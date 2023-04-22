@@ -2,18 +2,52 @@ project:
   type: website
 
 website:
-  title: "ISSS608"
+  title: "KB's Visual Analytics "
+  sidebar:
+    logo: dataviz.jpeg
+    style: "docked"
+    background: dark
+    search: true
+    alignment: left
+    collapse-level: 1
+    contents:
+      - text: 'Home'
+        href: index.qmd
+      - section: "Hands-On Exercises"
+        contents:
+          - text: Ex 1 A Layered Grammar of Graphics - ggplot2 methods
+            href: Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.qmd
+          - text: Ex 2 Beyond ggplot2 Fundamentals
+            href: Hands-On_Ex/Hands-On_Ex02/Hands-on_Ex2.qmd
+      - section: "In-class Exercises"
+        contents:
+          - text: Ex 1 A Light Makeover of ggplots
+            href: In-Class_Ex/In-Class_Ex01/In-Class_Ex1.qmd
+  page-navigation: true
   navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
-
+    left: 
+      - text: Hands-on Exercises
+        menu: 
+          - text: Ex 1 A Layered Grammar of Graphics - ggplot2 methods
+            href: Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.qmd
+          - text: Ex 2 Beyond ggplot2 Fundamentals
+            href: Hands-On_Ex/Hands-On_Ex02/Hands-on_Ex2.qmd
+          #- text: Ex 3 Interactive Data Visualisation with R
+          #  href: Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3.qmd
+          
+      - text: In-class Exercises
+        menu: 
+          - text: Ex 1 A Light Makeover of ggplots
+            href: In-Class_Ex/In-Class_Ex01/In-Class_Ex1.qmd
+    right:
+      - text: KB's GeoSpatial Analytics
+        href: https://kaleidoscopic-bunny-isss624.netlify.app/
 format:
   html:
-    theme: cosmo
+    theme: flatly
     css: styles.css
     toc: true
+
 
 editor: visual
 

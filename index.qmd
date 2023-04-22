@@ -1,11 +1,19 @@
 ---
-title: "ISSS608"
+title: "Visual Analytics and Applications"
+image: pexels.jpg
+about:
+  template: solana
+execute:
+  freeze: auto  # re-render only when source changes
+format:
+  html:
+    code-fold: false
+    code-summary: "Show the code"
+    code-line-numbers: true
 ---
 
-This is a Quarto website.
+Hi all,
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+I am a student taking a post-grad analytics programme. Welcome to my ISSS608 Visual Analytics and Applications site! 😊
 
-```{r}
-1 + 1
-```
+This site is a portfolio of my learning and accomplishments in the course. It showcases the exercises and projects I have completed and the skills I have acquired from the course.
