@@ -4,5 +4,17 @@
   },
   "index.qmd": {
     "index.html": "0c5f47df"
+  },
+  "In-Class_Ex/In-Class_Ex01/In-Class_Ex1.qmd": {
+    "In-Class_Ex1.html": "d6c7dd72"
+  },
+  "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex1.qmd": {
+    "Hands-On_Ex1.html": "a3fb105f"
+  },
+  "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex2.qmd": {
+    "Hands-On_Ex2.html": "699d057b"
+  },
+  "Hands-On_Ex/Hands-On_Ex03/Hands-On_Ex3.qmd": {
+    "Hands-On_Ex3.html": "fe3553fe"
   }
 }

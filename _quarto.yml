@@ -13,15 +13,15 @@ website:
     contents:
       - text: 'Home'
         href: index.qmd
-      - section: "Hands-On Exercises"
+      - section: "Hands-on Exercises"
         contents:
-          - text: Ex 1 A Layered Grammar of Graphics - ggplot2 methods
+          - text: 'Ex 1: A Layered Grammar of Graphics - ggplot2 methods'
             href: Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.qmd
-          - text: Ex 2 Beyond ggplot2 Fundamentals
+          - text: 'Ex 2: Beyond ggplot2 Fundamentals'
             href: Hands-On_Ex/Hands-On_Ex02/Hands-on_Ex2.qmd
       - section: "In-class Exercises"
         contents:
-          - text: Ex 1 A Light Makeover of ggplots
+          - text: 'Ex 1: A Light Makeover of ggplots'
             href: In-Class_Ex/In-Class_Ex01/In-Class_Ex1.qmd
   page-navigation: true
   navbar:
