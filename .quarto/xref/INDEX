@@ -19,5 +19,8 @@
   },
   "Tableau/1_Superstore.qmd": {
     "1_Superstore.html": "3e3985b7"
+  },
+  "Tableau/2_SuperStore_Story.qmd": {
+    "2_SuperStore_Story.html": "839cee6d"
   }
 }

@@ -27,6 +27,8 @@ website:
         contents:
           - text: 'Superstore Annual Sales and Profit'
             href: Tableau/1_Superstore.qmd
+          - text: 'The Superstore Story'
+            href: Tableau/2_Superstore_Story.qmd
   page-navigation: true
   navbar:
     left: 

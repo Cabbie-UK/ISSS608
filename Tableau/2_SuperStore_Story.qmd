@@ -1,0 +1,12 @@
+---
+title: "The Superstore Story"
+editor: visual
+---
+
+Published: 23-Apr-23
+
+I created this storyboard after going through the online tutorial on [Tableau's website](https://help.tableau.com/current/guides/get-started-tutorial/en-us/get-started-tutorial-home.htm)👻. It's refreshing to learn some of the capabilities of the visualisation tool and the workflow of creating a data story
+
+```{=html}
+<iframe width="1100"" height="700" src="https://public.tableau.com/shared/MH2NMZ79M?:display_count=n&:origin=viz_share_link?:showVizHome=no&:embed=true"></iframe>
+```
