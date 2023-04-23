@@ -14,7 +14,7 @@ format:
 
 Published: 20-Apr-2023
 
-Modified: 22-Apr-2023
+Modified: 23-Apr-2023
 
 ## 2.1 Learning Outcome
 
@@ -142,10 +142,10 @@ p1 + theme_tufte()
 p1 +theme_economist() + scale_colour_economist()
 ```
 
-## Wall Street Journal
+## (Stephen) Few 👍🏾
 
 ```{r}
-p1 + theme_wsj() + scale_colour_wsj("colors6", "")
+p1 + theme_few() + scale_colour_few()
 ```
 
 ## Fivethirtyeight
@@ -303,7 +303,7 @@ We can apply themes to the charts
 
 ```{r}
 #| fig-width: 14
-#| fig-height: 12
+#| fig-asp: 0.68
 patchwork <- (p1 / p2) | p3
 patchwork & theme_economist()
 ```
