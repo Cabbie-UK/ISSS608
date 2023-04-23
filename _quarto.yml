@@ -23,6 +23,10 @@ website:
         contents:
           - text: 'Ex 1: A Light Makeover of ggplots'
             href: In-Class_Ex/In-Class_Ex01/In-Class_Ex1.qmd
+      - section: "Tableau"
+        contents:
+          - text: 'Superstore Annual Sales and Profit'
+            href: Tableau/1_Superstore.qmd
   page-navigation: true
   navbar:
     left: 

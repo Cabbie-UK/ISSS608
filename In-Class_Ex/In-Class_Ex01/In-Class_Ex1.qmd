@@ -254,3 +254,6 @@ ggplot(data=exam_data,
 ::: {style="text-align: center"}
 $**That's$ $all$ $folks!**$
 :::
+
+```{=html}
+```

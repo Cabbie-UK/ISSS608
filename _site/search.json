@@ -222,5 +222,12 @@
     "title": "Visual Analytics and Applications",
     "section": "",
     "text": "I am a student taking a post-grad analytics programme. Welcome to my ISSS608 Visual Analytics and Applications site! 😊\nThis site is a portfolio of my learning and accomplishments in the course. It showcases the exercises and projects I have completed and the skills I have acquired from the course."
+  },
+  {
+    "objectID": "Tableau/1_Superstore.html",
+    "href": "Tableau/1_Superstore.html",
+    "title": "Superstore Annual Sales and Profit",
+    "section": "",
+    "text": "This was the first dashboard we developed in class. It marks the start of our fascinating journey into the world of data visualisation using Tableau."
   }
 ]
