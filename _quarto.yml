@@ -19,8 +19,10 @@ website:
             href: Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.qmd
           - text: 'Ex 2: Beyond ggplot2 Fundamentals'
             href: Hands-On_Ex/Hands-On_Ex02/Hands-on_Ex2.qmd
-          - text: 'Ex 3: Programming Interactive Data Visualisations'
-            href: Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3.qmd
+          - text: 'Ex 3a: Programming Interactive Data Visualisations'
+            href: Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3a.qmd
+          - text: 'Ex 3b: Programming Animated Data Visualisations'
+            href: Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3b.qmd
       - section: "In-class Exercises"
         contents:
           - text: 'Ex 1: A Light Makeover of ggplots'
@@ -40,8 +42,10 @@ website:
             href: Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.qmd
           - text: 'Ex 2 Beyond ggplot2 Fundamentals'
             href: Hands-On_Ex/Hands-On_Ex02/Hands-on_Ex2.qmd
-          - text: 'Ex 3: Programming Interactive Data Visualisations'
-            href: Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3.qmd
+          - text: 'Ex 3a: Programming Interactive Data Visualisations'
+            href: Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3a.qmd
+          - text: 'Ex 3b: Programming Animated Data Visualisations'
+            href: Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3b.qmd
           
       - text: In-class Exercises
         menu: 

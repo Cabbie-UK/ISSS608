@@ -1,0 +1,198 @@
+---
+title: "Animated Statistical Graph with R"
+editor: visual
+author: "KB"
+execute:
+  freeze: auto 
+  warning: false
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    code-line-numbers: true
+    toc-depth: 4
+---
+
+Published: 27-Apr-2023
+
+## 4.1 Learning Outcome
+
+When telling a visually-driven data story, animated graphics tends to attract the interest of the audience and make deeper impression than static graphics.We will learn to create animated data visualisation. At the same time, we will also learn to reshape, process, wrangle and transform the data-set.
+
+### 4.1.1 Basic concept of animation
+
+When creating animations, the plot does not actually move. Instead, many individual plots are built and then stitched together as movie frames, just like an old-school flip book or cartoon. Each frame is a different plot, which is built using a relevant subset of the data-set. Motion (and the animated effect) is rendered when the stitched plots are displayed sequentially.
+![](images/paste-1B7CAF83.png)
+
+### 4.1.2 Terminologies
+
+Before we dive into the steps for creating an animated statistical graph, it\'s important to understand some of the key concepts and terminologies that will be used:
+
+1.  **Frame**: In an animated line graph, each frame represents a different point in time or a different category. When the frame changes, the data points on the graph are updated to reflect the new data.
+
+2.  **Animation Attributes**: The animation attributes are the settings that control how the animation behaves. For example, we can specify the duration of each frame, the easing function used to transit between frames, and whether to start the animation from the current frame or from the beginning.
+
+::: callout-tip
+## When do we use animated graphs?
+
+Before we start making animated graphs, we should first ask ourselves: Does it makes sense to go through the effort? If we are conducting an exploratory data analysis, a animated graphic may not be worth the time investment. However, if we are giving a presentation, a few well-placed animated graphics can help an audience connect with our topic remarkably better than static counterparts.
+:::
+
+## 4.2 Getting Started
+
+### 4.2.1 Install and load the required r libraries
+
+Install and load the the required R packages. The name and function of the *new* package that will be used for this exercise are as follow:
+
+-   [**gganimate**](https://gganimate.com/)**:** creates animated graphics, such as line charts, bar charts, and maps, by specifying a series of frames with data and aesthetics that change over time
+
+-   [**gifski**](https://cran.r-project.org/web/packages/gifski/): converts images to GIF animations using pngquant's efficient cross-frame palettes and temporal dithering with thousands of colors per frame.
+
+-   [**gapminder**](https://cran.r-project.org/web/packages/gapminder/): An excerpt of the data available at Gapminder.org. We just want to use its *country_colors* scheme.
+
+-   [**readxl**](https://www.rdocumentation.org/packages/readxl/versions/1.4.2): makes it easy to get data out of Excel and into R
+
+```{r}
+pacman::p_load(tidyverse,plotly,gganimate, gifski, gapminder, gapminder,readxl)
+```
+
+### 4.2.2 Import the data
+
+The *Data* worksheet from *GlobalPopulation* Excel workbook will be used. We will use the following functions to process the data-set:
+
+-   [`read_xls()`](https://readxl.tidyverse.org/reference/read_excel.html) of **readxl** package is used to import the Excel worksheet.
+
+-   `mutate_if()` of **dplyr** package is used to a subset of columns in a data frame based on a logical condition
+
+-   `mutate()` of **dplyr** package is used to convert data values of Year field into integer.
+
+```{r}
+
+col <- c("Country", "Continent")
+globalPop <- read_xls("data/GlobalPopulation.xls",
+                      sheet="Data") %>%
+  mutate_if(is.character, as.factor) %>%  
+  mutate(Year = as.integer(Year))
+```
+
+## 4.3 Animated data visualisation
+
+The basic ggplot2 functions are used to create the static bubble plot.
+
+```{r}
+
+
+ggplot(globalPop, aes(x = Old, y = Young, 
+                      size = Population, 
+                      colour = Country)) +
+  geom_point(alpha = 0.7, 
+             show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  labs(title = 'Year: {frame_time}', 
+       x = '% Aged', 
+       y = '% Young') 
+
+```
+
+::: callout-note
+## The graph looks awful...
+
+This is because all data points for all featured countries across *all* years were plotted on a single chart. Read on to see the magic of animated charts 😜.
+:::
+
+### 4.3.1 Working with gganimate package
+
+[**gganimate**](https://gganimate.com/) extends the grammar of graphics as implemented by **ggplot2** to include the description of animation. It does this by providing a range of new grammar classes that can be added to the plot object in order to customise how it should change with time.
+
+-   `transition_*()` defines how the data should be spread out and how it relates to itself across time.
+
+-   `view_*()` defines how the positional scales should change along the animation.
+
+-   `shadow_*()` defines how data from other points in time should be presented in the given point in time.
+
+-   `enter_*()/exit_*()` defines how new data should appear and how old data should disappear during the course of the animation.
+
+-   `ease_aes()` defines how different aesthetics should be eased during transitions.
+
+**Building the animated bubble plot**
+
+In the following chart:
+
+-   [`transition_time()`](https://gganimate.com/reference/transition_time.html) is used to create transition through distinct states in time (i.e. Year).
+
+-   `ease_aes()` is used to control easing of aesthetics. The default is `linear`. Other methods are: quadratic, cubic, quartic, quintic, sine, circular, exponential, elastic, back, and bounce.
+
+```{r}
+
+ggplot(globalPop, aes(x = Old, y = Young, 
+                      size = Population, 
+                      colour = Country)) +
+  geom_point(alpha = 0.7, 
+             show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  labs(title = 'Year: {frame_time}', 
+       x = '% Aged', 
+       y = '% Young') +
+  transition_time(Year) +       
+  ease_aes('linear')          
+```
+
+### 4.3.2 Working with plotly() package
+
+In **Plotly R** package, both `ggplotly()` and `plot_ly()` support key frame animations through the `frame` argument/aesthetic. They also support an `ids` argument/aesthetic to ensure smooth transitions between objects with the same id (which helps facilitate object constancy).
+
+In the following graph, `ggplotly()` is used to convert the ggplot2 graph into an animated object.
+
+ggplotly(gg)
+
+```{r}
+gg <- ggplot(globalPop, 
+       aes(x = Old, 
+           y = Young, 
+           size = Population, 
+           colour = Country)) +
+  geom_point(aes(size = Population,
+                 frame = Year),
+             alpha = 0.7, 
+             show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  labs(x = '% Aged', 
+       y = '% Young') +
+  theme(legend.position='none')
+
+ggplotly(gg)
+```
+
+In this next graph, we will use plot_ly() function to create the animated bubble plot.
+
+```{r}
+bp <- globalPop %>%
+  plot_ly(x = ~Old, 
+          y = ~Young, 
+          size = ~Population, 
+          color = ~Continent, 
+          frame = ~Year, 
+          text = ~Country, 
+          hoverinfo = "text",
+          type = 'scatter',
+          mode = 'markers'
+          )
+bp
+```
+
+## 4.4 Reference
+
+-   [Getting Started](https://gganimate.com/articles/gganimate.html)
+
+-   Visit this [link](https://rpubs.com/raymondteo/dataviz8) for a very interesting implementation of **gganimate** by your senior.
+
+-   [Building an animation step-by-step with gganimate](https://www.alexcookson.com/post/2020-10-18-building-an-animation-step-by-step-with-gganimate/).
+
+-   [Creating a composite gif with multiple gganimate panels](https://solarchemist.se/2021/08/02/composite-gif-gganimate/)
+
+::: {style="text-align: center"}
+$**That's$ $all$ $folks!**$
+:::
