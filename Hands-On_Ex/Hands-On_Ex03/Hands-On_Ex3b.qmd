@@ -13,7 +13,7 @@ format:
     toc-depth: 4
 ---
 
-Published: 27-Apr-2023
+Published: 26-Apr-2023
 
 ## 4.1 Learning Outcome
 
@@ -21,12 +21,11 @@ When telling a visually-driven data story, animated graphics tends to attract th
 
 ### 4.1.1 Basic concept of animation
 
-When creating animations, the plot does not actually move. Instead, many individual plots are built and then stitched together as movie frames, just like an old-school flip book or cartoon. Each frame is a different plot, which is built using a relevant subset of the data-set. Motion (and the animated effect) is rendered when the stitched plots are displayed sequentially.
-![](images/paste-1B7CAF83.png)
+When creating animations, the plot does not actually move. Instead, many individual plots are built and then stitched together as movie frames, just like an old-school flip book or cartoon. Each frame is a different plot, which is built using a relevant subset of the data-set. Motion (and the animated effect) is rendered when the stitched plots are displayed sequentially. ![](images/paste-1B7CAF83.png)
 
 ### 4.1.2 Terminologies
 
-Before we dive into the steps for creating an animated statistical graph, it\'s important to understand some of the key concepts and terminologies that will be used:
+Before we dive into the steps for creating an animated statistical graph, it's important to understand some of the key concepts and terminologies that will be used:
 
 1.  **Frame**: In an animated line graph, each frame represents a different point in time or a different category. When the frame changes, the data points on the graph are updated to reflect the new data.
 

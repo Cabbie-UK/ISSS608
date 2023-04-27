@@ -102,7 +102,7 @@
     "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex2.html",
     "title": "Beyond ggplot2 Fundamentals",
     "section": "",
-    "text": "Published: 20-Apr-2023\nModified: 23-Apr-2023"
+    "text": "Published: 20-Apr-2023\nModified: 27-Apr-2023"
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex2.html#learning-outcome",
@@ -186,14 +186,14 @@
     "href": "Hands-On_Ex/Hands-On_Ex03/Hands-On_Ex3b.html",
     "title": "Animated Statistical Graph with R",
     "section": "",
-    "text": "Published: 27-Apr-2023"
+    "text": "Published: 26-Apr-2023"
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex03/Hands-On_Ex3b.html#learning-outcome",
     "href": "Hands-On_Ex/Hands-On_Ex03/Hands-On_Ex3b.html#learning-outcome",
     "title": "Animated Statistical Graph with R",
     "section": "4.1 Learning Outcome",
-    "text": "4.1 Learning Outcome\nWhen telling a visually-driven data story, animated graphics tends to attract the interest of the audience and make deeper impression than static graphics.We will learn to create animated data visualisation. At the same time, we will also learn to reshape, process, wrangle and transform the data-set.\n\n4.1.1 Basic concept of animation\nWhen creating animations, the plot does not actually move. Instead, many individual plots are built and then stitched together as movie frames, just like an old-school flip book or cartoon. Each frame is a different plot, which is built using some relevant subset of the aggregate data. When combined, the frames convey motion, \n\n\n4.1.2 Terminologies\nBefore we dive into the steps for creating an animated statistical graph, it's important to understand some of the key concepts and terminologies that will be used:\n\nFrame: In an animated line graph, each frame represents a different point in time or a different category. When the frame changes, the data points on the graph are updated to reflect the new data.\nAnimation Attributes: The animation attributes are the settings that control how the animation behaves. For example, we can specify the duration of each frame, the easing function used to transit between frames, and whether to start the animation from the current frame or from the beginning.\n\n\n\n\n\n\n\nWhen do we use animated graphs?\n\n\n\nBefore we start making animated graphs, we should first ask ourselves: Does it makes sense to go through the effort? If we are conducting an exploratory data analysis, a animated graphic may not be worth the time investment. However, if we are giving a presentation, a few well-placed animated graphics can help an audience connect with our topic remarkably better than static counterparts."
+    "text": "4.1 Learning Outcome\nWhen telling a visually-driven data story, animated graphics tends to attract the interest of the audience and make deeper impression than static graphics.We will learn to create animated data visualisation. At the same time, we will also learn to reshape, process, wrangle and transform the data-set.\n\n4.1.1 Basic concept of animation\nWhen creating animations, the plot does not actually move. Instead, many individual plots are built and then stitched together as movie frames, just like an old-school flip book or cartoon. Each frame is a different plot, which is built using a relevant subset of the data-set. Motion (and the animated effect) is rendered when the stitched plots are displayed sequentially. \n\n\n4.1.2 Terminologies\nBefore we dive into the steps for creating an animated statistical graph, it’s important to understand some of the key concepts and terminologies that will be used:\n\nFrame: In an animated line graph, each frame represents a different point in time or a different category. When the frame changes, the data points on the graph are updated to reflect the new data.\nAnimation Attributes: The animation attributes are the settings that control how the animation behaves. For example, we can specify the duration of each frame, the easing function used to transit between frames, and whether to start the animation from the current frame or from the beginning.\n\n\n\n\n\n\n\nWhen do we use animated graphs?\n\n\n\nBefore we start making animated graphs, we should first ask ourselves: Does it makes sense to go through the effort? If we are conducting an exploratory data analysis, a animated graphic may not be worth the time investment. However, if we are giving a presentation, a few well-placed animated graphics can help an audience connect with our topic remarkably better than static counterparts."
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex03/Hands-On_Ex3b.html#getting-started",

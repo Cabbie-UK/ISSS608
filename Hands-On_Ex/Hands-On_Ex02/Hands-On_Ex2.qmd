@@ -14,7 +14,7 @@ format:
 
 Published: 20-Apr-2023
 
-Modified: 23-Apr-2023
+Modified: 27-Apr-2023
 
 ## 2.1 Learning Outcome
 
@@ -303,7 +303,7 @@ We can apply themes to the charts
 
 ```{r}
 #| fig-width: 14
-#| fig-asp: 0.68
+#| fig-asp: 0.618
 patchwork <- (p1 / p2) | p3
 patchwork & theme_economist()
 ```
