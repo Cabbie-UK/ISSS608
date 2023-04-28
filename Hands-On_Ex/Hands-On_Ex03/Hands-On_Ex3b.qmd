@@ -15,13 +15,17 @@ format:
 
 Published: 26-Apr-2023
 
+Modified: 28-Apr-2023
+
 ## 4.1 Learning Outcome
 
-When telling a visually-driven data story, animated graphics tends to attract the interest of the audience and make deeper impression than static graphics.We will learn to create animated data visualisation. At the same time, we will also learn to reshape, process, wrangle and transform the data-set.
+When telling a visually-driven data story, animated graphics tends to attract the interest of the audience and make deeper impression than static graphics. We will learn to create animated data visualisation. At the same time, we will also learn to reshape, process, wrangle and transform the data-set.
 
 ### 4.1.1 Basic concept of animation
 
-When creating animations, the plot does not actually move. Instead, many individual plots are built and then stitched together as movie frames, just like an old-school flip book or cartoon. Each frame is a different plot, which is built using a relevant subset of the data-set. Motion (and the animated effect) is rendered when the stitched plots are displayed sequentially. ![](images/paste-1B7CAF83.png)
+When creating animations, the plot does not actually move. Instead, many individual plots are built and then stitched together as movie frames, just like an old-school flip book or cartoon. Each frame is a different plot, which is built using a relevant subset of the data-set. Motion (and the animated effect) appears when the stitched plots are displayed sequentially.
+
+![](images/paste-1B7CAF83.png)
 
 ### 4.1.2 Terminologies
 
@@ -135,12 +139,12 @@ ggplot(globalPop, aes(x = Old, y = Young,
        x = '% Aged', 
        y = '% Young') +
   transition_time(Year) +       
-  ease_aes('linear')          
+  ease_aes(y = 'linear')          
 ```
 
-### 4.3.2 Working with plotly() package
+### 4.3.2 Working with plotly package
 
-In **Plotly R** package, both `ggplotly()` and `plot_ly()` support key frame animations through the `frame` argument/aesthetic. They also support an `ids` argument/aesthetic to ensure smooth transitions between objects with the same id (which helps facilitate object constancy).
+In **Plotly** R package, both `ggplotly()` and `plot_ly()` support key frame animations through the `frame` argument/aesthetic. They also support an `ids` argument/aesthetic to ensure smooth transitions between objects with the same id (which helps facilitate object constancy).
 
 In the following graph, `ggplotly()` is used to convert the ggplot2 graph into an animated object.
 
