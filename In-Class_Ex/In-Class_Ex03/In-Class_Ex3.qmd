@@ -1,0 +1,17 @@
+---
+title: "In-Class_Exercise 3"
+author: "KB"
+editor: visual
+execute:
+  freeze: auto 
+  warning: false
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    code-line-numbers: true
+---
+
+Published: 29-Apr-2023
+
+*This test website was created as part of the Lesson 3 in-class exercises.*

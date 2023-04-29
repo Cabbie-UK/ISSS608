@@ -1,0 +1,24 @@
+---
+title: "Animinated Bubble Plot and Cross-Filtering of Charts"
+editor: visual
+---
+
+Published: 29-Apr-2023
+
+In line with the techniques covered under Hand-On Exercise 3a using **R**, , we were taught to create the following charts using **Tableau** this afternoon:
+
+A\) An animated bubble plot using the Superstore data-set
+
+👇*Select a different year using the "Year of Order Date' radio buttons on the right to check out the animated transition.*
+
+```{=html}
+<iframe width="1000"" height="700" src="https://public.tableau.com/views/SalesverusProfitforSuperstore/SalesvsProfit?:language=en-US&:display_count=n&:origin=viz_share_link?:language=en-US&:display_count=n&:origin=viz_share_link?:showVizHome=no&:embed=true"></iframe>
+```
+B\) Cross-filtered Charts using Exam Scores data-set
+
+👇*Select a group of data points on one of the three charts and notice how the other two charts respond dynamically.*
+
+```{=html}
+<iframe width="1000"" height="700" src="https://public.tableau.com/shared/WDMK3GY9S?:display_count=n&:origin=viz_share_link?:language=en-US&:display_count=n&:origin=viz_share_link?:showVizHome=no&:embed=true"></iframe>
+```
+Neat right? 😉

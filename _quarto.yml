@@ -27,12 +27,16 @@ website:
         contents:
           - text: 'Ex 1: A Light Makeover of ggplots'
             href: In-Class_Ex/In-Class_Ex01/In-Class_Ex1.qmd
+          - text: 'Ex 3: TBC'
+            href: In-Class_Ex/In-Class_Ex03/In-Class_Ex3.qmd
       - section: "Tableau"
         contents:
           - text: 'Superstore Annual Sales and Profit'
             href: Tableau/1_Superstore.qmd
           - text: 'The Superstore Story'
             href: Tableau/2_Superstore_Story.qmd
+          - text: 'Animinated Bubbleplot and Cross-Filtering of Charts'
+            href: Tableau/3_Animation_CrossFiltering.qmd
   page-navigation: true
   navbar:
     left: 
@@ -51,6 +55,8 @@ website:
         menu: 
           - text: Ex 1 A Light Makeover of ggplots
             href: In-Class_Ex/In-Class_Ex01/In-Class_Ex1.qmd
+          - text: 'Ex 3: TBC'
+            href: In-Class_Ex/In-Class_Ex03/In-Class_Ex3.qmd
     right:
       - text: KB's GeoSpatial Analytics
         href: https://kaleidoscopic-bunny-isss624.netlify.app/
