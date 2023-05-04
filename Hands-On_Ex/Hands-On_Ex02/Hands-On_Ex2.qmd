@@ -1,5 +1,6 @@
 ---
-title: "Beyond ggplot2 Fundamentals"
+title: "2 Beyond ggplot2 Fundamentals"
+subtitle: Hands-On Exercise for Week 2
 editor: visual
 author: "KB"
 execute:

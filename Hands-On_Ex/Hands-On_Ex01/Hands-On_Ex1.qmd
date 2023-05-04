@@ -1,5 +1,6 @@
 ---
-title: "A Layered Grammar of Graphics: ggplot2 methods"
+title: "1 A Layered Grammar of Graphics: ggplot2 methods"
+subtitle: Hands-On Exercise for Week 1
 author: "KB"
 editor: visual
 execute:

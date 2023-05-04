@@ -1,5 +1,6 @@
 ---
-title: "In-Class_Exercise 3"
+title: "2 Publishing a Quarto Document"
+subtitle: In-Class Exercise for Week 3
 author: "KB"
 editor: visual
 execute:
@@ -14,4 +15,4 @@ format:
 
 Published: 29-Apr-2023
 
-*This test website was created as part of the Lesson 3 in-class exercises.*
+*This test webpage was created as part of the follow-along exercise during Lesson 3.*

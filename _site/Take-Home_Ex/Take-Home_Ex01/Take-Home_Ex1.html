@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="KB">
+
+<title>KB’s Visual Analytics - The City of Engagement: Undestanding the Demographics and Financial Characteristics of its Residents</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="../../site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="../../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="../../site_libs/datatables-binding-0.27/datatables.js"></script>
+<script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../../site_libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="../../site_libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="../../site_libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">KB’s Visual Analytics</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercises" role="button" data-bs-toggle="dropdown" aria-expanded="false">Hands-on Exercises</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercises">    
+        <li>
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.html">
+ <span class="dropdown-text">1 A Layered Grammar of Graphics - ggplot2 methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex02/Hands-on_Ex2.html">
+ <span class="dropdown-text">2 Beyond ggplot2 Fundamentals</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3a.html">
+ <span class="dropdown-text">3 Programming Interactive Data Visualisations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3b.html">
+ <span class="dropdown-text">4 Programming Animated Data Visualisations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4a.html">
+ <span class="dropdown-text">5 Visual Statistical Analysis</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4b.html">
+ <span class="dropdown-text">6 Visualise Uncertainty</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4c.html">
+ <span class="dropdown-text">7 Funnel Plots for Fair Comparison</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercises" role="button" data-bs-toggle="dropdown" aria-expanded="false">In-class Exercises</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercises">    
+        <li>
+    <a class="dropdown-item" href="../../In-Class_Ex/In-Class_Ex01/In-Class_Ex1.html">
+ <span class="dropdown-text">1 A Light Makeover of ggplots</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-Class_Ex/In-Class_Ex03/In-Class_Ex3.html">
+ <span class="dropdown-text">2 Publishing a Quarto Document</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://kaleidoscopic-bunny-isss624.netlify.app/">KB’s GeoSpatial Analytics</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">The City of Engagement: Undestanding the Demographics and Financial Characteristics of its Residents</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../" class="sidebar-logo-link">
+      <img src="../../dataviz.jpeg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">Home</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Hands-on Exercises</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.html" class="sidebar-item-text sidebar-link">1 A Layered Grammar of Graphics - ggplot2 methods</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-On_Ex/Hands-On_Ex02/Hands-on_Ex2.html" class="sidebar-item-text sidebar-link">2 Beyond ggplot2 Fundamentals</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3a.html" class="sidebar-item-text sidebar-link">3 Programming Interactive Data Visualisations</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3b.html" class="sidebar-item-text sidebar-link">4 Programming Animated Data Visualisations</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4a.html" class="sidebar-item-text sidebar-link">5 Visual Statistical Analysis</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4b.html" class="sidebar-item-text sidebar-link">6 Visualise Uncertainty</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4c.html" class="sidebar-item-text sidebar-link">7 Funnel Plots for Fair Comparison</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">In-class Exercises</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../In-Class_Ex/In-Class_Ex01/In-Class_Ex1.html" class="sidebar-item-text sidebar-link">1 A Light Makeover of ggplots</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../In-Class_Ex/In-Class_Ex03/In-Class_Ex3.html" class="sidebar-item-text sidebar-link">2 Publishing a Quarto Document</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Tableau</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Tableau/1_Superstore.html" class="sidebar-item-text sidebar-link">Superstore Annual Sales and Profit</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Tableau/2_Superstore_Story.html" class="sidebar-item-text sidebar-link">The Superstore Story</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Tableau/3_Animation_CrossFiltering.html" class="sidebar-item-text sidebar-link">Animinated Bubbleplot and Cross-Filtering of Charts</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">The City of Engagement: Undestanding the Demographics and Financial Characteristics of its Residents</h1>
+<p class="subtitle lead">Take-Home Exercise 1</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>KB </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<figure class="figure">
+<img src="images/paste-B4B7171E.png" title="City of Griffith, Australia" class="img-fluid figure-img" alt="Photo from https://www.domain.com.au/news/griffith-the-charming-town-showing-its-cultural-and-culinary-diversity-with-an-agricultural-backdrop-1045676/">
+</figure>
+<p></p><figcaption class="figure-caption">Photo: Hadi Zaher</figcaption><p></p>
+</figure>
+</div>
+<p>Published: 14-May-2023</p>
+<ol type="1">
+<li>Overview</li>
+</ol>
+<p>1.1 Setting the Scene</p>
+<p>City of Engagement, with a total population of 50,000, is a small city located at Country of Nowhere. The city serves as a service centre of an agriculture region surrounding the city. The main agriculture of the region is fruit farms and vineyards.</p>
+<p>The city council is in the process of preparing the Local Plan 2023. A sample survey of representative residents had been conducted to collect data related to their household demographic and spending patterns, among other things. The city aims to use the data to assist with their major community revitalization efforts, including how to allocate a very large city renewal grant they have recently received.</p>
+<p>1.2 Our Task</p>
+<p>We will apply the concepts and methods learned from Lesson 1-4 of the course to reveal the <strong>demographic</strong> and <strong>financial characteristics</strong> of the city, using appropriate static and interactive statistical graphics methods. This will also help the city managers and planners explore the relevant data in an engaging way and discover any hidden patterns.</p>
+<ol start="2" type="1">
+<li>Set Up</li>
+</ol>
+<p>2.1 Load the relevant packages into the R environment</p>
+<p>We use the <code>pacman::p_load()</code> function to load the required R packages into our working environment. The loaded packages are:</p>
+<ul>
+<li><p><strong>plotly</strong>: For creating interactive web-based graphs.</p></li>
+<li><p><strong>ggstatsplot</strong>: For creating graphics with details from statistical tests.</p></li>
+<li><p><strong>knitr</strong>: For dynamic report generation</p></li>
+<li><p><strong>pacthwork</strong>: For combining plots</p></li>
+<li><p><strong>ggdist</strong>: For visualising distribution and uncertainty</p></li>
+<li><p><strong>ggthemes</strong>: Provides additional themes for <strong>ggplot2</strong></p></li>
+<li><p><strong>tidyverse</strong>: A collection of core packages designed for data science, used extensively for data preparation and wrangling.</p></li>
+<li><p><strong>DT</strong>: For creating interactive tables using the DataTables JavaScript library</p></li>
+<li><p><strong>reshape2</strong>: For transforming dataframes from one shape to another</p></li>
+</ul>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#Load packages</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(plotly, ggstatsplot, knitr, patchwork, ggdist, ggthemes, tidyverse, DT, reshape2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>2.2 Import the data-sets</p>
+<p>Two data-sets are provided for this exercise:</p>
+<p>(i) Partcipants.csv: contains information about the 1011 city residents who responded to the survey. Other than an identifier variable, we also have the household size, a Boolean indicator for children, age, education level, interest group and joviality (or happiness) level of the respondents.</p>
+<p>We import the records in the Participants.csv file as <em>survey</em>, convert the <code>participantID</code> from numeric to character data type, and convert <code>educationLevel</code> from character data type to an ordinal factor.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Import Participant.csv and assign it to survey variable</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>survey <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/Participants.csv'</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">mutate</span>(<span class="at">participantId =</span> <span class="fu">as.character</span>(participantId)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">mutate</span>(<span class="at">educationLevel =</span> <span class="fu">as.factor</span>(educationLevel)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="fu">mutate</span>(<span class="at">educationLevel =</span> <span class="fu">ordered</span>(educationLevel, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Low"</span>,<span class="st">"HighSchoolOrCollege"</span>, <span class="st">"Bachelors"</span>,<span class="st">"Graduate"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>(ii) FinancialJournal.csv contains the financial transactions of the respondents from 1 Mar 2022 to 28 Feb 2023. Other than an identifier variable (which permits us to cross-reference to the participants’ demographic information), the time, nature and amount involved for the transactions were also provided.</p>
+<p>Simiarly, we import the records in the FinancialJournal.csv file as <em>financials</em>, and convert the <code>participantID</code> from numeric to character data type</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Import FinancialJournal.csv and assign it to financials variable</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>financials <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/FinancialJournal.csv'</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">participantId =</span> <span class="fu">as.character</span>(participantId))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="3" type="1">
+<li>Data Wrangling</li>
+</ol>
+<p>3.1 Create a month-year column for temporal analysis</p>
+<p>There are 1.5 million financial transactions over the 12-month period and the daily information is too granular for us to analyse. We will create a <code>month_year</code> column, from the <code>timestamp</code> column, which will then allow us to aggregate the transactions by month for temporal analysis.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>financials <span class="ot">&lt;-</span> financials <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">mutate</span>(<span class="at">month_year =</span> <span class="fu">format</span>(timestamp, <span class="st">"%b-%Y"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">mutate</span>(<span class="at">month_year =</span> <span class="fu">as.factor</span>(month_year)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">mutate</span>(<span class="at">month_year =</span> <span class="fu">ordered</span>(month_year, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Mar-2022"</span>, <span class="st">"Apr-2022"</span>,<span class="st">"May-2022"</span>,<span class="st">"Jun-2022"</span>,<span class="st">"Jul-2022"</span>,<span class="st">"Aug-2022"</span>,<span class="st">"Sep-2022"</span>,<span class="st">"Oct-2022"</span>,<span class="st">"Nov-2022"</span>, <span class="st">"Dec-2022"</span>,<span class="st">"Jan-2023"</span>,<span class="st">"Feb-2023"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>3.2 Recode Rental Adjustments</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>financials_grouped <span class="ot">&lt;-</span> financials <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">group_by</span>(category) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">summarise</span>(<span class="at">Count =</span> <span class="fu">n</span>(), <span class="at">Sum_of_Amt =</span> <span class="fu">round</span>(<span class="fu">sum</span>(amount),<span class="dv">2</span>)) </span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="fu">datatable</span>(financials_grouped, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">dom=</span><span class="st">'t'</span>), </span>
+<span id="cb5-6"><a href="#cb5-6"></a>              <span class="at">caption =</span> <span class="st">"Table 1: Breakdown of Financial Journal Transactions By Categories"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7"></a>              <span class="at">rownames =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-8"><a href="#cb5-8"></a>    <span class="fu">formatStyle</span>(<span class="dv">1</span>,</span>
+<span id="cb5-9"><a href="#cb5-9"></a>                <span class="at">target =</span> <span class="st">'row'</span>,</span>
+<span id="cb5-10"><a href="#cb5-10"></a>                <span class="at">backgroundColor =</span> <span class="fu">styleEqual</span>(<span class="fu">c</span>(<span class="st">'RentAdjustment'</span>), <span class="fu">c</span>(<span class="st">'lightblue'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<div id="htmlwidget-f3324ace2037bb67775c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f3324ace2037bb67775c">{"x":{"filter":"none","vertical":false,"caption":"<caption>Table 1: Breakdown of Financial Journal Transactions By Categories<\/caption>","data":[["Education","Food","Recreation","RentAdjustment","Shelter","Wage"],[3319,790051,296013,131,11463,412659],[-154365.49,-3703420.84,-4143338.04,54932.73,-7307070.95,45597680.42]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>category<\/th>\n      <th>Count<\/th>\n      <th>Sum_of_Amt<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(row).css({'background-color':value == \"RentAdjustment\" ? \"lightblue\" : null});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Rent Adjustments do not occur frequently (only 131 transactions out of the 1.5 million financial transactions relate to RentAdjustment ) and they are essentially price adjustments associated with the cost of accommodation. As such, Rent Adjustment transactions are recoded as Shelter in the financials table.</p>
+<p>After the recoding, the new breakdown of transactions by category is as follows:</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>financials_recoded <span class="ot">&lt;-</span> financials</span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a>financials_recoded<span class="sc">$</span>category <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(financials_recoded<span class="sc">$</span>category <span class="sc">==</span><span class="st">'RentAdjustment'</span>,<span class="st">'Shelter'</span>, financials_recoded<span class="sc">$</span>category)</span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a>financials_grouped <span class="ot">&lt;-</span> financials_recoded <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">group_by</span>(category) <span class="sc">%&gt;%</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">summarise</span>(<span class="at">Count =</span> <span class="fu">n</span>(), <span class="at">Sum_of_Amt =</span> <span class="fu">round</span>(<span class="fu">sum</span>(amount),<span class="dv">2</span>)) </span>
+<span id="cb6-8"><a href="#cb6-8"></a></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="fu">datatable</span>(financials_grouped, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">dom=</span><span class="st">'t'</span>), </span>
+<span id="cb6-10"><a href="#cb6-10"></a>              <span class="at">caption =</span> <span class="st">"Table 2: New breakdown of Financial Journal Transactions By Categories (after recoding)"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11"></a>              <span class="at">rownames =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-12"><a href="#cb6-12"></a>    <span class="fu">formatStyle</span>(<span class="dv">1</span>,</span>
+<span id="cb6-13"><a href="#cb6-13"></a>                <span class="at">target =</span> <span class="st">'row'</span>,</span>
+<span id="cb6-14"><a href="#cb6-14"></a>                <span class="at">backgroundColor =</span> <span class="fu">styleEqual</span>(<span class="fu">c</span>(<span class="st">'Shelter'</span>), <span class="fu">c</span>(<span class="st">'lightblue'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<div id="htmlwidget-f77310e8837e9c016d04" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f77310e8837e9c016d04">{"x":{"filter":"none","vertical":false,"caption":"<caption>Table 2: New breakdown of Financial Journal Transactions By Categories (after recoding)<\/caption>","data":[["Education","Food","Recreation","Shelter","Wage"],[3319,790051,296013,11594,412659],[-154365.49,-3703420.84,-4143338.04,-7252138.22,45597680.42]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>category<\/th>\n      <th>Count<\/th>\n      <th>Sum_of_Amt<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(row).css({'background-color':value == \"Shelter\" ? \"lightblue\" : null});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+</div>
+</div>
+<p>3.3 Remove duplicate records found in the financial data</p>
+<p>We notice duplicate records in the financial data. For instance, a survey participant (with Id=0) has duplicate records for Education and Shelter for the same amount and timestamp.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>participant_0 <span class="ot">&lt;-</span> financials_recoded[,<span class="sc">-</span><span class="dv">5</span>] <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">filter</span>(participantId<span class="sc">==</span><span class="st">'0'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">group_by_all</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">filter</span>(<span class="fu">n</span>()<span class="sc">&gt;</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">arrange_all</span>()</span>
+<span id="cb7-6"><a href="#cb7-6"></a>  </span>
+<span id="cb7-7"><a href="#cb7-7"></a></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="fu">datatable</span>(participant_0, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">dom=</span><span class="st">'t'</span>), </span>
+<span id="cb7-9"><a href="#cb7-9"></a>              <span class="at">caption =</span> <span class="st">"Table 3: Original and Duplicate Financial Records of a Survey Participant (Id=0)"</span>,</span>
+<span id="cb7-10"><a href="#cb7-10"></a>              <span class="at">rownames =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-11"><a href="#cb7-11"></a>  <span class="fu">formatStyle</span>(<span class="dv">3</span>,</span>
+<span id="cb7-12"><a href="#cb7-12"></a>                <span class="at">target =</span> <span class="st">'row'</span>,</span>
+<span id="cb7-13"><a href="#cb7-13"></a>                <span class="at">backgroundColor =</span> <span class="fu">styleEqual</span>(<span class="fu">c</span>(<span class="st">'Education'</span>), <span class="fu">c</span>(<span class="st">'lightblue'</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>  <span class="fu">formatStyle</span>(<span class="dv">3</span>,</span>
+<span id="cb7-15"><a href="#cb7-15"></a>                <span class="at">target =</span> <span class="st">'row'</span>,</span>
+<span id="cb7-16"><a href="#cb7-16"></a>                <span class="at">backgroundColor =</span> <span class="fu">styleEqual</span>(<span class="fu">c</span>(<span class="st">'Shelter'</span>), <span class="fu">c</span>(<span class="st">'yellow'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<div id="htmlwidget-6a8283e03fa8e6ecf5a1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6a8283e03fa8e6ecf5a1">{"x":{"filter":"none","vertical":false,"caption":"<caption>Table 3: Original and Duplicate Financial Records of a Survey Participant (Id=0)<\/caption>","data":[["0","0","0","0"],["2022-03-01T00:00:00Z","2022-03-01T00:00:00Z","2022-03-01T00:00:00Z","2022-03-01T00:00:00Z"],["Education","Education","Shelter","Shelter"],[-38.00537955,-38.00537955,-554.9886217,-554.9886217]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>participantId<\/th>\n      <th>timestamp<\/th>\n      <th>category<\/th>\n      <th>amount<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":3}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[2]; $(row).css({'background-color':value == \"Education\" ? \"lightblue\" : null});\nvar value=data[2]; $(row).css({'background-color':value == \"Shelter\" ? \"yellow\" : null});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Applying the <code>duplicated()</code> function on the financial data, we have</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">paste</span>(<span class="fu">sum</span>(<span class="fu">duplicated</span>(financials_recoded)),<span class="st">"duplicate records."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1113 duplicate records."</code></pre>
+</div>
+</div>
+<p>We are unsure of the reasons behind the duplicate records 😕. Nonetheless, we will use the <code>distinct()</code> function on the financial data to only retain unique records for our analysis.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>financials_unique <span class="ot">&lt;-</span> financials_recoded <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">distinct</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>3.4 Summarise the financial information by participants</p>
+<p>We aggregate the financial information by participants, taking into consideration the timestamp and category using the <code>dcast()</code> function from <strong>reshape2</strong> package.</p>
+<p>After performing the following steps, we notice 131 survey participants only had transaction records for Mar-2022 , but not in the other months :</p>
+<ul>
+<li><p>Group the transactions by participantId, pivot the information by month_year and count the number of transactions per month</p></li>
+<li><p>Add a new column, “Months_with_trans”, which sum up the no. of months over the 12-month period where there were transactions</p></li>
+<li><p>Perform a value count of the “Months_with_trans” column and this reveals the number of participants who only had 1 month of financial transactions.</p></li>
+</ul>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Group the transactions by participantId, pivot the information by month_year and count the number of transactions per month.</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>financials_count <span class="ot">&lt;-</span> <span class="fu">dcast</span>(financials_unique,</span>
+<span id="cb11-3"><a href="#cb11-3"></a>                           participantId <span class="sc">~</span> month_year, </span>
+<span id="cb11-4"><a href="#cb11-4"></a>                           <span class="at">value.var =</span> <span class="st">"amount"</span>, <span class="at">fun.aggregate =</span> length)</span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co"># Add a new column, "Months_with_trans", which sum up the no. of months over the 12-month period where there were transactions. </span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>financials_count<span class="sc">$</span>Months_with_trans <span class="ot">&lt;-</span> <span class="fu">apply</span>(financials_count[,<span class="dv">2</span><span class="sc">:</span><span class="dv">13</span>]<span class="sc">!=</span><span class="dv">0</span>,<span class="dv">1</span>,sum)</span>
+<span id="cb11-8"><a href="#cb11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co"># Perform a value count of the "Months_with_trans" column</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>summary_count <span class="ot">&lt;-</span> financials_count <span class="sc">%&gt;%</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>  <span class="fu">group_by</span>(Months_with_trans)<span class="sc">%&gt;%</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>  <span class="fu">summarise</span>(<span class="at">Count=</span><span class="fu">n</span>())</span>
+<span id="cb11-13"><a href="#cb11-13"></a></span>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="fu">datatable</span>(summary_count, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">dom=</span><span class="st">'t'</span>), </span>
+<span id="cb11-15"><a href="#cb11-15"></a>              <span class="at">caption =</span> <span class="st">"Table 4: No. of Survey Participants grouped by the count of months with transactions"</span>,</span>
+<span id="cb11-16"><a href="#cb11-16"></a>              <span class="at">rownames =</span> <span class="cn">FALSE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<div id="htmlwidget-c65cce4d09d15c4ba22c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c65cce4d09d15c4ba22c">{"x":{"filter":"none","vertical":false,"caption":"<caption>Table 4: No. of Survey Participants grouped by the count of months with transactions<\/caption>","data":[[1,12],[131,880]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Months_with_trans<\/th>\n      <th>Count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>The reason for the economic activity of the 131 participants appearing only in Mar-2022 is unclear and requires further investigation. To avoid biasing our results which covers the entire year, we will remove the records of these 131 participants from our subsequent analysis.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># List those participants who only had transaction records for 1 month and assign it id_to_exclude</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>ids_to_exclude <span class="ot">&lt;-</span> <span class="fu">c</span>(financials_count[financials_count<span class="sc">$</span>Months_with_trans<span class="sc">==</span><span class="dv">1</span>,]<span class="sc">$</span>participantId)</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># Exclude from the financial_unique data-set participants whose id are in id_to_exclude list</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>financials_880 <span class="ot">&lt;-</span> <span class="fu">subset</span>(financials_unique, <span class="sc">!</span>(participantId <span class="sc">%in%</span> ids_to_exclude))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Next. we derive the the monthly and total wages of the 880 participants. The first 5 records of the wage information are as follow:</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>wages_880 <span class="ot">&lt;-</span> </span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">dcast</span>(<span class="fu">subset</span>(financials_880,(category <span class="sc">==</span> <span class="st">'Wage'</span>)), participantId <span class="sc">~</span> month_year, <span class="at">value.var =</span> <span class="st">"amount"</span>, sum) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">mutate</span>(<span class="at">total_wages =</span> <span class="fu">rowSums</span>(.[<span class="dv">2</span><span class="sc">:</span><span class="dv">13</span>],<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co"># Inspect the first 5 records </span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="fu">head</span>(wages_880, <span class="at">n=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  participantId  Mar-2022 Apr-2022 May-2022 Jun-2022 Jul-2022 Aug-2022 Sep-2022
+1             0 11931.948 8636.880 9048.160 9048.160 8636.880 9459.440 9048.160
+2             1 10359.024 7589.639 7951.050 7951.050 7589.639 8312.461 7951.050
+3            10  8954.216 6207.318 6502.904 6502.904 6207.318 6798.491 6502.904
+4           100  5990.472 3783.218 3611.254 3783.218 3783.218 3783.218 3783.218
+5          1000  5253.964 2121.081 2222.085 2222.085 2121.081 2323.089 2222.085
+  Oct-2022 Nov-2022 Dec-2022 Jan-2023 Feb-2023 total_wages
+1 8636.880 9048.160 9048.160 9048.160 8225.600   109816.59
+2 7589.639 7951.050 7951.050 7951.050 7228.227    96374.93
+3 6207.318 6502.904 6502.904 6502.904 5911.731    79303.82
+4 3611.254 3783.218 3955.183 3611.254 3439.289    46918.02
+5 2121.081 2222.085 2222.085 2222.085 2020.078    29292.89</code></pre>
+</div>
+</div>
+<p>Based on Table 2 above, Education, Shelter, Food and Entertainment are all living expenses and we will also work out the monthly living expenses and the year’s total for the 880 participants. The first 5 records of the expenses information are as follow:</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>expenses_880 <span class="ot">&lt;-</span> <span class="fu">dcast</span>(<span class="fu">subset</span>(financials_880,<span class="sc">!</span>(category <span class="sc">==</span> <span class="st">'Wage'</span>)), participantId <span class="sc">~</span> month_year, <span class="at">value.var =</span> <span class="st">"amount"</span>, sum) <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">mutate</span>(<span class="at">total_expenses =</span> <span class="fu">rowSums</span>(.[<span class="dv">2</span><span class="sc">:</span><span class="dv">13</span>],<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># Inspect the first 5 records </span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="fu">head</span>(expenses_880, <span class="at">n=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  participantId  Mar-2022  Apr-2022  May-2022  Jun-2022  Jul-2022  Aug-2022
+1             0 -1210.049 -1078.279 -1240.619 -1315.648 -1932.751 -1168.974
+2             1 -1929.849 -1364.962 -1209.680 -1529.356 -1368.731 -1301.938
+3            10 -1390.006 -1378.171 -1114.957 -1109.890 -1143.551 -1340.567
+4           100 -1348.511 -1396.971 -1345.599 -1212.583 -1243.120 -1326.042
+5          1000 -2098.306 -1714.850 -1547.361 -1359.852 -1460.345 -1394.524
+   Sep-2022   Oct-2022  Nov-2022  Dec-2022  Jan-2023  Feb-2023 total_expenses
+1 -1143.759  -884.7442 -1231.511 -1215.773 -1067.794 -1152.069      -14641.97
+2 -1235.970 -1239.7351 -1478.765 -1954.347 -1188.012 -1119.430      -16920.77
+3 -1118.623 -1265.3818 -1222.833 -1260.307 -1199.805 -1169.646      -14713.74
+4 -1287.791 -1472.5088 -1285.277 -1225.494 -1105.222 -1040.053      -15289.17
+5 -1537.170 -1649.6618 -1443.646 -1643.306 -1500.960 -1303.951      -18653.93</code></pre>
+</div>
+</div>
+<p>3.5 Combine the Financial and Participant Demographic Data</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>merged <span class="ot">&lt;-</span> survey <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">inner_join</span>(<span class="fu">select</span>(wages_880, participantId, total_wages), <span class="at">by =</span> <span class="st">"participantId"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">inner_join</span>(<span class="fu">select</span>(expenses_880, participantId, total_expenses), <span class="at">by =</span> <span class="st">"participantId"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4"></a></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="fu">head</span>(merged)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 9
+  participantId householdSize haveKids   age educationLevel      interestGroup
+  &lt;chr&gt;                 &lt;dbl&gt; &lt;lgl&gt;    &lt;dbl&gt; &lt;ord&gt;               &lt;chr&gt;        
+1 0                         3 TRUE        36 HighSchoolOrCollege H            
+2 1                         3 TRUE        25 HighSchoolOrCollege B            
+3 2                         3 TRUE        35 HighSchoolOrCollege A            
+4 3                         3 TRUE        21 HighSchoolOrCollege I            
+5 4                         3 TRUE        43 Bachelors           H            
+6 5                         3 TRUE        32 HighSchoolOrCollege D            
+# ℹ 3 more variables: joviality &lt;dbl&gt;, total_wages &lt;dbl&gt;, total_expenses &lt;dbl&gt;</code></pre>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,5 +1,6 @@
 ---
-title: "Animated Statistical Graph with R"
+title: "4 Animated Statistical Graph with R"
+subtitle: Hands-On Exercise for Week 3
 editor: visual
 author: "KB"
 execute:
@@ -14,8 +15,6 @@ format:
 ---
 
 Published: 26-Apr-2023
-
-Modified: 28-Apr-2023
 
 ## 4.1 Learning Outcome
 

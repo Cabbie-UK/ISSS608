@@ -13,22 +13,36 @@ website:
     contents:
       - text: 'Home'
         href: index.qmd
+        
       - section: "Hands-on Exercises"
         contents:
-          - text: 'Ex 1: A Layered Grammar of Graphics - ggplot2 methods'
+          - text: '1 A Layered Grammar of Graphics - ggplot2 methods'
             href: Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.qmd
-          - text: 'Ex 2: Beyond ggplot2 Fundamentals'
+          - text: '2 Beyond ggplot2 Fundamentals'
             href: Hands-On_Ex/Hands-On_Ex02/Hands-on_Ex2.qmd
-          - text: 'Ex 3a: Programming Interactive Data Visualisations'
+          - text: '3 Programming Interactive Data Visualisations'
             href: Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3a.qmd
-          - text: 'Ex 3b: Programming Animated Data Visualisations'
+          - text: '4 Programming Animated Data Visualisations'
             href: Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3b.qmd
+          - text: '5 Visual Statistical Analysis'
+            href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4a.qmd
+          - text: '6 Visualise Uncertainty'
+            href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4b.qmd
+          - text: '7 Funnel Plots for Fair Comparison'
+            href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4c.qmd
+            
       - section: "In-class Exercises"
         contents:
-          - text: 'Ex 1: A Light Makeover of ggplots'
+          - text: '1 A Light Makeover of ggplots'
             href: In-Class_Ex/In-Class_Ex01/In-Class_Ex1.qmd
-          - text: 'Ex 3: TBC'
+          - text: '2 Publishing a Quarto Document'
             href: In-Class_Ex/In-Class_Ex03/In-Class_Ex3.qmd
+            
+#      - section: "Take-Home Exercises"
+#        contents:
+#          - text: 'City of Engagement: Demographics and Financial Health of its Residents'
+#            href: Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.qmd
+            
       - section: "Tableau"
         contents:
           - text: 'Superstore Annual Sales and Profit'
@@ -42,21 +56,33 @@ website:
     left: 
       - text: Hands-on Exercises
         menu: 
-          - text: 'Ex 1 A Layered Grammar of Graphics - ggplot2 methods'
+          - text: '1 A Layered Grammar of Graphics - ggplot2 methods'
             href: Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.qmd
-          - text: 'Ex 2 Beyond ggplot2 Fundamentals'
+          - text: '2 Beyond ggplot2 Fundamentals'
             href: Hands-On_Ex/Hands-On_Ex02/Hands-on_Ex2.qmd
-          - text: 'Ex 3a: Programming Interactive Data Visualisations'
+          - text: '3 Programming Interactive Data Visualisations'
             href: Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3a.qmd
-          - text: 'Ex 3b: Programming Animated Data Visualisations'
+          - text: '4 Programming Animated Data Visualisations'
             href: Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3b.qmd
-          
+          - text: '5 Visual Statistical Analysis'
+            href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4a.qmd
+          - text: '6 Visualise Uncertainty'
+            href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4b.qmd
+          - text: '7 Funnel Plots for Fair Comparison'
+            href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4c.qmd
+            
       - text: In-class Exercises
         menu: 
-          - text: Ex 1 A Light Makeover of ggplots
+          - text: '1 A Light Makeover of ggplots'
             href: In-Class_Ex/In-Class_Ex01/In-Class_Ex1.qmd
-          - text: 'Ex 3: TBC'
+          - text: '2 Publishing a Quarto Document'
             href: In-Class_Ex/In-Class_Ex03/In-Class_Ex3.qmd
+            
+#      - text: Take-Home Exercises
+#        menu:
+#          - text: 'City of Engagement: Demographics and Financial Health of Residents'
+#            href: Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.qmd
+            
     right:
       - text: KB's GeoSpatial Analytics
         href: https://kaleidoscopic-bunny-isss624.netlify.app/

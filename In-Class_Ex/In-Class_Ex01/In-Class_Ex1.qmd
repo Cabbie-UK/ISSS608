@@ -1,5 +1,6 @@
 ---
-title: "A Light Makeover of ggplots"
+title: "1 A Light Makeover of ggplots"
+subtitle: In-Class Exercise for Week 1
 author: "KB"
 editor: visual
 execute:

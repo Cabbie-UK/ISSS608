@@ -1,5 +1,6 @@
 ---
-title: "Interactive Data Visualisation with R"
+title: "3 Interactive Data Visualisation with R"
+subtitle: Hands-On Exercise for Week 3
 editor: visual
 author: "KB"
 execute:

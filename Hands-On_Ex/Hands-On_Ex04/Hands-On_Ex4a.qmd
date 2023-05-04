@@ -1,0 +1,274 @@
+---
+title: "5 Visual Statistical Analysis"
+subtitle: Hands-On Exercise for Week 4
+author: "KB"
+editor: visual
+execute:
+  freeze: auto 
+  warning: false
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    code-line-numbers: true
+    toc-depth: 4
+---
+
+Published: 4-May-2023
+
+## 5.1 Learning Outcome
+
+We will learn to create visual graphics with rich statistical information, visualise model diagnostics, and model parameters.
+
+## 5.2 Getting Started
+
+### 5.2.1 Install and load the required r libraries
+
+Install and load the the required R packages. The name and function of the *new* package that will be used for this exercise are as follow:
+
+-   **ggstatsplot**: offers various types of statistical plots and functions for statistical tests such as t-tests, ANOVA, correlation tests, and regression analysis
+
+-   **performance**: offers functions for computing model evaluation metrics for model evaluation and comparison
+
+-   **parameters**: provides for managing complex experiments with many parameters and for automating parameter tuning in machine learning workflows
+
+-   [**see**](https://easystats.github.io/see/): provides a host of functions and tools to produce a range of publication-ready visualizations for model parameters, predictions, and performance diagnostics
+
+```{r}
+pacman::p_load(tidyverse,readxl, ggstatsplot, performance, parameters, see)
+```
+
+## 5.3 Visual Statistical Analysis with **ggstatsplot** package
+
+[**ggstatsplot**](https://indrajeetpatil.github.io/ggstatsplot/) is an extension of [**ggplot2**](https://ggplot2.tidyverse.org/) package for creating graphics enriched with statistical test details. It:
+
+-   Provides alternative statistical inference methods by default.
+
+-   Follows the best practices for statistical reporting. For all statistical tests reported in the plots, the default template abides by the [APA](https://my.ilstu.edu/~jhkahn/apastats.html) gold standard for statistical reporting. For example, here are the results from a t-test:
+
+![](images/paste-B71E582F.png)
+
+### 5.3.1 Import the data
+
+We will be using the same exam scores data-set that was featured in my [Hands-On Exercise for Week 1](https://boomie-boom-isss608.netlify.app/hands-on_ex/hands-on_ex01/hands-on_ex1#import-the-data "Additional info on the data-set").
+
+```{r}
+exam <- read_csv('data/Exam_data.csv', show_col_types = FALSE )
+```
+
+### 5.3.2 One-sample Mean Test
+
+We use [*`gghistostats()`*](https://indrajeetpatil.github.io/ggstatsplot/reference/gghistostats.html) to to build an visual of one-sample test on English scores.
+
+In the following case:
+
+-   **`type = "bayes"`**: specifies the type of statistical test to perform on the data to generate the interval estimate. In this case, it is a Bayesian analysis, which provides a posterior distribution of plausible values based on prior knowledge and observed data.
+
+-   **`test.value = 60`**: specifies the value for the null hypothesis that will be used to calculate the probability of the observed data. In this case, it is 60, which assumes that the average English score is 60.
+
+```{r}
+set.seed(1234)
+
+gghistostats(
+  data = exam,
+  x = ENGLISH,
+  type = "bayes",
+  test.value = 60,
+  xlab = "English scores"
+)
+```
+
+**Unpacking the Bayes Factor**
+
+A Bayes factor is the ratio of the likelihood of one particular hypothesis to the likelihood of another. It can be interpreted as a measure of the strength of evidence in favor of one theory among two competing theories.
+
+The Bayes factor gives us a way to evaluate the data in favor of a null hypothesis, and to use external information to do so. It tells us what the weight of the evidence is in favor of a given hypothesis.
+
+When we are comparing two hypotheses, H~1~ (the alternate hypothesis) and H~0~ (the null hypothesis), the Bayes Factor is often written as B~10~. It can be defined mathematically as:
+
+![](images/paste-B5B2345F.png)
+
+The [**Schwarz criterion**](https://www.statisticshowto.com/bayesian-information-criterion/) is one of the easiest ways to calculate rough approximation of the Bayes Factor.
+
+**How to interpret Bayes Factor**
+
+A **Bayes Factor** can be any positive number. One of the most common interpretations is this one---first proposed by Harold Jeffereys (1961) and slightly modified by [Lee and Wagenmakers](https://www-tandfonline-com.libproxy.smu.edu.sg/doi/pdf/10.1080/00031305.1999.10474443?needAccess=true) in 2013: ![](images/paste-8A6AF405.png)
+
+### 5.3.3 Two-sample Mean Test
+
+Next, we use [`ggbetweenstats()`](https://indrajeetpatil.github.io/ggstatsplot/reference/ggbetweenstats.html) to build a visual for two-sample mean test of Maths scores by gender. This generates a combination of box and violin plots along with jittered data points for between-subjects designs with statistical details included in the plot as a subtitle.
+
+In the following case:
+
+-   **`type = "np"`**: specifies the type of test to be used to compare the groups, in this case, a non-parametric test (Wilcoxon-Mann-Whitney test).
+
+-   **`messages = FALSE`**: specifies whether or not to display informative messages about the statistical test being performed.
+
+```{r}
+ggbetweenstats(
+  data = exam,
+  x = GENDER, 
+  y = MATHS,
+  type = "np",
+  messages = FALSE
+)
+```
+
+### 5.3.4 One-way ANOVA Test
+
+We can also use `ggbetweenstats()` to build a visual for One-way ANOVA test on English score by race.
+
+In the following case:
+
+-   **`type = "p"`**: specifies the type of test to be used to compare the groups, in this case, a parametric test (one-way ANOVA).
+
+-   **`mean.ci = TRUE`**: specifies whether or not to display confidence intervals for the group means.
+
+-   **`pairwise.comparisons = TRUE`**: specifies whether or not to display pairwise comparisons between the groups.
+
+-   **`pairwise.display = "s"`**: specifies the format of the pairwise comparison display, in this case, "s" for compact letter display.
+
+-   **`p.adjust.method = "fdr"`**: specifies the method used for p-value adjustment for multiple comparisons, in this case, false discovery rate (FDR) correction.
+
+```{r}
+ggbetweenstats(
+  data = exam,
+  x = RACE, 
+  y = ENGLISH,
+  type = "p",
+  mean.ci = TRUE, 
+  pairwise.comparisons = TRUE, 
+  pairwise.display = "s",
+  p.adjust.method = "fdr",
+  messages = FALSE
+)
+```
+
+```{r}
+
+```
+
+**Summary of tests with ggbetweenstats**
+
+![](images/paste-01306AC1.png) ![](images/paste-7CF1AB54.png) ![](images/paste-166AA56B.png)
+
+### 5.3.5 Significant Test of Correlation
+
+We can use [`ggscatterstats()`](https://indrajeetpatil.github.io/ggstatsplot/reference/ggscatterstats.html) to build a visual for Significant Test of Correlation between Maths scores and English scores. This creates a scatter plot with overlaid regression lines between the variables "MATHS" and "ENGLISH" in the "exam" dataset.
+
+In the following case:
+
+-   **`marginal = TRUE`**: specifies whether or not to display marginal histograms or density plots along the axes of the scatter plot. In this case, marginal plots are not displayed.
+
+```{r}
+ggscatterstats(
+  data = exam,
+  x = MATHS,
+  y = ENGLISH,
+  marginal = TRUE,
+  )
+```
+
+### 5.3.5 Significant Test of Association (Dependence)
+
+First, we bin the Maths scores into a 4-class variable using `cut()` function.
+
+```{r}
+exam1 <- exam %>% 
+  mutate(MATHS_bins = cut(MATHS, 
+               breaks = c(0,60,75,85,100))
+  )
+```
+
+We use [*ggbarstats()*](https://indrajeetpatil.github.io/ggstatsplot/reference/ggbarstats.html) to build a visual for Significant Test of Association between the categorised Maths scores and gender.
+
+```{r}
+ggbarstats(exam1, 
+           x = MATHS_bins, 
+           y = GENDER)
+```
+
+## 5.4 Visualise Models
+
+In this section, we will learn how to visualise model diagnostic and model parameters.
+
+### 5.4.1 Import the data
+
+Toyota Corolla case study will be used and the datat-set is imported. We will build a model to discover factors affecting prices of used-cars by taking into consideration a set of explanatory variables.
+
+```{r}
+car_resale <- read_xls("data/ToyotaCorolla.xls", 
+                       "data")
+car_resale
+```
+
+### 5.4.2 Create a Multi-variate Linear Regression Model
+
+We use `lm()` function of R **Base Stats** to calibrate a multi-variate linear regression model.
+
+```{r}
+model <- lm(Price ~ Age_08_04 + Mfg_Year + KM + 
+              Weight + Guarantee_Period, data = car_resale)
+model
+```
+
+### 5.4.3 Model Diagnostic: Check for Multicolinearity
+
+We use [`check_collinearity()`](https://easystats.github.io/performance/reference/check_collinearity.html) of [**performance**](https://easystats.github.io/performance/) package to conduct the test.
+
+```{r}
+check_collinearity(model)
+
+plot(check_collinearity(model))
+```
+
+### 5.4.4 Model Diagnostic: Check Normality Assumption
+
+There is the [`check_normality()`](https://easystats.github.io/performance/reference/check_normality.html) function to conduct the test.
+
+```{r}
+model1 <- lm(Price ~ Age_08_04 + KM + 
+              Weight + Guarantee_Period, data = car_resale)
+
+check_n <- check_normality(model1)
+
+plot(check_n)
+```
+
+### 5.4.5 Model Diagnostic: Check model for homogeneity of variances
+
+We can use the [`check_heteroscedasticity()`](https://easystats.github.io/performance/reference/check_heteroscedasticity.html) to do this check.
+
+```{r}
+check_h <- check_heteroscedasticity(model1)
+
+plot(check_h)
+```
+
+### 5.4.6 Model Diagnostic: Complete Check
+
+Thank goodness! There's also a [`check_model()`](https://easystats.github.io/performance/reference/check_model.html)function to conduct the diagnostic tests discussed above.
+
+```{r}
+#| fig-height: 10
+check_model(model1)
+```
+
+### 5.4.7 Visualise Regression Parameters
+
+We can use `plot(`) function of **see** package and `parameters()` of **parameters** package to visualise the parameters of a regression model.
+
+```{r}
+plot(parameters(model1))
+```
+
+Alternatively, we can use [`ggcoefstats()`](https://indrajeetpatil.github.io/ggstatsplot/reference/ggcoefstats.html) of **ggstatsplot** package to visualise the parameters of a regression model.
+
+```{r}
+ggcoefstats(model1, 
+            output = "plot")
+```
+
+::: {style="text-align: center"}
+$**That's$ $all$ $folks!**$
+:::
