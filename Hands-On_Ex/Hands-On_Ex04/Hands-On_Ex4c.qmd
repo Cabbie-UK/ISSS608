@@ -117,12 +117,6 @@ Further updates to the relevant arguments of the funnel_plot() function are:
 
 -   **`label`**: A logical value indicating whether or not to display the group labels on the plot. Here, it is set to **`NA`**, which means that no labels will be displayed.
 
--   **`title`**: A character string specifying the title of the plot. Here, it is set to "COVID-19 Fatality Rate by Total Number of COVID-19 Positive Cases".
-
--   **`x_label`**: A character string specifying the label for the x-axis of the plot. Here, it is set to "COVID-19 Positive Cases".
-
--   **`y_label`**: A character string specifying the label for the y-axis of the plot. Here, it is set to "Fatality Rate".
-
 ```{r}
 funnel_plot(
   numerator = covid19$Death,
