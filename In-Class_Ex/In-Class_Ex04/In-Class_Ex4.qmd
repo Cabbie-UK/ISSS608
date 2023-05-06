@@ -1,0 +1,83 @@
+---
+title: "3 Quantile–quantile plots"
+subtitle: In-Class Exercise for Week 4
+author: "KB"
+editor: visual
+date: 2023-05-06
+execute:
+  freeze: auto
+  warning: false
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    code-line-numbers: true
+---
+
+## 1.Load the required packages
+
+```{r}
+pacman::p_load(rstatix,gt,patchwork,tidyverse,webshot2)
+```
+
+## 2.Load the data-set into R
+
+```{r}
+exam_data <- read_csv('data/Exam_data.csv', show_col_types = FALSE) 
+```
+
+## 3.Visualise Normal Distribution
+
+Quantile--quantile (Q-Q) plots are a useful visualization when we want to determine to what extent the observed data points do or do not follow a given distribution. If the data is normally distributed, the points in a Q-Q plot will be on a straight diagonally line. Conversely, if the points deviate significantly from the straight diagonally line, then it's less likely that the data is normally distributed.
+
+::: panel-tabset
+## The Plot
+
+```{r}
+#| code-fold: false
+#| echo: false
+ggplot(exam_data, 
+       aes(sample=ENGLISH))+
+  stat_qq()+
+  stat_qq_line()
+```
+
+## The Codes
+
+```{r}
+#| code-fold: false
+#| eval: false
+ggplot(exam_data, 
+       aes(sample=ENGLISH))+
+  stat_qq()+
+  stat_qq_line()
+```
+:::
+
+::: callout-note
+## Note
+
+We can see that the points deviate significantly from the straight diagonal line. This is a clear indication that the set of data is not normally distributed.
+:::
+
+## 4.Combining statistical graph and analysis table
+
+We will need to install webshot2
+
+```{r}
+qq <-ggplot(exam_data, 
+       aes(sample=ENGLISH))+
+  stat_qq()+
+  stat_qq_line()
+
+sw_t <- exam_data %>%
+  shapiro_test(ENGLISH) %>%
+  gt()
+
+tmp <- tempfile(fileext = '.png')
+gtsave(sw_t,tmp)
+table_png <- png::readPNG(tmp,
+                          native = TRUE)
+
+qq + table_png
+```

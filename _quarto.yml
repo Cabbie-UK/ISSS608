@@ -37,6 +37,8 @@ website:
             href: In-Class_Ex/In-Class_Ex01/In-Class_Ex1.qmd
           - text: '2 Publishing a Quarto Document'
             href: In-Class_Ex/In-Class_Ex03/In-Class_Ex3.qmd
+          - text: '3 Quantile–quantile plots'
+            href: In-Class_Ex/In-Class_Ex04/In-Class_Ex4.qmd
             
 #      - section: "Take-Home Exercises"
 #        contents:
@@ -77,6 +79,8 @@ website:
             href: In-Class_Ex/In-Class_Ex01/In-Class_Ex1.qmd
           - text: '2 Publishing a Quarto Document'
             href: In-Class_Ex/In-Class_Ex03/In-Class_Ex3.qmd
+          - text: '3 Quantile–quantile plots'
+            href: In-Class_Ex/In-Class_Ex04/In-Class_Ex4.qmd
             
 #      - text: Take-Home Exercises
 #        menu:

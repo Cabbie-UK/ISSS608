@@ -1,0 +1,16 @@
+{
+  "hash": "a32f9b1f6b14ec25c89d51a644602619",
+  "result": {
+    "markdown": "---\ntitle: \"Quantile–quantile plots\"\nsubtitle: In-Class Exercise for Week 4\nauthor: \"KB\"\neditor: visual\ndate: 2023-05-06\nexecute:\n  freeze: auto\n  warning: false\nformat:\n  html:\n    code-fold: true\n    code-summary: \"Show the code\"\n    code-line-numbers: true\n---\n\n\n1.Load the required packages\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(rstatix,gt,patchwork,tidyverse,webshot2)\n```\n:::\n\n\n2.Load the data-set into R\n\n\n::: {.cell}\n\n```{.r .cell-code}\nexam_data <- read_csv('data/Exam_data.csv', show_col_types = FALSE) \n```\n:::\n\n\n3.Visualise Normal Distribution\n\nQuantile--quantile (Q-Q) plots are a useful visualization when we want to determine to what extent the observed data points do or do not follow a given distribution. If the data is normally distributed, the points in a Q-Q plot will be on a straight diagonally line. Conversely, if the points deviate significantly from the straight diagonally line, then it's less likely that the data is normally distributed.\n\n::: panel-tabset\n## The Plot\n\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"false\"}\nggplot(exam_data, \n       aes(sample=ENGLISH))+\n  stat_qq()+\n  stat_qq_line()\n```\n\n::: {.cell-output-display}\n![](In-Class_Ex44_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n\n## The Codes\n\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"false\"}\nggplot(exam_data, \n       aes(sample=ENGLISH))+\n  stat_qq()+\n  stat_qq_line()\n```\n\n::: {.cell-output-display}\n![](In-Class_Ex44_files/figure-html/unnamed-chunk-4-1.png){width=672}\n:::\n:::\n\n:::\n",
+    "supporting": [
+      "In-Class_Ex44_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
