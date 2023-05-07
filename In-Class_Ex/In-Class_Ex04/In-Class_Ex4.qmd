@@ -2,8 +2,8 @@
 title: "3 Quantile–quantile plots"
 subtitle: In-Class Exercise for Week 4
 author: "KB"
+date: last-modified
 editor: visual
-date: 2023-05-06
 execute:
   freeze: auto
   warning: false
@@ -13,6 +13,8 @@ format:
     code-summary: "Show the code"
     code-line-numbers: true
 ---
+
+(First published: May 6, 2023)
 
 ## 1.Load the required packages
 

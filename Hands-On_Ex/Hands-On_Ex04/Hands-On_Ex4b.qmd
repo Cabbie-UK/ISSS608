@@ -1,6 +1,7 @@
 ---
 title: "6 Visualise Uncertainty"
 subtitle: Hands-On Exercise for Week 4
+date: last-modified
 author: "KB"
 editor: visual
 execute:
@@ -14,9 +15,7 @@ format:
     toc-depth: 4
 ---
 
-Published: 4-May-2023
-
-Modified: 6-May-2023
+(First Published: 4-May-2023)
 
 ## 6.1 Learning Outcome
 
@@ -230,7 +229,7 @@ exam %>%
     subtitle = "Gradient + interval plot")
 ```
 
-## 6.5 Visualise Uncertainty with Hypothetical Outcome Plots (HOPs) 
+## 6.5 Visualise Uncertainty with Hypothetical Outcome Plots (HOPs)
 
 The **ungeviz** package is meant to provide helpful add-on functionality for ggplot2 to visualize uncertainty. The package is particularly focused on hypothetical outcome plots (HOPs) and provides bootstrapping and sampling functionality that integrates well with the ggplot2 API.
 
@@ -277,5 +276,9 @@ ggplot(data = exam,
 ::: callout-note
 ## Note
 
-The sampler() functions generates sampling and bootstrapping exam scores repeatedly, that can be used in place of data in ggplot2 layers. This help to create the hypothetical outcome plots.
+The sampler() function generates sampling and bootstrapping exam scores repeatedly and these scores are used as input data in ggplot2 layer. This helps to create the hypothetical outcome plot.
+:::
+
+::: {style="text-align: center"}
+$**That's$ $all$ $folks!**$
 :::
