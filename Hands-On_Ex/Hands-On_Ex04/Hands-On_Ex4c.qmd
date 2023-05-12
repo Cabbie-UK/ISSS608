@@ -27,7 +27,7 @@ In this hands-on exercise, we will learn to design and produce static and intera
 
 ### 7.2.1 Install and load the required r libraries
 
-Install and load the the required R packages. The name and function of the new package that will be used for this exercise are as follow:
+Install and load the the required R packages. The name and function of the new packages that will be used for this exercise are as follow:
 
 -   **FunnelPlotR** for creating funnel plot
 
