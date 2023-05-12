@@ -183,7 +183,7 @@ ggplot(exam,
 
 ## 8.4 Visualise Distribution with Raincloud Plot
 
-Raincloud Plot is a data visualisation technique that produces a density and a dot plot symmetrically cupped together along a common pane. It gets the name because the density plot is in the shape of a "raincloud" while the dots plot represents raindrops 🌧️. The raincloud (half-density) plot enhances the traditional box-plot by highlighting multiple modalities (an indicator that groups may exist). The boxplot does not show where densities are clustered, but the raincloud plot does!
+Raincloud Plot is a data visualisation technique that produces a density and a dot plot symmetrically cupped together along a common pane. It gets the name because the density plot is in the shape of a "raincloud" while the dots represent raindrops 🌧️. The raincloud (half-density) plot enhances the traditional box-plot by highlighting multiple modalities (an indicator that groups may exist). The boxplot does not show where densities are clustered, but the raincloud plot does!
 
 In this section, we will learn how to create a raincloud plot to visualise the distribution of English scores by race. It will be created by using functions provided by **ggdist** and ggplot2 packages.
 
