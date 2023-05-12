@@ -32,6 +32,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4c.qmd
           - text: '8 Visualise Distributions'
             href: Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5a.qmd
+          - text: '9 Visualise Network Data'
+            href: Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5b.qmd
             
       - section: "In-class Exercises"
         contents:
@@ -76,6 +78,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4c.qmd
           - text: '8 Visualise Distributions'
             href: Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5a.qmd
+          - text: '9 Visualise Network Data'
+            href: Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5b.qmd
             
       - text: In-class Exercises
         menu: 

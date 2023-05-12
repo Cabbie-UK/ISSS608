@@ -29,7 +29,7 @@ We will learn 2 fairly new techniques to visual distribution, namely:
 
 ### 8.2.1 Install and load the required r libraries
 
-Install and load the the required R packages. The name and function of the new package that will be used for this exercise is as follow:
+Install and load the the required R packages. The name and function of the new packages that will be used for this exercise are as follow:
 
 -   **ggridges** : a ggplot2 extension specially designed for plotting ridgeline plots
 
