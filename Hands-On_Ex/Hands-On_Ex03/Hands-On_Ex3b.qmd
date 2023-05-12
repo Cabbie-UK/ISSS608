@@ -1,6 +1,7 @@
 ---
 title: "4 Animated Statistical Graph with R"
 subtitle: Hands-On Exercise for Week 3
+date: last-modified
 editor: visual
 author: "KB"
 execute:
@@ -14,7 +15,7 @@ format:
     toc-depth: 4
 ---
 
-Published: 26-Apr-2023
+(First Published: 26-Apr-2023)
 
 ## 4.1 Learning Outcome
 
@@ -180,8 +181,12 @@ bp <- globalPop %>%
           text = ~Country, 
           hoverinfo = "text",
           type = 'scatter',
-          mode = 'markers'
-          )
+          mode = 'markers') %>%
+  layout(xaxis=list(title='% Old',
+                showgrid=FALSE,
+                zeroline=FALSE,
+                showticklabels=FALSE),
+         yaxis=list(title='% Young'))
 bp
 ```
 
@@ -194,6 +199,8 @@ bp
 -   [Building an animation step-by-step with gganimate](https://www.alexcookson.com/post/2020-10-18-building-an-animation-step-by-step-with-gganimate/).
 
 -   [Creating a composite gif with multiple gganimate panels](https://solarchemist.se/2021/08/02/composite-gif-gganimate/)
+
+-   [How to change the yaxis linecolor in the horizontal bar? - Plotly R, MATLAB, Julia, Net / Plotly R - Plotly Community Forum](https://community.plotly.com/t/how-to-change-the-yaxis-linecolor-in-the-horizontal-bar/1915/4): This helps to resolve the black y-axis in the last bubble plot. The interesting finding is that we have to set the x-axis's zeroline argument to FALSE to resolve the issue 😅.
 
 ::: {style="text-align: center"}
 $**That's$ $all$ $folks!**$

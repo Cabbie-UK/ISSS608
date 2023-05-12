@@ -30,6 +30,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4b.qmd
           - text: '7 Funnel Plots for Fair Comparison'
             href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4c.qmd
+          - text: '8 Visualise Distributions'
+            href: Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5a.qmd
             
       - section: "In-class Exercises"
         contents:
@@ -40,10 +42,10 @@ website:
           - text: '3 Quantile–quantile plots'
             href: In-Class_Ex/In-Class_Ex04/In-Class_Ex4.qmd
             
-#      - section: "Take-Home Exercises"
-#        contents:
-#          - text: 'City of Engagement: Demographics and Financial Health of its Residents'
-#            href: Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.qmd
+      # - section: "Take-Home Exercises"
+      #   contents:
+      #     - text: 'City of Engagement: Demographics and Financial Health of its Residents'
+      #       href: Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.qmd
             
       - section: "Tableau"
         contents:
@@ -72,6 +74,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4b.qmd
           - text: '7 Funnel Plots for Fair Comparison'
             href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4c.qmd
+          - text: '8 Visualise Distributions'
+            href: Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5a.qmd
             
       - text: In-class Exercises
         menu: 
@@ -82,10 +86,10 @@ website:
           - text: '3 Quantile–quantile plots'
             href: In-Class_Ex/In-Class_Ex04/In-Class_Ex4.qmd
             
-#      - text: Take-Home Exercises
-#        menu:
-#          - text: 'City of Engagement: Demographics and Financial Health of Residents'
-#            href: Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.qmd
+      # - text: Take-Home Exercises
+      #   menu:
+      #     - text: 'City of Engagement: Demographics and Financial Health of Residents'
+      #       href: Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.qmd
             
     right:
       - text: KB's GeoSpatial Analytics

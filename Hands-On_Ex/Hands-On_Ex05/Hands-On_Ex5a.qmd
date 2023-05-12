@@ -1,0 +1,28 @@
+---
+title: "8 Visualise Distribution"
+subtitle: Hands-On Exercise for Week 5
+date: last-modified
+author: "KB"
+editor: visual
+execute:
+  freeze: auto 
+  warning: false
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    code-line-numbers: true
+    toc-depth: 4
+---
+
+(First Published: May 12, 2023)
+
+8.1 Learning Outcome
+
+We will learn 2 fairly new techniques to visual distribution, namely:
+
+-   ridgeline plot
+
+-   raincloud plot
+
+-   

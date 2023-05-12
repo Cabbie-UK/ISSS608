@@ -161,7 +161,13 @@ p <- ggplot(d) +
     linewidth=0.5) +
   geom_point(aes
            (x=RACE, 
-            y=`Avg Scores`), 
+            y=`Avg Scores`,
+            text = paste("Race:", `RACE`, 
+                                  "<br>N:", `No. of pupils`,
+                                  "<br>Avg. Scores:", round(`Avg Scores`, digits = 2),
+                                  "<br>95% CI:[", 
+                                  round((`Avg Scores` - qt(0.995, `No. of pupils`-1)*`Std Error`), digits = 2), ",",
+                                  round((`Avg Scores` + qt(0.995, `No. of pupils`-1)*`Std Error`), digits = 2),"]")), 
            stat="identity", 
            color="red",
            size = 1.5,
