@@ -64,5 +64,14 @@
   },
   "Hands-On_Ex/Hands-On_Ex05/Hands-On_Ex5b.qmd": {
     "Hands-On_Ex5b.html": "4aefaf1b"
+  },
+  "In-Class_Ex/In-Class_Ex05/In-Class_Ex5.qmd": {
+    "In-Class_Ex5.html": "5c30a5f1"
+  },
+  "site_libs/cal-heatmap-3.5.2/CHANGELOG.md": {
+    "CHANGELOG.html": "b2a73ebd"
+  },
+  "site_libs/d3-3.5.5/CONTRIBUTING.md": {
+    "CONTRIBUTING.html": "150ca49c"
   }
 }

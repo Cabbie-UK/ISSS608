@@ -1,0 +1,78 @@
+---
+title: "4 Working with json files for Network Analysis"
+subtitle: In-Class Exercise for Week 5
+date: last-modified
+author: "KB"
+editor: visual
+execute:
+  freeze: auto 
+  warning: false
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    code-line-numbers: true
+    toc-depth: 4
+---
+
+(First Published: May 13, 2023)
+
+## 4.1 Getting Started
+
+### 4.1.1 Install and load the required r libraries
+
+-   **jsonlite** : allows the reading and importing of json files.
+
+```{r}
+pacman::p_load(jsonlite,tidygraph,ggraph,visNetwork,tidyverse)
+```
+
+### 4.1.2 Import the data
+
+Import the given MC1.json file into R and assign the data to MC1.
+
+```{r}
+MC1 = fromJSON("data/MC1.json")
+```
+
+Extract the nodes info from MC1 data frame
+
+```{r}
+MC1_nodes <- as_tibble(MC1$nodes) %>%
+  select(id, type, country)
+```
+
+Extract the edges info from MC1 data frame
+
+```{r}
+MC1_edges <- as_tibble(MC1$links) %>%
+  select(source, target, type, weight, key)
+```
+
+Aggregate the weight information between each pair of notes and by the relationship type
+
+```{r}
+MC1_edges_aggregated <- MC1_edges  %>%
+  group_by(source, target, type) %>%
+  summarise(weight_sum = sum()) %>%
+  filter(source !=target) %>%
+  ungroup()
+```
+
+### 4.1.3 Use `tbl_graph()` to build tidygraph data model
+
+We use `tbl_graph()` of **tinygraph** package to build an tidygraph\'s network graph data.frame.
+
+```{r}
+MC1_graph <- tbl_graph(nodes = MC1_nodes,
+                       edges = MC1_edges_aggregated,
+                       directed = TRUE)
+```
+
+Let\'s take a look at the output tidygraph\'s graph object.
+
+```{r}
+MC1_graph
+```
+
+Further data cleaning is required before we can proceed to plot the graph.

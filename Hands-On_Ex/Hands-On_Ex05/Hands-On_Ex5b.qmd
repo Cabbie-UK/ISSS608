@@ -100,11 +100,13 @@ GAStech_edges <- GAStech_edges %>%
 
 A close examination of *GAStech_edges* data.frame reveals that it consists of:
 
--   Non-worked related emails
+-   non-worked related emails
 
--   Not grouped by weekends
+-   weekends
 
 -   self-directed e-mails where the individuals send an email to themselves
+
+-   emails that were only sent once
 
 We will wrangle the data to address these issues.
 

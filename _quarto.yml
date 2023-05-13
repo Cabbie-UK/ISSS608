@@ -43,7 +43,9 @@ website:
             href: In-Class_Ex/In-Class_Ex03/In-Class_Ex3.qmd
           - text: '3 Quantile–quantile plots'
             href: In-Class_Ex/In-Class_Ex04/In-Class_Ex4.qmd
-            
+          - text: '4 Working with json files for Network Analysis'
+            href: In-Class_Ex/In-Class_Ex05/In-Class_Ex5.qmd
+
       # - section: "Take-Home Exercises"
       #   contents:
       #     - text: 'City of Engagement: Demographics and Financial Health of its Residents'
@@ -57,6 +59,7 @@ website:
             href: Tableau/2_Superstore_Story.qmd
           - text: 'Animinated Bubbleplot and Cross-Filtering of Charts'
             href: Tableau/3_Animation_CrossFiltering.qmd
+            
   page-navigation: true
   navbar:
     left: 
@@ -89,6 +92,8 @@ website:
             href: In-Class_Ex/In-Class_Ex03/In-Class_Ex3.qmd
           - text: '3 Quantile–quantile plots'
             href: In-Class_Ex/In-Class_Ex04/In-Class_Ex4.qmd
+          - text: '4 Working with json files for Network Analysis'
+            href: In-Class_Ex/In-Class_Ex05/In-Class_Ex5.qmd
             
       # - text: Take-Home Exercises
       #   menu:

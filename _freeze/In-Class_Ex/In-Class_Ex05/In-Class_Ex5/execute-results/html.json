@@ -1,0 +1,16 @@
+{
+  "hash": "7c3ca435bc8a36a1ef4ab2c504d0decb",
+  "result": {
+    "markdown": "---\ntitle: \"4 Working with json files for Network Analysis\"\nsubtitle: In-Class Exercise for Week 5\ndate: last-modified\nauthor: \"KB\"\neditor: visual\nexecute:\n  freeze: auto \n  warning: false\nformat:\n  html:\n    code-fold: true\n    code-summary: \"Show the code\"\n    code-line-numbers: true\n    toc-depth: 4\n---\n\n\n(First Published: May 13, 2023)\n\n## 4.1 Getting Started\n\n### 4.1.1 Install and load the required r libraries\n\n-   **jsonlite** : allows the reading and importing of json files.\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(jsonlite,tidygraph,ggraph,visNetwork,tidyverse)\n```\n:::\n\n\n### 4.1.2 Import the data\n\nImport the given MC1.json file into R and assign the data to MC1.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nMC1 = fromJSON(\"data/MC1.json\")\n```\n:::\n\n\nExtract the nodes info from MC1 data frame\n\n\n::: {.cell}\n\n```{.r .cell-code}\nMC1_nodes <- as_tibble(MC1$nodes) %>%\n  select(id, type, country)\n```\n:::\n\n\nExtract the edges info from MC1 data frame\n\n\n::: {.cell}\n\n```{.r .cell-code}\nMC1_edges <- as_tibble(MC1$links) %>%\n  select(source, target, type, weight, key)\n```\n:::\n\n\nAggregate the weight information between each pair of notes and by the relationship type\n\n\n::: {.cell}\n\n```{.r .cell-code}\nMC1_edges_aggregated <- MC1_edges  %>%\n  group_by(source, target, type) %>%\n  summarise(weight_sum = sum()) %>%\n  filter(source !=target) %>%\n  ungroup()\n```\n:::\n\n\n### 4.1.3 Use `tbl_graph()` to build tidygraph data model\n\nWe use `tbl_graph()` of **tinygraph** package to build an tidygraph\\'s network graph data.frame.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nMC1_graph <- tbl_graph(nodes = MC1_nodes,\n                       edges = MC1_edges_aggregated,\n                       directed = TRUE)\n```\n:::\n\n\nLet\\'s take a look at the output tidygraph\\'s graph object.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nMC1_graph\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n# A tbl_graph: 3428 nodes and 10747 edges\n#\n# A bipartite multigraph with 93 components\n#\n# A tibble: 3,428 × 3\n  id                       type         country \n  <chr>                    <chr>        <chr>   \n1 Spanish Shrimp  Carriers company      Nalakond\n2 12744                    organization <NA>    \n3 143129355                organization <NA>    \n4 7775                     organization <NA>    \n5 1017141                  organization <NA>    \n6 2591586                  organization <NA>    \n# ℹ 3,422 more rows\n#\n# A tibble: 10,747 × 4\n   from    to type                weight_sum\n  <int> <int> <chr>                    <int>\n1    49    51 family_relationship          0\n2    49    52 family_relationship          0\n3    49     4 family_relationship          0\n# ℹ 10,744 more rows\n```\n:::\n:::\n\n\nFurther data cleaning is required before we can proceed to plot the graph.\n",
+    "supporting": [
+      "In-Class_Ex5_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
