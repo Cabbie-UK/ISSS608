@@ -43,8 +43,6 @@ We use the `pacman::p_load()` function to load the required R packages into our 
 
 -   **ggstatsplot**: For creating graphics with details from statistical tests.
 
--   **pacthwork**: For combining plots\*\*
-
 -   **ggdist**: For visualising distribution and uncertainty
 
 -   **ggthemes**: Provides additional themes for **ggplot2**
@@ -59,7 +57,7 @@ We use the `pacman::p_load()` function to load the required R packages into our 
 
 ```{r}
 #Load packages
-pacman::p_load(plotly, ggstatsplot, patchwork, ggdist, gridExtra,ggthemes, tidyverse, DT, reshape2)
+pacman::p_load(plotly, ggstatsplot, ggdist, gridExtra,ggthemes, tidyverse, DT, reshape2)
 ```
 
 ## 2.2 Import the data-sets
