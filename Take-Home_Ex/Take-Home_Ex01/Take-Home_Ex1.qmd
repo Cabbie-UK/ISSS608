@@ -789,6 +789,8 @@ The results confirm that we can't assume Normality for the data and we will proc
 :::
 
 ```{r}
+#| fig-width: 12
+#| fig-height: 8
 
 set.seed(123)
 
@@ -839,6 +841,8 @@ The results confirm that we can't assume Normality for the data and we will proc
 -   H0 = There is no difference between the median joviality index of the participants with different education level at 0.05 level of significance.
 
 ```{r}
+#| fig-width: 12
+#| fig-height: 8
 
 set.seed(123)
 
@@ -885,6 +889,9 @@ The results confirm that we can't assume Normality for the data and we will proc
 -   H0 = There is no difference between the total expenses for households with and without kids at 0.05 level of significance.
 
 ```{r}
+#| fig-width: 12
+#| fig-height: 8
+
 set.seed(123)
 
 # Set a color scheme for Household Size Level analysis for consistency
@@ -925,6 +932,8 @@ To do this, we have to first extract the individual expenses items of the 880 pa
 :::
 
 ```{r}
+#| fig-width: 12
+#| fig-height: 8
 
 # Extract the individual expenses items of the 880 participants for the year
 
@@ -990,6 +999,9 @@ Since we cannot assume Normality for the data based on the results of Step 1, we
 -   H0 = There is no difference between the expense-to-wage ratio of the participants with different household size at 0.05 level of significance.
 
 ```{r}
+#| fig-width: 12
+#| fig-height: 8
+
 set.seed(123)
 
 # Set a color scheme for Household Size Level analysis for consistency
