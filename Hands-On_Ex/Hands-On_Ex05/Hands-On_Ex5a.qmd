@@ -261,7 +261,15 @@ ggplot(exam,
             dotsize = 1.5) +
   # Add'l codes from the previous plot
   coord_flip() +
-  theme_economist()
+  theme_economist() +
+  # Add geom_text layer for displaying median values
+  stat_summary(fun = median, geom = "text", aes(label = round(..y.., 1)),
+               position = position_nudge(x = 0.15), vjust = -0.5) +
+  # Add geom_text layer for displaying mean dot in red
+  stat_summary(fun = mean, geom = "point", shape = 16, size = 3, color = "red",
+               position = position_nudge(x = 0.0)) +
+    stat_summary(fun = mean, geom = "text", aes(label = round(..y.., 0)),
+               position = position_nudge(x = 0.15), vjust = 2.5, color = "red") 
 ```
 
 ::: {style="text-align: center"}

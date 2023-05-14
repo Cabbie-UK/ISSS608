@@ -46,10 +46,10 @@ website:
           - text: '4 Working with json files for Network Analysis'
             href: In-Class_Ex/In-Class_Ex05/In-Class_Ex5.qmd
 
-      # - section: "Take-Home Exercises"
-      #   contents:
-      #     - text: 'City of Engagement: Demographics and Financial Health of its Residents'
-      #       href: Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.qmd
+      - section: "Take-Home Exercises"
+        contents:
+          - text: 'City of Engagement: Demographics and Financial Health of its Residents'
+            href: Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.qmd
             
       - section: "Tableau"
         contents:
@@ -95,10 +95,10 @@ website:
           - text: '4 Working with json files for Network Analysis'
             href: In-Class_Ex/In-Class_Ex05/In-Class_Ex5.qmd
             
-      # - text: Take-Home Exercises
-      #   menu:
-      #     - text: 'City of Engagement: Demographics and Financial Health of Residents'
-      #       href: Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.qmd
+      - text: Take-Home Exercises
+        menu:
+          - text: 'City of Engagement: Demographics and Financial Health of Residents'
+            href: Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.qmd
             
     right:
       - text: KB's GeoSpatial Analytics
