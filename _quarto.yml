@@ -14,27 +14,6 @@ website:
       - text: 'Home'
         href: index.qmd
         
-      - section: "Hands-on Exercises"
-        contents:
-          - text: '1 A Layered Grammar of Graphics - ggplot2 methods'
-            href: Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.qmd
-          - text: '2 Beyond ggplot2 Fundamentals'
-            href: Hands-On_Ex/Hands-On_Ex02/Hands-on_Ex2.qmd
-          - text: '3 Programming Interactive Data Visualisations'
-            href: Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3a.qmd
-          - text: '4 Programming Animated Data Visualisations'
-            href: Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3b.qmd
-          - text: '5 Visual Statistical Analysis'
-            href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4a.qmd
-          - text: '6 Visualise Uncertainty'
-            href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4b.qmd
-          - text: '7 Funnel Plots for Fair Comparison'
-            href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4c.qmd
-          - text: '8 Visualise Distributions'
-            href: Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5a.qmd
-          - text: '9 Visualise Network Data'
-            href: Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5b.qmd
-            
       - section: "In-class Exercises"
         contents:
           - text: '1 A Light Makeover of ggplots'
@@ -60,6 +39,30 @@ website:
           - text: 'Animinated Bubbleplot and Cross-Filtering of Charts'
             href: Tableau/3_Animation_CrossFiltering.qmd
             
+      - section: "Hands-on Exercises"
+        contents:
+          - text: '1 A Layered Grammar of Graphics - ggplot2 methods'
+            href: Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.qmd
+          - text: '2 Beyond ggplot2 Fundamentals'
+            href: Hands-On_Ex/Hands-On_Ex02/Hands-on_Ex2.qmd
+          - text: '3 Programming Interactive Data Visualisations'
+            href: Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3a.qmd
+          - text: '4 Programming Animated Data Visualisations'
+            href: Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3b.qmd
+          - text: '5 Visual Statistical Analysis'
+            href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4a.qmd
+          - text: '6 Visualise Uncertainty'
+            href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4b.qmd
+          - text: '7 Funnel Plots for Fair Comparison'
+            href: Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4c.qmd
+          - text: '8 Visualise Distributions'
+            href: Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5a.qmd
+          - text: '9 Visualise Network Data'
+            href: Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5b.qmd
+          - text: '10 Ternary Plot to display composition of 3 variables'
+            href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6a.qmd
+            
+            
   page-navigation: true
   navbar:
     left: 
@@ -83,6 +86,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5a.qmd
           - text: '9 Visualise Network Data'
             href: Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5b.qmd
+          - text: '10 Ternary Plot to display composition of 3 variables'
+            href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6a.qmd
             
       - text: In-class Exercises
         menu: 
