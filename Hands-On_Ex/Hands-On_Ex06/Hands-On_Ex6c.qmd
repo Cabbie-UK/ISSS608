@@ -256,6 +256,12 @@ plot(num_k)
 
 The figure above shows that k=3 would be good.
 
+::: callout-tip
+## Other methods to determine k
+
+Check out my Geospatial Analytics page [here](https://kaleidoscopic-bunny-isss624.netlify.app/take-home_ex/take-home_ex2#determine-the-optimal-clusters) where I shared 2 other methods - Elbow and Gap Statistic - to find the best k.
+:::
+
 Using the statistical analysis results, we can prepare the hierarchical plot.
 
 ```{r}
