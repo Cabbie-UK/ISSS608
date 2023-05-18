@@ -54,6 +54,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6a.qmd
           - text: '11 Visual Correlation Analysis of Numerical and Categorical Data'
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6b.qmd
+          - text: '12 Heatmap to visualise Multivariate Data'
+            href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6c.qmd
             
       - section: "Tableau"
         contents:
@@ -91,6 +93,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6a.qmd
           - text: '11 Visual Correlation Analysis of Numerical and Categorical Data'
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6b.qmd
+          - text: '12 Heatmap to visualise Multivariate Data'
+            href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6c.qmd
             
       - text: In-class Exercises
         menu: 

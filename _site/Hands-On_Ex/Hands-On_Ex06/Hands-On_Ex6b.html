@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="KB">
-<meta name="dcterms.date" content="2023-05-17">
+<meta name="dcterms.date" content="2023-05-18">
 
 <title>KB’s Visual Analytics - 11 Visual Correlation Analysis of Numerical and Categorical Data</title>
 <style>
@@ -95,7 +95,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Tableau/1_Superstore.html" rel="next">
+<link href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6c.html" rel="next">
 <link href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6a.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -193,6 +193,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li>
     <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6b.html">
  <span class="dropdown-text">11 Visual Correlation Analysis of Numerical and Categorical Data</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6c.html">
+ <span class="dropdown-text">12 Heatmap to visualise Multivariate Data</span></a>
   </li>  
     </ul>
   </li>
@@ -374,6 +378,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6b.html" class="sidebar-item-text sidebar-link active">11 Visual Correlation Analysis of Numerical and Categorical Data</a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6c.html" class="sidebar-item-text sidebar-link">12 Heatmap to visualise Multivariate Data</a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -448,7 +457,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 17, 2023</p>
+      <p class="date">May 18, 2023</p>
     </div>
   </div>
     
@@ -783,17 +792,17 @@ On ggcorrmat()
 </div>
 </div>
 <p><strong>Reorder a corrgram</strong></p>
-<p>Matrix reorder is very important for mining the hiden structure and pattern in a corrgram. By default, the order of attributes of a corrgram is sorted according to the correlation matrix (i.e.&nbsp;"original"). The default setting can be over-write by using the <em>order</em> argument of <code>corrplot().</code> Currently, <strong>corrplot</strong> package support four sorting methods, they are:</p>
+<p>Matrix reorder is very important for mining the hiden structure and pattern in a corrgram. By default, the order of attributes of a corrgram is sorted according to the correlation matrix (i.e.&nbsp;“original”). The default setting can be over-write by using the <em>order</em> argument of <code>corrplot().</code> Currently, <strong>corrplot</strong> package support four sorting methods, they are:</p>
 <ul>
-<li><p>"AOE" is for the angular order of the eigenvectors. See Michael Friendly (2002) for details.</p></li>
-<li><p>"FPC" for the first principal component order.</p></li>
-<li><p>"hclust" for hierarchical clustering order, and "hclust.method" for the agglomeration method to be used.</p>
+<li><p>“AOE” is for the angular order of the eigenvectors. See Michael Friendly (2002) for details.</p></li>
+<li><p>“FPC” for the first principal component order.</p></li>
+<li><p>“hclust” for hierarchical clustering order, and “hclust.method” for the agglomeration method to be used.</p>
 <ul>
-<li>"hclust.method" should be one of "ward", "single", "complete", "average", "mcquitty", "median" or "centroid".</li>
+<li>“hclust.method” should be one of “ward”, “single”, “complete”, “average”, “mcquitty”, “median” or “centroid”.</li>
 </ul></li>
-<li><p>"alphabet" for alphabetical order.</p></li>
+<li><p>“alphabet” for alphabetical order.</p></li>
 </ul>
-<p>"AOE", "FPC", "hclust", "alphabet". More algorithms can be found in <strong>seriation</strong> package.</p>
+<p>“AOE”, “FPC”, “hclust”, “alphabet”. More algorithms can be found in <strong>seriation</strong> package.</p>
 <div class="cell">
 <details>
 <summary>Show the code</summary>
@@ -831,8 +840,8 @@ On ggcorrmat()
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">11.6 References</h2>
 <ul>
-<li><p>Michael Friendly (2002). "Corrgrams: Exploratory displays for correlation matrices". <em>The American Statistician</em>, 56, 316–324.</p></li>
-<li><p>D.J. Murdoch, E.D. Chow (1996). "A graphical display of large correlation matrices". <em>The American Statistician</em>, 50, 178–180.</p></li>
+<li><p>Michael Friendly (2002). “Corrgrams: Exploratory displays for correlation matrices”. <em>The American Statistician</em>, 56, 316–324.</p></li>
+<li><p>D.J. Murdoch, E.D. Chow (1996). “A graphical display of large correlation matrices”. <em>The American Statistician</em>, 50, 178–180.</p></li>
 </ul>
 
 
@@ -937,7 +946,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6a.html" class="pagination-link">
@@ -945,8 +953,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Tableau/1_Superstore.html" class="pagination-link">
-        <span class="nav-page-text">Superstore Annual Sales and Profit</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6c.html" class="pagination-link">
+        <span class="nav-page-text">12 Heatmap to visualise Multivariate Data</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
