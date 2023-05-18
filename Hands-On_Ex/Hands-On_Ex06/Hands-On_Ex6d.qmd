@@ -188,3 +188,7 @@ parallelPlot(wh1,
 -   [**parcoords** user guide](https://cran.r-project.org/web/packages/parcoords/parcoords.pdf)
 
 -   [**parallelPlot**](https://cran.r-project.org/web/packages/parallelPlot/parallelPlot.pdf)
+
+::: {style="text-align: center"}
+$**That's$ $all$ $folks!**$
+:::
