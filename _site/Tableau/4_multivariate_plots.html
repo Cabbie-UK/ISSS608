@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="KB">
+<meta name="dcterms.date" content="2023-05-20">
 
-<title>KB’s Visual Analytics - Animinated Bubble Plot and Cross-Filtering of Charts</title>
+<title>KB’s Visual Analytics - Plots for multi-variate analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +32,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../Tableau/4_multivariate_plots.html" rel="next">
-<link href="../Tableau/2_Superstore_Story.html" rel="prev">
+<link href="../Tableau/3_Animation_CrossFiltering.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -181,7 +182,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Animinated Bubble Plot and Cross-Filtering of Charts</h1>
+      <h1 class="quarto-secondary-nav-title">Plots for multi-variate analysis</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -349,12 +350,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Tableau/3_Animation_CrossFiltering.html" class="sidebar-item-text sidebar-link active">Animinated Bubbleplot and Cross-Filtering of Charts</a>
+  <a href="../Tableau/3_Animation_CrossFiltering.html" class="sidebar-item-text sidebar-link">Animinated Bubbleplot and Cross-Filtering of Charts</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Tableau/4_multivariate_plots.html" class="sidebar-item-text sidebar-link">Plots for multi-variate analysis</a>
+  <a href="../Tableau/4_multivariate_plots.html" class="sidebar-item-text sidebar-link active">Plots for multi-variate analysis</a>
   </div>
 </li>
       </ul>
@@ -371,31 +372,47 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Animinated Bubble Plot and Cross-Filtering of Charts</h1>
+<h1 class="title d-none d-lg-block">Plots for multi-variate analysis</h1>
+<p class="subtitle lead">In-Class Exercise for Week 6</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>KB </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 20, 2023</p>
+    </div>
+  </div>
     
   </div>
   
 
 </header>
 
-<p>Published: 29-Apr-2023</p>
-<p>In line with the techniques covered under Hand-On Exercise 3 using <strong>R</strong>, , we were taught to create the following charts using <strong>Tableau</strong> this afternoon:</p>
-<p>A) An animated bubble plot using the Superstore data-set</p>
-<p>👇<em>Select a different year using the “Year of Order Date’ radio buttons on the right to check out the animated transition.</em></p>
+<p>(First Published: May 20, 2023)</p>
+<p>In line with the techniques covered under Hand-On Exercises 12,13 and 14 using <strong>R</strong>, , we were taught to create the following charts using <strong>Tableau</strong> this afternoon:</p>
+<p>A) A Heatmap to understand the World Happiness Data in 2018</p>
+<p>👇<em>Select a different year using the “Region’ radio buttons on the right to filter the countries by Region. Singapore is a part of South East Asia.</em></p>
 
-<iframe width="1000" "="" height="700" src="https://public.tableau.com/views/SalesverusProfitforSuperstore/SalesvsProfit?:language=en-US&amp;:display_count=n&amp;:origin=viz_share_link?:language=en-US&amp;:display_count=n&amp;:origin=viz_share_link?:showVizHome=no&amp;:embed=true"></iframe>
-<p>B) Cross-filtered Charts using Exam Scores data-set</p>
-<p>👇<em>Select a group of data points on one of the three charts and notice how the other two charts respond dynamically.</em></p>
+<iframe width="1000" "="" height="700" src="https://public.tableau.com/shared/QXMG6JBP8?:display_count=n&amp;:origin=viz_share_link?:language=en-US&amp;:display_count=n&amp;:origin=viz_share_link?:showVizHome=no&amp;:embed=true"></iframe>
+<p>B) Parallel Coordinates Plot on the World Happiness Data in 2018</p>
+<p>👇<em>Select a data point or brush on a group of data points to observe how the ratings change for each of the attributes to the happiness measure.</em></p>
 
-<iframe width="1000" "="" height="700" src="https://public.tableau.com/shared/WDMK3GY9S?:display_count=n&amp;:origin=viz_share_link?:language=en-US&amp;:display_count=n&amp;:origin=viz_share_link?:showVizHome=no&amp;:embed=true"></iframe>
-<p>Neat right? 😉</p>
+<iframe width="1000" "="" height="700" src="https://public.tableau.com/shared/65N7B78DZ?:display_count=n&amp;:origin=viz_share_link?:language=en-US&amp;:display_count=n&amp;:origin=viz_share_link?:showVizHome=no&amp;:embed=true"></iframe>
+<p>C) Treemap on Property Sale 2018</p>
+<p>👇<em>Mouse over the tiles to see more details of property transactions that occurred for each property object.</em></p>
+
+<iframe width="1000" "="" height="700" src="https://public.tableau.com/views/TreemaponPropertySales2018/Treemap?:language=en-US&amp;:display_count=n&amp;:origin=viz_share_link?:language=en-US&amp;:display_count=n&amp;:origin=viz_share_link?:showVizHome=no&amp;:embed=true"></iframe>
 
 
 
@@ -501,14 +518,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../Tableau/2_Superstore_Story.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">The Superstore Story</span>
+      <a href="../Tableau/3_Animation_CrossFiltering.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Animinated Bubbleplot and Cross-Filtering of Charts</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../Tableau/4_multivariate_plots.html" class="pagination-link">
-        <span class="nav-page-text">Plots for multi-variate analysis</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

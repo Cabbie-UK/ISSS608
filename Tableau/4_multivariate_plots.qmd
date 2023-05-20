@@ -1,0 +1,36 @@
+---
+title: "Plots for multi-variate analysis"
+subtitle: In-Class Exercise for Week 6
+date: last-modified
+author: "KB"
+editor: visual
+execute:
+  freeze: auto 
+  warning: false
+---
+
+(First Published: May 20, 2023)
+
+In line with the techniques covered under Hand-On Exercises 12,13 and 14 using **R**, , we were taught to create the following charts using **Tableau** this afternoon:
+
+A\) A Heatmap to understand the World Happiness Data in 2018
+
+👇*Select a different year using the "Region' radio buttons on the right to filter the countries by Region. Singapore is a part of South East Asia.*
+
+```{=html}
+<iframe width="1000"" height="700" src="https://public.tableau.com/shared/QXMG6JBP8?:display_count=n&:origin=viz_share_link?:language=en-US&:display_count=n&:origin=viz_share_link?:showVizHome=no&:embed=true"></iframe>
+```
+B\) Parallel Coordinates Plot on the World Happiness Data in 2018
+
+👇*Select a data point or brush on a group of data points to observe how the ratings change for each of the attributes to the happiness measure.*
+
+```{=html}
+<iframe width="1000"" height="700" src="https://public.tableau.com/shared/65N7B78DZ?:display_count=n&:origin=viz_share_link?:language=en-US&:display_count=n&:origin=viz_share_link?:showVizHome=no&:embed=true"></iframe>
+```
+C\) Treemap on Property Sale 2018
+
+👇*Mouse over the tiles to see more details of property transactions that occurred for each property object.*
+
+```{=html}
+<iframe width="1000"" height="700" src="https://public.tableau.com/views/TreemaponPropertySales2018/Treemap?:language=en-US&:display_count=n&:origin=viz_share_link?:language=en-US&:display_count=n&:origin=viz_share_link?:showVizHome=no&:embed=true"></iframe>
+```

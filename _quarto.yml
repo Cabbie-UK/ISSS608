@@ -67,6 +67,8 @@ website:
             href: Tableau/2_Superstore_Story.qmd
           - text: 'Animinated Bubbleplot and Cross-Filtering of Charts'
             href: Tableau/3_Animation_CrossFiltering.qmd
+          - text: 'Plots for multi-variate analysis'
+            href: Tableau/4_multivariate_plots.qmd
             
   page-navigation: true
   navbar:

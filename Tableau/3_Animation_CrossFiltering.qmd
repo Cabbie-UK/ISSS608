@@ -5,7 +5,7 @@ editor: visual
 
 Published: 29-Apr-2023
 
-In line with the techniques covered under Hand-On Exercise 3a using **R**, , we were taught to create the following charts using **Tableau** this afternoon:
+In line with the techniques covered under Hand-On Exercise 3 using **R**, , we were taught to create the following charts using **Tableau** this afternoon:
 
 A\) An animated bubble plot using the Superstore data-set
 

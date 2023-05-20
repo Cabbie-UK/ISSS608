@@ -68,7 +68,7 @@ Next, use the `mutate()` function of **dplyr** package to derive three new measu
 #Deriving the young, economy active and old measures
 agpop_mutated <- pop_data %>%
   mutate(`Year` = as.character(Year))%>%
-  spread(AG, Population) %>%
+  pivot_wider(names_from = AG, values_from = Population) %>%
   mutate(YOUNG = rowSums(.[4:8]))%>%
   mutate(ACTIVE = rowSums(.[9:16]))  %>%
   mutate(OLD = rowSums(.[17:21])) %>%
@@ -97,7 +97,7 @@ ggtern(data=agpop_mutated, aes(x=YOUNG,y=ACTIVE, z=OLD)) +
   theme_rgbw()
 ```
 
-## 10.4 Plotting Intereactive Ternary Diagram with **plotly**
+## 10.4 Plotting Interactive Ternary Diagram with **plotly**
 
 We can create an interactive ternary plot using `plot_ly()` function of **Plotly R**.
 

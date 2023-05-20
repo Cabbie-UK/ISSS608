@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="KB">
-<meta name="dcterms.date" content="2023-05-10">
+<meta name="dcterms.date" content="2023-05-20">
 
-<title>KB’s Visual Analytics - 3 Quantile–quantile plots</title>
+<title>KB’s Visual Analytics - FishEye Knowldge Graph: Identify Temporal Patterns of individual entities and between entities</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -95,8 +95,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../In-Class_Ex/In-Class_Ex05/In-Class_Ex5.html" rel="next">
-<link href="../../In-Class_Ex/In-Class_Ex03/In-Class_Ex3.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -246,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">3 Quantile–quantile plots</h1>
+      <h1 class="quarto-secondary-nav-title">FishEye Knowldge Graph: Identify Temporal Patterns of individual entities and between entities</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -276,12 +274,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">In-class Exercises</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">In-class Exercises</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../In-Class_Ex/In-Class_Ex01/In-Class_Ex1.html" class="sidebar-item-text sidebar-link">1 A Light Makeover of ggplots</a>
@@ -294,7 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../In-Class_Ex/In-Class_Ex04/In-Class_Ex4.html" class="sidebar-item-text sidebar-link active">3 Quantile–quantile plots</a>
+  <a href="../../In-Class_Ex/In-Class_Ex04/In-Class_Ex4.html" class="sidebar-item-text sidebar-link">3 Quantile–quantile plots</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -433,10 +431,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#load-the-required-packages" id="toc-load-the-required-packages" class="nav-link active" data-scroll-target="#load-the-required-packages">1.Load the required packages</a></li>
-  <li><a href="#load-the-data-set-into-r" id="toc-load-the-data-set-into-r" class="nav-link" data-scroll-target="#load-the-data-set-into-r">2.Load the data-set into R</a></li>
-  <li><a href="#visualise-normal-distribution" id="toc-visualise-normal-distribution" class="nav-link" data-scroll-target="#visualise-normal-distribution">3.Visualise Normal Distribution</a></li>
-  <li><a href="#combining-statistical-graph-and-analysis-table" id="toc-combining-statistical-graph-and-analysis-table" class="nav-link" data-scroll-target="#combining-statistical-graph-and-analysis-table">4.Combining statistical graph and analysis table</a></li>
+  <li><a href="#we-will-store-mc2_nodes-in-rds-format-for-ease-of-subsequent-retrieval.-this-code-need-only-be-executed-once-and-henece.-thereafter-we-will-reload-the-mc2_nodes-dataframe-again" id="toc-we-will-store-mc2_nodes-in-rds-format-for-ease-of-subsequent-retrieval.-this-code-need-only-be-executed-once-and-henece.-thereafter-we-will-reload-the-mc2_nodes-dataframe-again" class="nav-link active" data-scroll-target="#we-will-store-mc2_nodes-in-rds-format-for-ease-of-subsequent-retrieval.-this-code-need-only-be-executed-once-and-henece.-thereafter-we-will-reload-the-mc2_nodes-dataframe-again">We will store mc2_nodes in rds format for ease of subsequent retrieval. This code need only be executed once and henece. Thereafter we will reload the mc2_nodes dataframe again</a></li>
+  <li><a href="#also-store-the-mc2_edge-info-in-native-rds-format." id="toc-also-store-the-mc2_edge-info-in-native-rds-format." class="nav-link" data-scroll-target="#also-store-the-mc2_edge-info-in-native-rds-format.">Also store the mc2_edge info in native rds format.</a></li>
   </ul>
 </nav>
     </div>
@@ -445,8 +441,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">3 Quantile–quantile plots</h1>
-<p class="subtitle lead">In-Class Exercise for Week 4</p>
+<h1 class="title d-none d-lg-block">FishEye Knowldge Graph: Identify Temporal Patterns of individual entities and between entities</h1>
+<p class="subtitle lead">VAST Chaellenge 2023: Mini-Challenge 2</p>
 </div>
 
 
@@ -463,7 +459,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 10, 2023</p>
+      <p class="date">May 20, 2023</p>
     </div>
   </div>
     
@@ -472,88 +468,176 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>(First published: May 6, 2023)</p>
-<section id="load-the-required-packages" class="level2">
-<h2 class="anchored" data-anchor-id="load-the-required-packages">1.Load the required packages</h2>
+<p>(First Published: May 28, 2023)</p>
+<p>Load all relevant packages</p>
 <div class="cell">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(rstatix,gt,patchwork,tidyverse,webshot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(igraph, tidygraph, ggraph, visNetwork, lubridate, clock,               tidyverse, graphlayouts,jsonlite)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section>
-<section id="load-the-data-set-into-r" class="level2">
-<h2 class="anchored" data-anchor-id="load-the-data-set-into-r">2.Load the data-set into R</h2>
+<p>import data</p>
 <div class="cell">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>exam_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/Exam_data.csv'</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>mc2 <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">"data/mc2_challenge_graph.json"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section>
-<section id="visualise-normal-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="visualise-normal-distribution">3.Visualise Normal Distribution</h2>
-<p>Quantile–quantile (Q-Q) plots are a useful visualization when we want to determine to what extent the observed data points do or do not follow a given distribution. If the data is normally distributed, the points in a Q-Q plot will be on a straight diagonally line. Conversely, if the points deviate significantly from the straight diagonally line, then it’s less likely that the data is normally distributed.</p>
-<div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">The Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">The Codes</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Extract the nodes info from mc2 data frame</p>
 <div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>mc2_nodes <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(mc2<span class="sc">$</span>nodes) <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">select</span>(id, shpcountry, rcvcountry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ul>
+<li><p>id -- Name of the company that originated (or received) the shipment</p></li>
+<li><p>shpcountry -- Country the company most often associated with when shipping</p></li>
+<li><p>rcvcountry -- Country the company most often associated with when receiving</p></li>
+</ul>
+<section id="we-will-store-mc2_nodes-in-rds-format-for-ease-of-subsequent-retrieval.-this-code-need-only-be-executed-once-and-henece.-thereafter-we-will-reload-the-mc2_nodes-dataframe-again" class="level2">
+<h2 class="anchored" data-anchor-id="we-will-store-mc2_nodes-in-rds-format-for-ease-of-subsequent-retrieval.-this-code-need-only-be-executed-once-and-henece.-thereafter-we-will-reload-the-mc2_nodes-dataframe-again">We will store mc2_nodes in rds format for ease of subsequent retrieval. This code need only be executed once and henece. Thereafter we will reload the mc2_nodes dataframe again</h2>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># write_rds(mc2_nodes, "data/mc2_nodes.rds")</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>mc2_nodes <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="st">"data/mc2_nodes.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Extract the edges info from mc2 data frame</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>mc2_edges <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(mc2<span class="sc">$</span>links) <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">select</span>(source, target, arrivaldate, hscode, valueofgoods_omu, volumeteu, weightkg,  valueofgoodsusd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ul>
+<li><p>arrivaldate -- Date the shipment arrived at port in YYYY-MM-DD format.</p></li>
+<li><p>hscode -- Harmonized System code for the shipment. Can be joined with the hscodes table to get additional details.</p></li>
+<li><p>valueofgoods_omu -- Customs-declared value of the total shipment, in Oceanus Monetary Units (OMU)</p></li>
+<li><p>volumeteu -- The volume of the shipment in ‘Twenty-foot equivalent units’, roughly how many 20-foot standard containers would be required. (Actual number of containers may have been different as there are 20ft and 40ft standard containers and tankers that do not use containers)</p></li>
+<li><p>weightkg -- The weight of the shipment in kilograms (if known)</p></li>
+</ul>
+</section>
+<section id="also-store-the-mc2_edge-info-in-native-rds-format." class="level2">
+<h2 class="anchored" data-anchor-id="also-store-the-mc2_edge-info-in-native-rds-format.">Also store the mc2_edge info in native rds format.</h2>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">#write_rds(mc2_edges, "data/mc2_edges.rds")</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>mc2_edges <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/mc2_edges.rds"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">mutate</span>(<span class="at">arrivaldate =</span> <span class="fu">as.Date</span>(arrivaldate, <span class="at">format =</span> <span class="st">"%Y-%m-%d"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Aggregate the weight information between each pair of notes and by the relationship type</p>
+<p>Get summary stats on the edge data frame</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">summary</span>(mc2_edges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    source             target           arrivaldate            hscode         
+ Length:5464378     Length:5464378     Min.   :2028-01-01   Length:5464378    
+ Class :character   Class :character   1st Qu.:2029-09-11   Class :character  
+ Mode  :character   Mode  :character   Median :2031-04-30   Mode  :character  
+                                       Mean   :2031-05-31                     
+                                       3rd Qu.:2033-02-25                     
+                                       Max.   :2034-12-30                     
+                                                                              
+ valueofgoods_omu     volumeteu         weightkg         valueofgoodsusd    
+ Min.   :    1100   Min.   :   0.0   Min.   :        0   Min.   :0.000e+00  
+ 1st Qu.:  148130   1st Qu.:   0.0   1st Qu.:     3060   1st Qu.:2.682e+04  
+ Median :  504485   Median :   0.0   Median :    10300   Median :7.204e+04  
+ Mean   : 1665142   Mean   :   1.5   Mean   :    37266   Mean   :8.654e+05  
+ 3rd Qu.: 1202560   3rd Qu.:   0.0   3rd Qu.:    19730   3rd Qu.:1.580e+05  
+ Max.   :44744530   Max.   :1215.0   Max.   :495492485   Max.   :2.258e+11  
+ NA's   :5464097    NA's   :520933                       NA's   :3017844    </code></pre>
+</div>
+</div>
+<p>Understand the unique values for HS code</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>hscode_count <span class="ot">&lt;-</span> mc2_edges <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">group_by</span>(hscode) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">summarise</span>(<span class="at">count=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Aggregate the weight information between each pair of notes and by the date</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>mc2_edges_aggregated <span class="ot">&lt;-</span> mc2_edges  <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">group_by</span>(source, target, arrivaldate) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">summarise</span>(<span class="at">weight_sum =</span> <span class="fu">sum</span>(weightkg),</span>
+<span id="cb10-4"><a href="#cb10-4"></a>            <span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">filter</span>(source <span class="sc">!=</span>target) <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We use <code>tbl_graph()</code> of <strong>tinygraph</strong> package to build an tidygraph’s network graph data.frame.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>mc2_graph <span class="ot">&lt;-</span> <span class="fu">tbl_graph</span>(<span class="at">nodes =</span> mc2_nodes,</span>
+<span id="cb11-2"><a href="#cb11-2"></a>                       <span class="at">edges =</span> mc2_edges_aggregated,</span>
+<span id="cb11-3"><a href="#cb11-3"></a>                       <span class="at">directed =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Plot a graph for “Náutica del Norte Kga Holding”</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>mc2_graph <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">activate</span>(edges) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">filter</span>(arrivaldate<span class="sc">==</span><span class="st">'2034-02-12'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">'stress'</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">geom_edge_fan</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">color =</span> <span class="st">'lightblue'</span>) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">geom_node_point</span>() <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>  <span class="fu">theme_graph</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<p><img src="In-Class_Ex4_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="Take-Home_Ex2_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">ggplot</span>(exam_data, </span>
-<span id="cb3-2"><a href="#cb3-2"></a>       <span class="fu">aes</span>(<span class="at">sample=</span>ENGLISH))<span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">stat_qq</span>()<span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">stat_qq_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>We can see that the points deviate significantly from the straight diagonal line. This is a clear indication that the set of data is not normally distributed.</p>
-</div>
-</div>
-</section>
-<section id="combining-statistical-graph-and-analysis-table" class="level2">
-<h2 class="anchored" data-anchor-id="combining-statistical-graph-and-analysis-table">4.Combining statistical graph and analysis table</h2>
-<p>We will need to install webshot2</p>
+<p>test graph</p>
 <div class="cell">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>qq <span class="ot">&lt;-</span><span class="fu">ggplot</span>(exam_data, </span>
-<span id="cb4-2"><a href="#cb4-2"></a>       <span class="fu">aes</span>(<span class="at">sample=</span>ENGLISH))<span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">stat_qq</span>()<span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">stat_qq_line</span>()</span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a>sw_t <span class="ot">&lt;-</span> exam_data <span class="sc">%&gt;%</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>  <span class="fu">shapiro_test</span>(ENGLISH) <span class="sc">%&gt;%</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a>  <span class="fu">gt</span>()</span>
-<span id="cb4-9"><a href="#cb4-9"></a></span>
-<span id="cb4-10"><a href="#cb4-10"></a>tmp <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">'.png'</span>)</span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="fu">gtsave</span>(sw_t,tmp)</span>
-<span id="cb4-12"><a href="#cb4-12"></a>table_png <span class="ot">&lt;-</span> png<span class="sc">::</span><span class="fu">readPNG</span>(tmp,</span>
-<span id="cb4-13"><a href="#cb4-13"></a>                          <span class="at">native =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-14"><a href="#cb4-14"></a></span>
-<span id="cb4-15"><a href="#cb4-15"></a>qq <span class="sc">+</span> table_png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>mc2_edges <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.null</span>(valueofgoods_omu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<p><img src="In-Class_Ex4_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5,464,378 × 8
+   source          target arrivaldate hscode valueofgoods_omu volumeteu weightkg
+   &lt;chr&gt;           &lt;chr&gt;  &lt;date&gt;      &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;    &lt;int&gt;
+ 1 AquaDelight In… Barin… 2034-02-12  630630           141015         0     4780
+ 2 AquaDelight In… Barin… 2034-03-13  630630           141015         0     6125
+ 3 AquaDelight In… -15045 2028-02-07  470710               NA         0    10855
+ 4 AquaDelight In… -15045 2028-02-23  470710               NA         0    11250
+ 5 AquaDelight In… -15045 2028-09-11  470710               NA         0    11165
+ 6 AquaDelight In… -15045 2028-10-09  470710               NA         0    11290
+ 7 AquaDelight In… Océan… 2028-04-12  304890               NA         0     9000
+ 8 AquaDelight In… Olas … 2028-06-04  304890               NA         0    19490
+ 9 AquaDelight In… Shou … 2028-09-03  303890               NA         0     6865
+10 AquaDelight In… Shou … 2028-09-08  306170               NA         0    19065
+# ℹ 5,464,368 more rows
+# ℹ 1 more variable: valueofgoodsusd &lt;dbl&gt;</code></pre>
 </div>
 </div>
+<div class="cell">
+
+</div>
+<p>References</p>
+<ul>
+<li><p>Harshita Kanodia (June 2022), IUU Fishing in the Indian Ocean: A Security Threat. Diplomatist, https://diplomatist.com/2022/06/09/lets-catch-the-big-fish/</p></li>
+<li></li>
+</ul>
 
 
 </section>
@@ -657,18 +741,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../../In-Class_Ex/In-Class_Ex03/In-Class_Ex3.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2 Publishing a Quarto Document</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../../In-Class_Ex/In-Class_Ex05/In-Class_Ex5.html" class="pagination-link">
-        <span class="nav-page-text">4 Working with json files for Network Analysis</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 
