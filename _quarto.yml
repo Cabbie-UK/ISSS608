@@ -58,6 +58,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6c.qmd
           - text: '13 Visual Multivariate Analysis with Parallel Coordinates Plot'
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6d.qmd
+          - text: '14 Visual Multivariate Analysis with Parallel Coordinates Plot'
+            href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6e.qmd
             
       - section: "Tableau"
         contents:
@@ -101,6 +103,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6c.qmd
           - text: '13 Visual Multivariate Analysis with Parallel Coordinates Plot'
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6d.qmd
+          - text: '14 Visual Multivariate Analysis with Parallel Coordinates Plot'
+            href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6e.qmd
             
       - text: In-class Exercises
         menu: 

@@ -27,7 +27,7 @@ Parallel coordinates plot is a data visualisation specially designed for visuali
 
 ### 13.2.1 Install and load the required R libraries
 
-Install and load the the required R packages. The name and function of the new packaged that will be used for this exercise are as follow
+Install and load the the required R packages. The name and function of the new packages that will be used for this exercise are as follow
 
 -   **GGally** : provides additional functions and tools for creating more complex and customized plots
 
