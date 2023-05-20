@@ -294,7 +294,7 @@ ggplot(data=realis2018_selected,
   geom_treemap()
 ```
 
-We add boundary lines the 2 levels of grouping
+We add boundary lines to outline the 2 levels of grouping
 
 ```{r}
 ggplot(data=realis2018_selected, 
