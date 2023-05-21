@@ -25,7 +25,7 @@ website:
           - text: '4 Working with json files for Network Analysis'
             href: In-Class_Ex/In-Class_Ex05/In-Class_Ex5.qmd
 
-      - section: "Take-Home Exercises"
+      - section: "Take-home Exercises"
         contents:
           - text: 'City of Engagement: Demographics and Financial Health of its Residents'
             href: Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.qmd
@@ -58,7 +58,7 @@ website:
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6c.qmd
           - text: '13 Visual Multivariate Analysis with Parallel Coordinates Plot'
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6d.qmd
-          - text: '14 Visual Multivariate Analysis with Parallel Coordinates Plot'
+          - text: '14  Treemap Visualisation'
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6e.qmd
             
       - section: "Tableau"
@@ -103,7 +103,7 @@ website:
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6c.qmd
           - text: '13 Visual Multivariate Analysis with Parallel Coordinates Plot'
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6d.qmd
-          - text: '14 Visual Multivariate Analysis with Parallel Coordinates Plot'
+          - text: '14  Treemap Visualisation'
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6e.qmd
             
       - text: In-class Exercises
@@ -117,7 +117,7 @@ website:
           - text: '4 Working with json files for Network Analysis'
             href: In-Class_Ex/In-Class_Ex05/In-Class_Ex5.qmd
             
-      - text: Take-Home Exercises
+      - text: Take-home Exercises
         menu:
           - text: 'City of Engagement: Demographics and Financial Health of Residents'
             href: Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.qmd

@@ -1,5 +1,5 @@
 ---
-title: "14  Treemap Visualisation with R"
+title: "14  Treemap Visualisation"
 subtitle: Hands-On Exercise for Week 6
 date: last-modified
 author: "KB"
