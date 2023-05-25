@@ -79,6 +79,8 @@ mc2_edges <- as_tibble(mc2$links) %>%
 Also store the mc2_edge info in native rds format.
 
 ```{r}
+#| eval: false
+
 #write_rds(mc2_edges, "data/mc2_edges.rds")
 mc2_edges <- read_rds("data/mc2_edges.rds") %>%
   mutate(arrivaldate = as.Date(arrivaldate, format = "%Y-%m-%d"))
@@ -89,6 +91,7 @@ Aggregate the weight information between each pair of notes and by the relations
 Get summary stats on the edge data frame
 
 ```{r}
+#| eval: false
 
 summary(mc2_edges)
 ```
@@ -96,6 +99,8 @@ summary(mc2_edges)
 Remove likely duplicate records from edges
 
 ```{r}
+#| eval: false
+
 # Check for the presence of duplicate edge 
 paste(sum(duplicated(mc2_edges)),"duplicate records.")
 ```
@@ -103,6 +108,8 @@ paste(sum(duplicated(mc2_edges)),"duplicate records.")
 We are unsure of the reasons behind the duplicate records and do not discount the possibility that they could be genuine. On balance, we find it unlikely that duplicate records exist for every day, with same weight and among the same pair of entities. Hence, we will use the `distinct()` function on the edge data to only retain only unique edge records for our analysis.
 
 ```{r}
+#| eval: false
+#| 
 mc2_edges_unique <- mc2_edges %>%
   distinct()
 
@@ -111,9 +118,11 @@ summary(mc2_edges_unique)
 
 **Identifying edge records that relate to the fishing industry**
 
-We extract the top 5 HS code used for the edge records and match against the [HS Nomenclature 2022](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools/hs-nomenclature-2022-edition/hs-nomenclature-2022-edition.aspx) available at World Customs Organisation (WCO)'s website.
+We extract the top 5 HS code used for the edge records and match against the [HS Nomenclature 2022](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools/hs-nomenclature-2022-edition/hs-nomenclature-2022-edition.aspx) available at World Customs Organisation (WCO)'s website, supplemented by the HSN Code List that is found on [Connect2India](https://connect2india.com/hs-classification.html) website.
 
 ```{r}
+#| eval: false
+
 hscode_count <- mc2_edges_unique %>%
   group_by(hscode) %>%
   summarise(count=n()) %>% 
@@ -123,8 +132,8 @@ head(hscode_count[order(-hscode_count$count), ],n=5)
 ```
 
 | S/No. | HS Code | Description                                                                                                                                                                                         |
-|-------------------|-------------------|----------------------------------|
-| 1     | 306170  | *No matching code found*                                                                                                                                                                            |
+|------------------|------------------|------------------------------------|
+| 1     | 306170  | Fish and crustaceans, molluscs and other aquatic invertebrates.                                                                                                                                     |
 | 2     | 950300  | Tricycles, scooters, pedal cars and similar wheeled toys; dolls' carriages; dolls; other toys; reduced-size ("scale") models and similar recreational models, working or not; puzzles of all kinds. |
 | 3     | 870899  | Other parts and accessories of the motor vehicles                                                                                                                                                   |
 | 4     | 611020  | Cotton jerseys, pullovers, cardigans, waistcoats and similar articles, knitted or crocheted.                                                                                                        |
@@ -133,6 +142,8 @@ head(hscode_count[order(-hscode_count$count), ],n=5)
 : From the above, it is obvious not all transactions relate to fishing, We scanned WCO's HS Nomenclature 2022 edition and identified a list 46 HS codes which are associated with fish or the fishing industry and import them in our work environment,
 
 ```{r}
+#| eval: false
+
 hscode_fish <- read_csv('data/lookup_hscode.csv', show_col_types = FALSE ) %>%
   mutate(hscode = as.character(hscode))
 ```
@@ -140,97 +151,23 @@ hscode_fish <- read_csv('data/lookup_hscode.csv', show_col_types = FALSE ) %>%
 Next, we will use this list to extract edge records related to fish industry.
 
 ```{r}
+#| eval: false
+
 mc2_edges_fish <- mc2_edges_unique %>%
   filter(hscode %in% hscode_fish$hscode) %>%
   # further filter by code '1604','1605 for fish products
   filter(substr(hscode,start = 1,stop=4) %in% c('1604','1605'))
 ```
 
-We do a count by hscode to understand the volume for each hscode
+We do a frequency count by hscode to understand the volume for each hscode, the subset contains 30 hscodes pertaining to different types of seafood.
+
+**Prepare the Edges for Analysis**
+
+Group edges by source, target, date, and aggregate by count ( which will be renamed as weight), sum of weight, sum of value
 
 ```{r}
-hscode_count_fish <- mc2_edges_fish %>%
-  group_by(hscode) %>%
-  summarise(count=n(),weight_sum = sum(weightkg), weight_avg = mean(weightkg)) %>% 
-  ungroup 
+#| eval: false
 
-```
-
-Again, let's look at the overall summary
-
-```{r}
-summary(mc2_edges_fish)
-```
-
-We will remove business entities **which have fewer than 5 transactions i**n either the Source or Target column
-
-```{r}
-# Assign threshold as the cut-off 
-# threshold <- 200
-# top_x <- 50
-# 
-# # Get entities from the source column which transacted more than threshold
-# freq_count_src <- mc2_edges_fish %>%
-#   group_by(source) %>%
-#   summarise(count=n()) %>% 
-#   ungroup %>%
-#   slice_max(order_by = count, n = top_x)
-# 
-# # Get entities from the target column which transacted more than threshold
-# freq_count_tgt <- mc2_edges_fish %>%
-#   group_by(target) %>%
-#   summarise(count=n()) %>% 
-#   ungroup %>%
-#   slice_max(order_by = count, n = top_x)
-# 
-# # Retain records whether the entities in the source or target appeared more than the threshold
-# mc2_edges_threshold <- mc2_edges_fish %>%
-#   filter(source %in% freq_count_src$source) %>%
-#   filter(target %in% freq_count_tgt$target)
-```
-
-Approach 2, we group by source and target pairs
-
-```{r}
-# cut_off = 0.80
-# 
-# # Apply 80-20 rule for cut off
-# freq_count_src_tgt <- mc2_edges_fish %>%
-#   filter(source!=target) %>%
-#   group_by(source, target) %>%
-#   summarise(count=n()) %>% 
-#   ungroup %>%
-#   arrange(desc(count)) %>%
-#   mutate(cumulative = cumsum(count)/sum(count)) %>%
-#   filter(cumulative <= cut_off)
-
-```
-
-Merge back to mc_edges_fish
-
-```{r}
-# mc2_edges_eighty <- inner_join(mc2_edges_fish,freq_count_src_tgt, by = c("source" = "source", "target" = "target") ) %>%
-#   select(1:8)
-```
-
-summary
-
-```{r}
-# summary(mc2_edges_eighty)
-```
-
-n each pair of notes and by the date
-
-```{r}
-# # check the number of HS codes in the edge file
-# hscode_count <- mc2_edges_threshold %>%
-#   group_by(hscode) %>%
-#   summarise(count=n())
-```
-
-Group edges by source, target, date, and aggregate by count, sum of weight, sum of value
-
-```{r}
 # minimum count (or weight) cut-off for a substantial relationship to exist over 7 years
 cut_off = 20
 
@@ -246,6 +183,17 @@ mc2_edges_aggregated <- mc2_edges_fish %>%
   filter(weight>cut_off) %>%
   ungroup %>%
   inner_join(select(hscode_fish, hscode, short_desc), by = "hscode")
+
+# Save a copy of the edge file
+write_rds(mc2_edges_aggregated, "data/mc2_edges_aggregated.rds")
+
+```
+
+```{r}
+#| echo: true
+
+# load the edge file
+mc2_edges_aggregated = read_rds("data/mc2_edges_aggregated.rds")
 ```
 
 y-o-y plot
@@ -273,81 +221,277 @@ value_yoy = ggplot(mc2_edges_aggregated, aes(x= as.factor(year), y = value_goods
 (count_yoy + weight_yoy)/value_yoy
 ```
 
-Yearly transaction
+**Prepare the nodes for Analysis**
 
-2028
+The nodes within the node file must be unique and therefore the `filter` function is used to extract only the nodes that appear based on the *source* and *target*.
+
+```{r}
+#| eval: false
+
+mc2_nodes_aggregated <- mc2_nodes %>%
+  filter(id  %in% c(mc2_edges_aggregated$source, mc2_edges_aggregated$target)) %>%
+  # Duplicate the id column as this name will be replaced once we convert to when we apply tbl_graph()
+  mutate(label = id) %>%
+  mutate(row_id = row_number()) %>%
+  distinct() 
+
+# Replace with NA values in shpcountry and rcvcountry to prevent downstream issue
+mc2_nodes_aggregated <- replace(mc2_nodes_aggregated, is.na(mc2_nodes_aggregated), 'unknown')
+
+# Save a copy of the nodes file
+write_rds(mc2_nodes_aggregated, "data/mc2_nodes_aggregated.rds")
+```
+
+```{r}
+#| echo: true
+
+# load the node file
+mc2_nodes_aggregated = read_rds("data/mc2_nodes_aggregated.rds")
+```
+
+**Prepare the tbl_graph_object**
+
+```{r}
+mc2_graph <- tbl_graph(nodes = mc2_nodes_aggregated,
+                           edges = mc2_edges_aggregated, 
+                           directed = TRUE)
+```
+
+**Derive centrality measures for nodes**
+
+Since this is a directed graph, will compute the in-degree centrality, out-degree centrality, closeness and betweenness measures for the nodes.
+
+```{r}
+mc2_graph <- mc2_graph %>%
+  activate(nodes) %>% 
+  mutate(
+          in_deg_centrality = round(centrality_degree(weights = weight, mode = "in", loops = FALSE),3),
+          out_deg_centrality = round(centrality_degree(weights = weight, mode = "out", loops = FALSE),3),
+          out_deg_closeness = round(centrality_closeness(weights=weight,mode='out',normalized = TRUE),3),
+          in_deg_closeness = round(centrality_closeness(weights=weight,mode='in',normalized = TRUE),3)) 
+
+#%>%
+  # mutate(combined_degree = in_deg_centrality - out_deg_centrality) %>%
+  # mutate(combi_norm_degree =((combined_degree-min(combined_degree))/(max(combined_degree)-min(combined_degree)) )*100) 
+           
+```
+
+Charting a plot
+
+```{r}
+set.seed(123)
+
+mc2_graph %>%
+  ggraph(layout = 'fr') +
+  geom_edge_link(aes(width=weight), 
+                 alpha=0.2) +
+  scale_edge_width(range = c(0.1, 5)) +
+  geom_node_point(aes())
+```
+
+Remove disconnected nodes and focus on the main graph
+
+```{r}
+# Create a copy of the mc2_graph as we want to preserve the original graph
+g <- mc2_graph
+
+# Extract the graph with the biggest number of the members (main graph)
+V(g)$comp <- components(g)$membership
+main <- induced_subgraph(g,V(g)$comp==1)
+```
+
+Replot graph to check
+
+```{r}
+#| fig-width: 10
+#| fig-asp: 1
+
+set.seed(123)
+
+main %>%
+  ggraph(layout = 'kk') +
+  geom_edge_link(aes(width=weight,
+                     colour = factor(year)), 
+                 alpha=0.2) +
+  scale_edge_width(range = c(0.1, 5)) +
+  geom_node_point(aes()) +
+  scale_color_viridis() +
+  theme_graph()
+```
+
+```{r}
+# Convert tbl_graph to igraph object
+igraph_obj <- main
+
+# Compute the number of nodes and edges
+num_nodes <- vcount(igraph_obj)
+num_edges <- ecount(igraph_obj)
+
+# Print the results
+df <- data.frame(Num_of_Nodes = num_nodes, Num_of_Edges = num_edges)
+
+kable(head(df), format = 'html') 
+```
+
+```{r}
+#
+create_graph <- function(data, range, title) {
+  
+  set.seed(123)
+  
+  g <- data %>%
+    as_tbl_graph() %>%
+    activate(edges) %>%
+    filter(year %in% range) %>%
+    activate(nodes) %>%
+    mutate(
+      in_deg_norm = ifelse(in_deg_centrality == 0, 0, (in_deg_centrality - min(in_deg_centrality)) / (max(in_deg_centrality) - min(in_deg_centrality)) + 1),
+      out_deg_norm = ifelse(out_deg_centrality == 0, 0, (1 - (out_deg_centrality - min(out_deg_centrality)) / (max(out_deg_centrality) - min(out_deg_centrality))))
+    ) %>%
+    mutate(combined_in_out_deg = in_deg_norm + out_deg_norm) %>%
+    mutate(row_id = ifelse((combined_in_out_deg>=1.6) | (combined_in_out_deg <=0.4),row_id,""))
+  
+  Isolated <- which(degree(g) == 0)
+  g2 <- delete.vertices(g, Isolated)
+  
+  g2 %>%
+    as_tbl_graph() %>%
+    ggraph(layout = 'kk') +
+    geom_edge_link(aes(), alpha = 0.5) +
+    geom_edge_fan(
+      aes(color = short_desc),
+      arrow = arrow(length = unit(2, 'mm')),
+      end_cap = circle(3, 'mm'),
+      start_cap = circle(3, 'mm')
+    ) +
+    geom_node_circle(aes(fill = combined_in_out_deg,r = 0.2 ),alpha=0.8) +
+    scale_fill_gradient2(low = "green", mid = "gray", high = "red", midpoint = 1) +
+    geom_node_text(aes(label = row_id, size=0.8), colour = "black") +
+    theme_graph() +
+    theme(legend.position = "top") +
+    labs(title = title)
+}
+
+
+```
+
+```{r}
+#| fig-width: 10
+#| fig-asp: 1
+
+range <- c(2028, 2029,2030,2031,2032,2033,2034)
+
+create_graph(main,range,"Main Network of the Trading Entities in 2034")
+```
 
 ```{r}
 
-# Filter edge records
-mc2_edges_2028 <- mc2_edges_aggregated %>%
-  filter(year == 2028)
 
-# Prepare node records
-id1 <- mc2_edges_2028 %>%
-  select(source) %>%
-  rename(id = source)
-id2 <- mc2_edges_2028 %>%
-  select(target) %>%
-  rename(id = target)
-mc2_nodes_2028 <- rbind(id1, id2) %>%
-  distinct()
+```
 
-# Prepare graph table
-mc2_graph_2028 <- tbl_graph(nodes = mc2_nodes_2028,
-                       edges = mc2_edges_2028,
-                       directed = TRUE)
+Temporal Analysis of Individuals and between entities
 
-# Plot graph
-graph_2028 <- ggraph(mc2_graph_2028,
-       layout = "fr") +
-  geom_edge_link(aes()) +
-  geom_node_point(aes()) +
-  theme_graph()
+::: panel-tabset
+## 2028
 
-graph_2028
+```{r}
+#| fig-width: 10
+#| fig-asp: 1
+
+range <- c(2028)
+
+create_graph(main,range,"2028")
+```
+
+```{r}
+
+```
+
+test
+
+-   ttt
+
+-   tt
+
+## 2029
+
+```{r}
+#| fig-width: 10
+#| fig-asp: 1
+
+range <- c(2028,2029)
+
+create_graph(main,range,"2029")
+```
+
+## 2030
+
+```{r}
+#| fig-width: 10
+#| fig-asp: 1
+
+range <- c(2028,2029,2030)
+
+create_graph(main,range,"2030")
+```
+
+## 2031
+
+```{r}
+#| fig-width: 10
+#| fig-asp: 1
+
+range <- c(2028,2029,2030, 2031)
+
+create_graph(main,range,"2031")
+```
+
+## 2032
+
+```{r}
+#| fig-width: 10
+#| fig-asp: 1
+
+range <- c(2028,2029,2030, 2031, 2032)
+
+create_graph(main,range,"2032")
+```
+
+## 2033
+
+```{r}
+#| fig-width: 10
+#| fig-asp: 1
+
+range <- c(2028,2029,2030, 2031, 2032, 2033)
+
+create_graph(main,range,"2033")
+```
+
+## 2034
+
+```{r}
+#| fig-width: 10
+#| fig-asp: 1
+
+range <- c(2028,2029,2030, 2031, 2032, 2033, 2034)
+
+create_graph(main,range,"2034")
+```
+:::
+
+```{r}
+
 ```
 
 Function to plot yearly graph
 
 ```{r}
-plot_mc2_graph <- function(a_year) {
-  
-  mc2_edges_filtered <- mc2_edges_aggregated %>%
-    filter(year == a_year)
-  
-  id1 <- mc2_edges_filtered %>%
-    select(source) %>%
-    rename(id = source)
-  id2 <- mc2_edges_filtered %>%
-    select(target) %>%
-    rename(id = target)
-  mc2_nodes_filtered <- rbind(id1, id2) %>%
-    distinct()
-  
-  mc2_graph_filtered <- tbl_graph(nodes = mc2_nodes_filtered,
-                                  edges = mc2_edges_filtered,
-                                  directed = TRUE)
-  
-  ggraph(mc2_graph_filtered, 
-         layout = "fr") +
-    geom_edge_link(aes()) +
-    geom_node_point(aes()) +
-    theme_graph()
-}
+
 ```
 
 ```{r}
-# graph_2029 <- plot_mc2_graph(2029)
-# graph_2030 <- plot_mc2_graph(2030)
-# graph_2031 <- plot_mc2_graph(2031)
-# graph_2032 <- plot_mc2_graph(2032)
-# graph_2033 <- plot_mc2_graph(2033)
-# graph_2034 <- plot_mc2_graph(2034)
 
-# (graph_2028 + graph_2029)/(graph_2030 + graph_2031)/(graph_2032 + graph_2033)/graph_2034
-
-plot_mc2_graph(2031)
 ```
 
 Centrality measures of various transactions
@@ -356,42 +500,13 @@ In-degree, Out-Degree, Betweenness Score
 
 ```{r}
 
-# Prepare the nodes file
-  id1 <- mc2_edges_aggregated %>%
-    select(source) %>%
-    rename(id = source
-           )
-  id2 <- mc2_edges_aggregated %>%
-    select(target) %>%
-    rename(id = target)
-  
-  mc2_nodes_aggregated <- rbind(id1, id2) %>%
-    distinct()
-  
-  mc2_graph <- tbl_graph(nodes = mc2_nodes_aggregated,
-                                  edges = mc2_edges_aggregated,
-                                  directed = TRUE)
-
-mc2_graph <- mc2_graph %>%
-  activate(nodes) %>% 
-  mutate(
-          betweenness_centrality = round(centrality_betweenness(weights = weight, directed = TRUE, normalized = TRUE),3),
-          in_deg_centrality = round(centrality_degree(weights = weight, mode = "in", normalized = TRUE,loops = FALSE),3),
-          out_deg_centrality = round(centrality_degree(weights = weight, mode = "out", normalized = TRUE,loops = FALSE),3),
-          pagerank = round(centrality_pagerank(weights = weight, directed = TRUE),3),
-          out_deg_closeness = round(centrality_closeness(weights=weight,mode='out',normalized = TRUE),3),
-          in_deg_closeness = round(centrality_closeness(weights=weight,mode='in',normalized = TRUE),3))                                       
+                                       
 ```
 
 Top 10 nodes with 'in-degree" scores:
 
 ```{r}
-mc2_graph %>% 
-  activate("nodes") %>% 
-  as_tibble() %>% 
-  arrange(desc(out_deg_centrality)) %>% 
-  select(id,out_deg_centrality) %>% 
-  head(n=10) 
+
 ```
 
 View Graph Year by year
@@ -409,60 +524,46 @@ ggraph(mc2_graph, layout = "nicely") +
 
 ```
 
-Plot interactive graph
-
-\(a\) Prepare the edges
-
 ```{r}
-mc2_edges_interactive <- mc2_edges_aggregated %>% 
-  rename(from = source) %>%
-  rename(to = target) %>%
-  mutate(title = paste('Count = ',weight, "\n Desc =", short_desc))
-
-```
-
-\(b\) Prepare the nodes
-
-```{r}
-mc2_nodes_interactive <- mc2_graph %>%
- activate(nodes) %>%
- as_tibble() %>%
- mutate(title = paste(
-                        '\n In-deg = ',in_deg_centrality, ',',
-                        "\n Pagerank =", pagerank, ',',
-                        "\n Out-deg =", out_deg_centrality))
+# mc2_nodes_interactive <- mc2_graph %>%
+#  activate(nodes) %>%
+#  as_tibble() %>%
+#  mutate(title = paste(
+#                         '\n In-deg = ',in_deg_centrality, ',',
+#                         "\n Pagerank =", pagerank, ',',
+#                         "\n Out-deg =", out_deg_centrality))
   
 ```
 
 \(c\) Prepare the group, size
 
 ```{r}
-mc2_nodes_interactive_in <- mc2_graph %>% 
-  activate(nodes) %>%
-  as_tibble() %>%
-  mutate(class = cut_interval(in_deg_centrality, n = 5, 
-                              style = "quantile")) %>%
-  rename(group = class)
+# mc2_nodes_interactive_in <- mc2_graph %>% 
+#   activate(nodes) %>%
+#   as_tibble() %>%
+#   mutate(class = cut_interval(in_deg_centrality, n = 5, 
+#                               style = "quantile")) %>%
+#   rename(group = class)
 ```
 
 ```{r}
-visNetwork(mc2_nodes_interactive_in,
-           mc2_edges_interactive,
-          main = "Transaction graph grouped by In-Deg centrality intervals",
-           height = "500px", width = "100%") %>%
-  visIgraphLayout(layout = "layout_with_fr") %>%
-  #visNodes(shape = 'dot', value = 'pagerank') %>%
-  visEdges(arrows = 'to',
-           smooth = list(enables = TRUE,
-                         type= 'continuous'),
-           shadow = FALSE,
-           dash = FALSE) %>% 
-  visOptions(highlightNearest = list(enabled = T, degree = 1, hover = T),
-             nodesIdSelection = TRUE,
-             selectedBy = "group") %>%
-  visInteraction(hideEdgesOnDrag = TRUE) %>% 
-  visLegend() %>%
-  visLayout(randomSeed = 123)
+# visNetwork(mc2_nodes_interactive_in,
+#            mc2_edges_interactive,
+#           main = "Transaction graph grouped by In-Deg centrality intervals",
+#            height = "500px", width = "100%") %>%
+#   visIgraphLayout(layout = "layout_with_fr") %>%
+#   #visNodes(shape = 'dot', value = 'pagerank') %>%
+#   visEdges(arrows = 'to',
+#            smooth = list(enables = TRUE,
+#                          type= 'continuous'),
+#            shadow = FALSE,
+#            dash = FALSE) %>% 
+#   visOptions(highlightNearest = list(enabled = T, degree = 1, hover = T),
+#              nodesIdSelection = TRUE,
+#              selectedBy = "group") %>%
+#   visInteraction(hideEdgesOnDrag = TRUE) %>% 
+#   visLegend() %>%
+#   visLayout(randomSeed = 123)
 
 ```
 
@@ -471,34 +572,34 @@ Graph by out degree
 \(a\) Create group
 
 ```{r}
-mc2_nodes_interactive_out <- mc2_graph %>% 
-  activate(nodes) %>%
-  as_tibble() %>%
-  mutate(class = cut_interval(out_deg_centrality, n = 5, 
-                              style = "quantile")) %>%
-  rename(group = class)
+# mc2_nodes_interactive_out <- mc2_graph %>% 
+#   activate(nodes) %>%
+#   as_tibble() %>%
+#   mutate(class = cut_interval(out_deg_centrality, n = 5, 
+#                               style = "quantile")) %>%
+#   rename(group = class)
 ```
 
 \(b\) Create graph
 
 ```{r}
-visNetwork(mc2_nodes_interactive_out,
-           mc2_edges_interactive,
-          main = "Transaction graph grouped by Out-Deg centrality intervals",
-           height = "500px", width = "100%") %>%
-  visIgraphLayout(layout = "layout_with_fr") %>%
-  #visNodes(shape = 'dot', value = 'pagerank') %>%
-  visEdges(arrows = 'to',
-           smooth = list(enables = TRUE,
-                         type= 'continuous'),
-           shadow = FALSE,
-           dash = FALSE) %>% 
-  visOptions(highlightNearest = list(enabled = T, degree = 1, hover = T),
-             nodesIdSelection = TRUE,
-             selectedBy = "group") %>%
-  visInteraction(hideEdgesOnDrag = TRUE) %>% 
-  visLegend() %>%
-  visLayout(randomSeed = 123)
+# visNetwork(mc2_nodes_interactive_out,
+#            mc2_edges_interactive,
+#           main = "Transaction graph grouped by Out-Deg centrality intervals",
+#            height = "500px", width = "100%") %>%
+#   visIgraphLayout(layout = "layout_with_fr") %>%
+#   #visNodes(shape = 'dot', value = 'pagerank') %>%
+#   visEdges(arrows = 'to',
+#            smooth = list(enables = TRUE,
+#                          type= 'continuous'),
+#            shadow = FALSE,
+#            dash = FALSE) %>% 
+#   visOptions(highlightNearest = list(enabled = T, degree = 1, hover = T),
+#              nodesIdSelection = TRUE,
+#              selectedBy = "group") %>%
+#   visInteraction(hideEdgesOnDrag = TRUE) %>% 
+#   visLegend() %>%
+#   visLayout(randomSeed = 123)
 ```
 
 Look into the to supplier Playa del Tesoro OJSC
@@ -510,100 +611,100 @@ From the map, the sole customer was Fresh Wharf SRL Consulting.
 Others include:
 
 ```{r}
-mc2_edges_unique %>%
-  filter(source == 'Playa del Tesoro OJSC') %>%
-  group_by(source, target, hscode) %>%
-  summarise(count=n()) %>%
-  arrange(desc(count))
+# mc2_edges_unique %>%
+#   filter(source == 'Playa del Tesoro OJSC') %>%
+#   group_by(source, target, hscode) %>%
+#   summarise(count=n()) %>%
+#   arrange(desc(count))
 ```
 
 Get transactions with Fresh Wharf SRL consulting
 
 ```{r}
-playa <- mc2_edges_aggregated %>%
-  filter(source == 'Playa del Tesoro OJSC') %>%
-  mutate(month = substr(year_month,start = 6,stop=7))
-
-ggplot(playa, 
-       aes(x = month, 
-           y = weight,
-           group = year)) +
-  geom_line() +
-  facet_wrap(~year, ncol=1) +
-  
-  theme_minimal()
+# playa <- mc2_edges_aggregated %>%
+#   filter(source == 'Playa del Tesoro OJSC') %>%
+#   mutate(month = substr(year_month,start = 6,stop=7))
+# 
+# ggplot(playa, 
+#        aes(x = month, 
+#            y = weight,
+#            group = year)) +
+#   geom_line() +
+#   facet_wrap(~year, ncol=1) +
+#   
+#   theme_minimal()
 ```
 
 Heatmap
 
 ```{r}
-playa_heatmap <- playa %>%
-  select(year, month, weight) %>%
-  pivot_wider(names_from = month, values_from = weight) 
-  
-
-playa_heatmap <- replace(playa_heatmap, is.na(playa_heatmap), 0)
-
-row.names(playa_heatmap) <- playa_heatmap$year
-
-playa_matrix <- data.matrix(playa_heatmap)
-
-playa_matrix <- playa_matrix[,-1]
-
-heatmap(playa_matrix,Rowv=NA, Colv=NA)
+# playa_heatmap <- playa %>%
+#   select(year, month, weight) %>%
+#   pivot_wider(names_from = month, values_from = weight) 
+#   
+# 
+# playa_heatmap <- replace(playa_heatmap, is.na(playa_heatmap), 0)
+# 
+# row.names(playa_heatmap) <- playa_heatmap$year
+# 
+# playa_matrix <- data.matrix(playa_heatmap)
+# 
+# playa_matrix <- playa_matrix[,-1]
+# 
+# heatmap(playa_matrix,Rowv=NA, Colv=NA)
 ```
 
 Look at company Estrella de la Costa SRL
 
 ```{r}
-mc2_edges_fish %>%
-  filter(source == 'Estrella de la Costa SRL') %>%
-  group_by(source, target, hscode) %>%
-  summarise(count=n()) %>%
-  arrange(desc(count))
+# mc2_edges_fish %>%
+#   filter(source == 'Estrella de la Costa SRL') %>%
+#   group_by(source, target, hscode) %>%
+#   summarise(count=n()) %>%
+#   arrange(desc(count))
 ```
 
 Check the trend
 
 ```{r}
-estrella <- mc2_edges_aggregated %>%
-  filter(source == 'Estrella de la Costa SRL') %>%
-  inner_join(mc2_nodes, select(id, rcvcountry), by = c('source'='id'))
-
-ggplot(estrella, 
-       aes(x = year_month, 
-           y = weight,
-           group = target)) +
-  geom_line() +
-  facet_wrap(~target, ncol=1) +
-  
-  theme_minimal()
+# estrella <- mc2_edges_aggregated %>%
+#   filter(source == 'Estrella de la Costa SRL') %>%
+#   inner_join(mc2_nodes, select(id, rcvcountry), by = c('source'='id'))
+# 
+# ggplot(estrella, 
+#        aes(x = year_month, 
+#            y = weight,
+#            group = target)) +
+#   geom_line() +
+#   facet_wrap(~target, ncol=1) +
+#   
+#   theme_minimal()
 ```
 
-Look at company OceanicOrigin Foods Co Consulting
+--\>Look at company OceanicOrigin Foods Co Consulting
 
 ```{r}
-mc2_edges_fish %>%
-  filter(source == 'OceanicOrigin Foods Co Consulting') %>%
-  group_by(source, target, hscode) %>%
-  summarise(count=n()) %>%
-  arrange(desc(count))
+# mc2_edges_fish %>%
+#   filter(source == 'OceanicOrigin Foods Co Consulting') %>%
+#   group_by(source, target, hscode) %>%
+#   summarise(count=n()) %>%
+#   arrange(desc(count))
 ```
 
 check the trend
 
 ```{r}
-oceanic <- mc2_edges_aggregated %>%
-  filter(source == 'OceanicOrigin Foods Co Consulting') %>%
-  inner_join(mc2_nodes, select(id, rcvcountry), by = c('source'='id'))
-
-ggplot(oceanic, 
-       aes(x = year_month, 
-           y = weight,
-           group = target)) +
-  geom_line() +
-  facet_wrap(~target, ncol=1) +
-  theme_minimal()
+# oceanic <- mc2_edges_aggregated %>%
+#   filter(source == 'OceanicOrigin Foods Co Consulting') %>%
+#   inner_join(mc2_nodes, select(id, rcvcountry), by = c('source'='id'))
+# 
+# ggplot(oceanic, 
+#        aes(x = year_month, 
+#            y = weight,
+#            group = target)) +
+#   geom_line() +
+#   facet_wrap(~target, ncol=1) +
+#   theme_minimal()
 ```
 
 Code block
