@@ -132,7 +132,7 @@ head(hscode_count[order(-hscode_count$count), ],n=5)
 ```
 
 | S/No. | HS Code | Description                                                                                                                                                                                         |
-|------------------|------------------|------------------------------------|
+|---------------|---------------|------------------------------------------|
 | 1     | 306170  | Fish and crustaceans, molluscs and other aquatic invertebrates.                                                                                                                                     |
 | 2     | 950300  | Tricycles, scooters, pedal cars and similar wheeled toys; dolls' carriages; dolls; other toys; reduced-size ("scale") models and similar recreational models, working or not; puzzles of all kinds. |
 | 3     | 870899  | Other parts and accessories of the motor vehicles                                                                                                                                                   |
@@ -232,6 +232,7 @@ mc2_nodes_aggregated <- mc2_nodes %>%
   filter(id  %in% c(mc2_edges_aggregated$source, mc2_edges_aggregated$target)) %>%
   # Duplicate the id column as this name will be replaced once we convert to when we apply tbl_graph()
   mutate(label = id) %>%
+  arrange(label) %>%
   mutate(row_id = row_number()) %>%
   distinct() 
 
@@ -311,12 +312,16 @@ set.seed(123)
 main %>%
   ggraph(layout = 'kk') +
   geom_edge_link(aes(width=weight,
-                     colour = factor(year)), 
+                     colour = factor(year)),
                  alpha=0.2) +
-  scale_edge_width(range = c(0.1, 5)) +
-  geom_node_point(aes()) +
-  scale_color_viridis() +
-  theme_graph()
+  scale_edge_width(range = c(1, 5)) +
+  geom_node_circle(aes(r = 0.2, fill='grey' ),alpha=0.8) + 
+  #geom_node_text(aes(label = row_id, size=0.8), colour = "black") +
+  theme_graph() +
+  theme(legend.position = "top") +
+  labs(title = 'The Main Network takes years to build up',
+       subtitle = "The graph shows the year which the links between entites was established",
+       caption = "Edge records for HS Code starting with '1604' and '1605' seres")
 ```
 
 ```{r}
@@ -330,8 +335,28 @@ num_edges <- ecount(igraph_obj)
 # Print the results
 df <- data.frame(Num_of_Nodes = num_nodes, Num_of_Edges = num_edges)
 
-kable(head(df), format = 'html') 
+print(df)
 ```
+
+The graph above shows that the main network for prepared and preserved seafood between the 151 entities takes years to develop.
+
+In the next section, we will take a deeper look at the evolution of the network, to understand how it has grown over the 7 years between entities in the industry. Before we begin, it's crucial that we understand the visual cues that will be used so that we can appreciate the graphs
+
+| Visual Cue    | Sample Image                                           | What it means                                                                                                                                                                                                                 |
+|-----------------|-----------------|---------------------------------------|
+| Edges         |                                                        |                                                                                                                                                                                                                               |
+| \- Arrow head | ![](images/paste-9DA31A2B.png){width="94" height="34"} | Refers to the direction in which shipment is made, A sends goods to B.                                                                                                                                                        |
+| \- Edge width | ![](images/paste-2FB7AC7F.png){width="92"}             | There are more transactions between A and D than between A and B.                                                                                                                                                             |
+| \- Edge color | ![](images/paste-CA5DD6C3.png){width="96"}             | Different seafood products (based on HS Code) are transacted between A and B, and A and D.                                                                                                                                    |
+| Nodes         |                                                        |                                                                                                                                                                                                                               |
+| \- Color      | ![](images/paste-DE84572D.png){width="149"}            | Entities that supply seafood do not usually re-sell them. Hence, each node is either a supplier or buyer. Bright green means large supplier and this goes on to the other spectrum of bright red, which relates to big buyer. |
+| \- Label      | ![](images/paste-28D55782.png){width="82"}             | The label in the node is a reference for the entity involved. Only more active nodes (based on in-degree and out-degree centrality) are labelled.                                                                             |
+
+We create 2 functions to:
+
+-   Plot the graph for each year
+
+-   Compute the number of nodes and links involved, cumulatively since 2028.
 
 ```{r}
 #
@@ -349,7 +374,7 @@ create_graph <- function(data, range, title) {
       out_deg_norm = ifelse(out_deg_centrality == 0, 0, (1 - (out_deg_centrality - min(out_deg_centrality)) / (max(out_deg_centrality) - min(out_deg_centrality))))
     ) %>%
     mutate(combined_in_out_deg = in_deg_norm + out_deg_norm) %>%
-    mutate(row_id = ifelse((combined_in_out_deg>=1.6) | (combined_in_out_deg <=0.4),row_id,""))
+    mutate(row_id = ifelse((combined_in_out_deg>=1.2) | (combined_in_out_deg <=0.8),row_id,""))
   
   Isolated <- which(degree(g) == 0)
   g2 <- delete.vertices(g, Isolated)
@@ -372,21 +397,34 @@ create_graph <- function(data, range, title) {
     labs(title = title)
 }
 
+# Function to compute the nodes and links
 
+cal_node_edges <- function(data, range) {
+  # Convert tbl_graph to igraph object
+  
+  g <- data %>%
+    as_tbl_graph() %>%
+    activate(edges) %>%
+    filter(year %in% range)
+  
+  Isolated <- which(degree(g) == 0)
+  igraph_obj <- delete.vertices(g, Isolated)
+  
+  # Compute the number of nodes and edges
+  num_nodes <- vcount(igraph_obj)
+  num_edges <- ecount(igraph_obj)
+  
+  # Print the results
+  df <- data.frame(Num_of_Nodes = num_nodes, Num_of_Edges = num_edges)
+  
+  print(df)
+}
 ```
 
 ```{r}
-#| fig-width: 10
-#| fig-asp: 1
+range <- c(2028)
 
-range <- c(2028, 2029,2030,2031,2032,2033,2034)
-
-create_graph(main,range,"Main Network of the Trading Entities in 2034")
-```
-
-```{r}
-
-
+cal_node_edges(main,range)
 ```
 
 Temporal Analysis of Individuals and between entities
@@ -398,20 +436,16 @@ Temporal Analysis of Individuals and between entities
 #| fig-width: 10
 #| fig-asp: 1
 
-range <- c(2028)
+range <- c(2031)
 
-create_graph(main,range,"2028")
+create_graph(main,range,"2028: Trading Occurred Among 9 Entity Clusters") +
+  labs(subtitle="Only 4 categories of seafood were transacted",
+       caption = "Unconnected entities have been removed " )
 ```
 
 ```{r}
-
+cal_node_edges(main,range)
 ```
-
-test
-
--   ttt
-
--   tt
 
 ## 2029
 
@@ -421,7 +455,13 @@ test
 
 range <- c(2028,2029)
 
-create_graph(main,range,"2029")
+create_graph(main,range,"2029: More New Traders Joined The Network") +
+  labs(subtitle="This resulted in the 3 largest clusters in 2028 merging to form the largest network",
+       caption = "Unconnected entities have been removed " )
+```
+
+```{r}
+cal_node_edges(main,range)
 ```
 
 ## 2030
@@ -432,7 +472,13 @@ create_graph(main,range,"2029")
 
 range <- c(2028,2029,2030)
 
-create_graph(main,range,"2030")
+create_graph(main,range,"2030: Tier 2 Buyer ID 38 joined the Main Network") +
+  labs(subtitle="The Main Network contined to grow, with only 4 disjointed clusters from 2018 remaining",
+       caption = "Unconnected entities have been removed " )
+```
+
+```{r}
+cal_node_edges(main,range)
 ```
 
 ## 2031
@@ -443,7 +489,13 @@ create_graph(main,range,"2030")
 
 range <- c(2028,2029,2030, 2031)
 
-create_graph(main,range,"2031")
+create_graph(main,range,"2031: Y-o-Y Increase In Number of New Entity and Transation Slowed Down") +
+  labs(subtitle="This correlates with the lower transaction volume in 2031",
+       caption = "Unconnected entities have been removed " )
+```
+
+```{r}
+cal_node_edges(main,range)
 ```
 
 ## 2032
@@ -454,7 +506,13 @@ create_graph(main,range,"2031")
 
 range <- c(2028,2029,2030, 2031, 2032)
 
-create_graph(main,range,"2032")
+create_graph(main,range,"2032: Big Suppliers ID 61 and 124 were Closer, Connected by Buyer ID 135") +
+  labs(subtitle="This resulted in the main network becoming more compact",
+       caption = "Unconnected entities have been removed " )
+```
+
+```{r}
+cal_node_edges(main,range)
 ```
 
 ## 2033
@@ -465,7 +523,13 @@ create_graph(main,range,"2032")
 
 range <- c(2028,2029,2030, 2031, 2032, 2033)
 
-create_graph(main,range,"2033")
+create_graph(main,range,"2032: THe Big Players Took Centre-stage in the Main Network, Asserting Their Influence")+
+  labs(subtitle="The 9 clusters in 2028 were merged into the Main Network",
+       caption = "Unconnected entities have been removed " )
+```
+
+```{r}
+cal_node_edges(main,range)
 ```
 
 ## 2034
@@ -476,271 +540,177 @@ create_graph(main,range,"2033")
 
 range <- c(2028,2029,2030, 2031, 2032, 2033, 2034)
 
-create_graph(main,range,"2034")
+create_graph(main,range,"2034: 2nd Tier Suppliers Took Over the  Centre of the Network") +
+  labs(subtitle="These suppliers could provide to multiple buyers, marginalising the influence of big suppliers")
+```
+
+```{r}
+cal_node_edges(main,range)
 ```
 :::
 
-```{r}
+**Identifying the types of business relationship patterns between entities**
 
+We have discussed the more prominent entities in our network of interest. Let's take a look who they are.
+
+The bigger buyers are:
+
+```{r}
+nodes_active <- main %>%
+  as_tbl_graph() %>%
+  activate(nodes) %>%
+  mutate(
+      in_deg_norm = ifelse(in_deg_centrality == 0, 0, (in_deg_centrality - min(in_deg_centrality)) / (max(in_deg_centrality) - min(in_deg_centrality)) + 1),
+      out_deg_norm = ifelse(out_deg_centrality == 0, 0, (1 - (out_deg_centrality - min(out_deg_centrality)) / (max(out_deg_centrality) - min(out_deg_centrality))))
+    ) %>%
+    mutate(combined_in_out_deg = in_deg_norm + out_deg_norm) %>%
+  as_tibble()
+
+bigger_buyers <- nodes_active %>%
+  filter(combined_in_out_deg>=1.2) %>%
+  arrange(desc(in_deg_centrality)) %>%
+  select(row_id,id, shpcountry, rcvcountry, in_deg_centrality)
+
+bigger_buyers
 ```
 
-Function to plot yearly graph
+The bigger suppliers are:
 
 ```{r}
+bigger_suppliers <- nodes_active %>%
+  filter(combined_in_out_deg<=0.8) %>%
+  arrange(desc(out_deg_centrality)) %>%
+  select(row_id,id, shpcountry, rcvcountry, out_deg_centrality)
 
+bigger_suppliers
 ```
 
-```{r}
-
-```
-
-Centrality measures of various transactions
-
-In-degree, Out-Degree, Betweenness Score
+We will take 2 players from the buyer and supplier group to understand the business relationship and patterns. We will also construct an interactive network.
 
 ```{r}
+# Prepare the edge data set
+edges_aggregated <- main %>%
+  as_tbl_graph() %>%
+  activate(edges) %>%
+  as_tibble() %>%
+  mutate(title = paste('Count = ',weight,'<br>HSCODE =', short_desc),
+         value = weight)
+         #value = weight, label = paste(short_desc)) 
 
-                                       
-```
-
-Top 10 nodes with 'in-degree" scores:
-
-```{r}
-
-```
-
-View Graph Year by year
-
-```{r}
-#| fig-height: 20
-
-ggraph(mc2_graph, layout = "nicely") +
-  geom_edge_link(aes(width=weight)) +
-  scale_edge_width(range = c(0.1, 5)) +
-  geom_node_point(aes()) +
-  theme_graph() +
-  facet_edges(~year,ncol=1)
   
 
+# define grpuping based on the value of combined_in_out_degree
+
+cut_breaks <- c(0, 0.5, 0.9,1.1, 1.5,2)
+cut_labels <- c('1 High Out-Degree','2 Medium Out-Degree','3 Low Degree','4 Medium Out-Degree','5 High Out-Degree' )
+
+nodes_active <- nodes_active[,-1] %>%
+  mutate(categories=cut(combined_in_out_deg, breaks = cut_breaks, labels = cut_labels, include.lowest = TRUE)) %>%
+  # Requirement of visNetwork to name grouping column as such
+  rename(group = categories) %>%
+  mutate(id = row_number()) %>%
+  mutate(title = paste(label,"<br>Rcv Ctry =", rcvcountry,'<br>Shp Ctry =',shpcountry))
 ```
+
+![](images/paste-602D9612.png){fig-align="center" width="549"}
 
 ```{r}
-# mc2_nodes_interactive <- mc2_graph %>%
-#  activate(nodes) %>%
-#  as_tibble() %>%
-#  mutate(title = paste(
-#                         '\n In-deg = ',in_deg_centrality, ',',
-#                         "\n Pagerank =", pagerank, ',',
-#                         "\n Out-deg =", out_deg_centrality))
-  
+# Plot the intereactive graph
+visNetwork(nodes_active,
+           edges_aggregated,
+          main = "Transaction graph grouped by Deg centrality intervals",
+           height = "500px", width = "100%") %>%
+  visIgraphLayout(layout = "layout_with_kk") %>%
+  #visNodes(shape = 'dot', value = 'pagerank') %>%
+  visEdges(arrows = 'to',
+           smooth = list(enables = TRUE,
+                         type= 'continuous'),
+           shadow = FALSE,
+           dash = FALSE) %>%
+  visOptions(highlightNearest = list(enabled = T, degree = 1, hover = T),
+             nodesIdSelection = TRUE,
+             selectedBy = "group") %>%
+  visGroups(
+    groupname = '1 High Out-Degree',
+    color = "#20E620")  %>%
+  visGroups(
+    groupname = '2 Medium Out-Degree',
+    color = "#B6D7A8") %>%
+  visGroups(
+    groupname = '3 Low Degree',
+    color = "#666666") %>%
+  visGroups(
+    groupname = '4 Medium Out-Degree',
+    color = "#EA9999")  %>%
+  visGroups(
+    groupname = '5 High Out-Degree',
+    color = "#E00000")  %>%
+  visInteraction(hideEdgesOnDrag = TRUE) %>%
+  visLegend(enabled=F) %>%
+  visLayout(randomSeed = 123)
 ```
 
-\(c\) Prepare the group, size
+**Big Buyer 1: Volga River LLC Enterprises (Volga)**
 
-```{r}
-# mc2_nodes_interactive_in <- mc2_graph %>% 
-#   activate(nodes) %>%
-#   as_tibble() %>%
-#   mutate(class = cut_interval(in_deg_centrality, n = 5, 
-#                               style = "quantile")) %>%
-#   rename(group = class)
-```
+Buyer Pattern: Only Buys from Bigger Suppliers
 
-```{r}
-# visNetwork(mc2_nodes_interactive_in,
-#            mc2_edges_interactive,
-#           main = "Transaction graph grouped by In-Deg centrality intervals",
-#            height = "500px", width = "100%") %>%
-#   visIgraphLayout(layout = "layout_with_fr") %>%
-#   #visNodes(shape = 'dot', value = 'pagerank') %>%
-#   visEdges(arrows = 'to',
-#            smooth = list(enables = TRUE,
-#                          type= 'continuous'),
-#            shadow = FALSE,
-#            dash = FALSE) %>% 
-#   visOptions(highlightNearest = list(enabled = T, degree = 1, hover = T),
-#              nodesIdSelection = TRUE,
-#              selectedBy = "group") %>%
-#   visInteraction(hideEdgesOnDrag = TRUE) %>% 
-#   visLegend() %>%
-#   visLayout(randomSeed = 123)
+![](images/paste-A218AB55.png){fig-align="left" width="514"}
 
-```
+Volga, an entity that is probably based in Oceanus, has buying tunas from bigger suppliers based in other countries such as Mawazams and Merigrad. Given these, Volga is likely a company importing seafood. The businesses **specialises in sourcing and importing tunas** from suppliers located in other countries. They establish relationships with overseas seafood suppliers, which can include seafood processors, fishing companies, or seafood farms.
 
-Graph by out degree
+A check on the other exports shows that Volga does not export tunas overseas.
 
-\(a\) Create group
+![](images/paste-61CEFB59.png)
 
-```{r}
-# mc2_nodes_interactive_out <- mc2_graph %>% 
-#   activate(nodes) %>%
-#   as_tibble() %>%
-#   mutate(class = cut_interval(out_deg_centrality, n = 5, 
-#                               style = "quantile")) %>%
-#   rename(group = class)
-```
+**Big Buyer 2: hǎi dǎn Corporation Wharf (HD)**
 
-\(b\) Create graph
+Buying Pattern: Buys from a variety of sources, bigger and small suppliers
 
-```{r}
-# visNetwork(mc2_nodes_interactive_out,
-#            mc2_edges_interactive,
-#           main = "Transaction graph grouped by Out-Deg centrality intervals",
-#            height = "500px", width = "100%") %>%
-#   visIgraphLayout(layout = "layout_with_fr") %>%
-#   #visNodes(shape = 'dot', value = 'pagerank') %>%
-#   visEdges(arrows = 'to',
-#            smooth = list(enables = TRUE,
-#                          type= 'continuous'),
-#            shadow = FALSE,
-#            dash = FALSE) %>% 
-#   visOptions(highlightNearest = list(enabled = T, degree = 1, hover = T),
-#              nodesIdSelection = TRUE,
-#              selectedBy = "group") %>%
-#   visInteraction(hideEdgesOnDrag = TRUE) %>% 
-#   visLegend() %>%
-#   visLayout(randomSeed = 123)
-```
+![](images/paste-3FB051B4.png){width="581"}
 
-Look into the to supplier Playa del Tesoro OJSC
+As seen from the image, HD sources its goods and products from many sources and suppliers. Unlike Volga, HD deals with a variety of seafood such as shrimps, tunas, other crustaceans from other countries.
 
-\(a\) Who are its customers
+A check on the edge records shows that starting in 2034, HD has exported a variety of seafood products overseas
 
-From the map, the sole customer was Fresh Wharf SRL Consulting.
+![](images/paste-EF815DED.png)
 
-Others include:
+Given this profile, HD could be a seafood trading company or seafood brokerage. Seafood trading companies act as intermediaries between fishing boats, seafood suppliers, and customers. They purchase seafood directly from fishing boats locally and may also source seafood products from overseas suppliers. In addition, seafood trading companies often cater to a wide range of customers, including wholesalers, retailers, restaurants, and other food service providers.
 
-```{r}
-# mc2_edges_unique %>%
-#   filter(source == 'Playa del Tesoro OJSC') %>%
-#   group_by(source, target, hscode) %>%
-#   summarise(count=n()) %>%
-#   arrange(desc(count))
-```
+**Big Supplier 1: Estrella de la Costa SRL (Estrella)**\
 
-Get transactions with Fresh Wharf SRL consulting
+Selling Pattern (more than badminton): Supplies a variety of seafood to various customers internationally
 
-```{r}
-# playa <- mc2_edges_aggregated %>%
-#   filter(source == 'Playa del Tesoro OJSC') %>%
-#   mutate(month = substr(year_month,start = 6,stop=7))
-# 
-# ggplot(playa, 
-#        aes(x = month, 
-#            y = weight,
-#            group = year)) +
-#   geom_line() +
-#   facet_wrap(~year, ncol=1) +
-#   
-#   theme_minimal()
-```
+![](images/paste-3EFBB095.png){width="676"} Estrella's businesses is very similar to that of HD's. It is a large trader of seafood products, with 8 of the 9 customers shown above coming from Oceanus.
 
-Heatmap
+A check on the edge records shows that it receives a variety of products from other countries as well
 
-```{r}
-# playa_heatmap <- playa %>%
-#   select(year, month, weight) %>%
-#   pivot_wider(names_from = month, values_from = weight) 
-#   
-# 
-# playa_heatmap <- replace(playa_heatmap, is.na(playa_heatmap), 0)
-# 
-# row.names(playa_heatmap) <- playa_heatmap$year
-# 
-# playa_matrix <- data.matrix(playa_heatmap)
-# 
-# playa_matrix <- playa_matrix[,-1]
-# 
-# heatmap(playa_matrix,Rowv=NA, Colv=NA)
-```
+![](images/paste-08BB43BE.png)
 
-Look at company Estrella de la Costa SRL
+**Big Supplier 2: LLC S.A. de C.V. (LLC)**
 
-```{r}
-# mc2_edges_fish %>%
-#   filter(source == 'Estrella de la Costa SRL') %>%
-#   group_by(source, target, hscode) %>%
-#   summarise(count=n()) %>%
-#   arrange(desc(count))
-```
+Selling Pattern: Providing crustaceans to just a handful of buyers
 
-Check the trend
+\
+![](images/paste-4FDB3118.png){width="660"}
 
-```{r}
-# estrella <- mc2_edges_aggregated %>%
-#   filter(source == 'Estrella de la Costa SRL') %>%
-#   inner_join(mc2_nodes, select(id, rcvcountry), by = c('source'='id'))
-# 
-# ggplot(estrella, 
-#        aes(x = year_month, 
-#            y = weight,
-#            group = target)) +
-#   geom_line() +
-#   facet_wrap(~target, ncol=1) +
-#   
-#   theme_minimal()
-```
+With the available information, LLC is likely a seafood exporter or seafood trading company. These businesses specialize in sourcing, purchasing, and distributing various types of seafood, including crustaceans like lobsters, crabs, shrimp, and crayfish, to customers worldwide. Given the limited imports based on the edges data (as shown in the table below), LLC probably deals more with with local fishermen, aquaculture farms, or seafood processors to secure a steady supply of crustaceans.
 
---\>Look at company OceanicOrigin Foods Co Consulting
+![](images/paste-BCDC589A.png)\
 
-```{r}
-# mc2_edges_fish %>%
-#   filter(source == 'OceanicOrigin Foods Co Consulting') %>%
-#   group_by(source, target, hscode) %>%
-#   summarise(count=n()) %>%
-#   arrange(desc(count))
-```
+Conclusion
 
-check the trend
-
-```{r}
-# oceanic <- mc2_edges_aggregated %>%
-#   filter(source == 'OceanicOrigin Foods Co Consulting') %>%
-#   inner_join(mc2_nodes, select(id, rcvcountry), by = c('source'='id'))
-# 
-# ggplot(oceanic, 
-#        aes(x = year_month, 
-#            y = weight,
-#            group = target)) +
-#   geom_line() +
-#   facet_wrap(~target, ncol=1) +
-#   theme_minimal()
-```
-
-Code block
-
-```{r}
-
-```
-
-Code block
-
-```{r}
-
-```
-
-Code block
-
-```{r}
-
-
-
-```
-
-Code block
-
-```{r}
-
-```
-
-Code block
-
-```{r}
-
-```
+This analysis focuses on a subset of edge transactions that involve processed or preserved seafood products, based on their HS codes. By doing so, we can reveal the trading patterns of various trading entities and the business models they adopt. Creating meaningful network graphs is a challenging task that requires a lot of time and effort to explore and experiment with different options. However, the benefit is that we can discover patterns that are not easily visible using other types of visualisation.
 
 References
 
 -   Harshita Kanodia (June 2022), IUU Fishing in the Indian Ocean: A Security Threat. Diplomatist, https://diplomatist.com/2022/06/09/lets-catch-the-big-fish/
 
--   
+-   Intro to tidygraph and ggraph, [Intro to tidygraph and ggraph (jeremydfoote.com)](https://jeremydfoote.com/Communication-and-Social-Networks/resources/ggraph_walkthrough.html)
+
+-   Jordan Ong Zhi Rong (5-Jun-2022), Take-Home Exercise 6, [Take-Home Exercise 6 (isss608-jordan-va.netlify.app)](https://isss608-jordan-va.netlify.app/th_ex6/th_ex6.html)
+
+-   Wang Xuze (20-Nov-2019), IS428 - DataViz Makeover 2, [RPubs - IS428 - DataViz Makeover 2 - Xuze](https://rpubs.com/Xuze/Makeover2)
+
+-   Options for visNetwork, an R package for interactive network visualisation, [Options (datastorm-open.github.io)](https://datastorm-open.github.io/visNetwork/options.html)
+
+*P.S. \> I would like to express my gratitude to my course instructor who offered invaluable guidance during the analysis process. Also a shout out to my 2 groupmates who provided good ideas to tackle this task.*
