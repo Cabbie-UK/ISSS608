@@ -1,0 +1,686 @@
+---
+title: "FishEye Knowldge Graph: Identify Temporal Patterns of individual entities and between entities"
+subtitle: "VAST Chaellenge 2023: Mini-Challenge 2"
+author: "KB"
+date: last-modified
+editor: visual
+execute:
+  freeze: auto 
+  warning: false
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    code-line-numbers: true
+    toc-depth: 4
+---
+
+(First Published: May 28, 2023)
+
+# 1.Overview  Fisheye Bundles 
+
+1.1 Setting the Scene
+
+The country of Oceanus has sought FishEye International's help in identifying companies possibly engaged in illegal, unreported, and unregulated (IUU) fishing. As part of the collaboration, FishEye's analysts received import/export data for Oceanus' marine and fishing industries. However, Oceanus has informed FishEye that the data is incomplete. To facilitate their analysis, FishEye transformed the trade data into a knowledge graph. Using this knowledge graph, it hopes to understand business relationships, including finding links that will help stop IUU fishing and protect marine species that are affected by it.
+
+1.2 Our Task
+
+In response to Question 1 of VAST Chaellenge 2023: Mini-Challenge 2, our tasks are to:
+
+1.  Use visual analytics to identify temporal patterns for individual entities and between entities in the knowledge graph FishEye created from trade records, and
+2.  Categorize the types of business relationship patterns we can identify.
+
+# **2.Set Up**
+
+## **2.1 Load the relevant packages into the R environment**
+
+We use the `pacman::p_load()` function to load the required R packages into our working environment. The loaded packages are:
+
+-   **igraph** : provides functions for creating, analyzing, and visualizing graphs
+
+-   **ggraph**: creates visualizations of graphs using the grammar of graphics approach
+
+-   **visNetwork** : creates interactive network visualizations
+
+-   **lubridate** : for working with dates and times
+
+-   **graphlayouts** : provides layout algorithms for graph visualization
+
+-   **jsonlite** : for working with JSON (JavaScript Object Notation) data
+
+-   **plotly** : for creating interactive web-based graphs
+
+-   **patchwork** : for combining multiple plots into a single layout
+
+-   **knitr:** for dynamic report generation
+
+-   **kableExtra** : provides additional customization options for tables created with the knitr package,
+
+-   **treemap** : for creating treemaps
+
+```{r}
+pacman::p_load(igraph, tidygraph, ggraph, visNetwork, lubridate,                tidyverse, graphlayouts,jsonlite, plotly, patchwork, knitr, kableExtra, treemap)
+
+# Set the default display settings for numeric values to see large numbers in full
+options(scipen = 999, digits = 15)
+```
+
+2.2 Import the data
+
+The data is a directed knowledge graph provided is in json format containing 2 data-sets. Nodes and Edges attributes .
+
+We first import data as assign it to a variable *mc2*.
+
+```{r}
+#| eval: false
+mc2 <- fromJSON("data/mc2_challenge_graph.json")
+```
+
+Next. we extract the nodes info from mc2 data frame
+
+```{r}
+#| eval: false
+mc2_nodes <- as_tibble(mc2$nodes) %>%
+  select(id, shpcountry, rcvcountry)
+```
+
+The nodes data frame contains the following attributes:
+
+-   id \-- Name of the company that originated (or received) the shipment
+
+-   shpcountry \-- Country the company most often associated with when shipping
+
+-   rcvcountry \-- Country the company most often associated with when receiving
+
+Then we cxtract the edges info from *mc2* data frame
+
+```{r}
+#| eval: false
+
+mc2_edges <- as_tibble(mc2$links) %>%
+  select(source, target, arrivaldate, hscode, valueofgoods_omu, volumeteu, weightkg,  valueofgoodsusd)
+```
+
+The edges data frame contains the following attributes:
+
+-   arrivaldate \-- Date the shipment arrived at port in YYYY-MM-DD format.
+
+-   hscode \-- Harmonized System code for the shipment. Can be joined with the hscodes table to get additional details.
+
+-   valueofgoods_omu \-- Customs-declared value of the total shipment, in Oceanus Monetary Units (OMU)
+
+-   volumeteu \-- The volume of the shipment in 'Twenty-foot equivalent units', roughly how many 20-foot standard containers would be required. (Actual number of containers may have been different as there are 20ft and 40ft standard containers and tankers that do not use containers)
+
+-   weightkg \-- The weight of the shipment in kilograms (if known)
+
+Since these working files are huge, we will store the mc2 nodes and edges data frames in *rds* format for ease of subsequent retrieval. This code need only be executed once. Thereafter we will reload the mc2_nodes and edges data frames again
+
+```{r}
+# write_rds(mc2_nodes, "data/mc2_nodes.rds")
+mc2_nodes = read_rds("data/mc2_nodes.rds")
+
+#write_rds(mc2_edges, "data/mc2_edges.rds")
+# Read arrivaldate as data format
+mc2_edges <- read_rds("data/mc2_edges.rds") %>%
+  mutate(arrivaldate = as.Date(arrivaldate, format = "%Y-%m-%d"))
+```
+
+2.3 Data Preparation
+
+2.3.1 Edge Data Frame
+
+**Inspect the data frame**
+
+We get some summary statistics to understand the available data.
+
+```{r}
+summary(mc2_edges)
+```
+
+The following are noted:
+
+-   There are 7 years of transactions, ranging from 1-Jan-2028 to 30-Dec-2034
+
+-   Valueofgood_omu, volumeteu and valueofgoodusd contain a lot of 'NA's. These attributes are not useful for our analysis.
+
+**Check for the presence of duplicate records**
+
+```{r}
+#| eval: false
+
+# Check for the presence of duplicate edge 
+paste(sum(duplicated(mc2_edges)),"duplicate records.")
+```
+
+We are unsure of the reasons behind the duplicate records and do not discount the possibility that they could be genuine. On balance, we find it unlikely that duplicate records exist for every day, with same weight and among the same pair of entities. Hence, we will use the `distinct()` function on the edge data to only retain only unique edge records for our analysis.
+
+```{r}
+mc2_edges_unique <- mc2_edges %>%
+  distinct()
+
+summary(mc2_edges_unique)
+```
+
+We are left with 5.3 million edge records after removing possible duplicate records.
+
+**2.3.2 Identify edge records that relate to the fishing industry**
+
+We referred to the [HS Nomenclature 2022](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools/hs-nomenclature-2022-edition/hs-nomenclature-2022-edition.aspx) available at World Customs Organisation (WCO)'s website, and the HSN Code List that is provided by [Connect2India](https://connect2india.com/hs-classification.html) on their website. Based on these sources, we identified the following HS codes that correspond to different categories of fish and fishery products.
+
+| HS Code      | Description                                         |
+|--------------|-----------------------------------------------------|
+| 3-digit code |                                                     |
+| \- 301       | Live fish                                           |
+| \- 302       | Fish, fresh or chilled, whole                       |
+| \- 303       | Fish, frozen, whole                                 |
+| \- 304       | Fish fillets, fish meat, mince except liver, roe    |
+| \- 305       | Fish,cured, smoked, fish meal for human consumption |
+| \- 306       | Crustaceans                                         |
+| \- 307       | Molluscs                                            |
+| \- 308       | Fish and crustaceans, molluscs and other aquatic    |
+
+Next, we import the list of relevant HS codes and the description into our work environment,
+
+```{r}
+hscode_fish <- read_csv('data/lookup_hscode.csv', show_col_types = FALSE ) %>%
+  mutate(hscode = as.character(hscode))
+```
+
+Next, we will use this list to extract edge records related to fish industry.
+
+```{r}
+
+
+mc2_edges_fish <- mc2_edges_unique %>%
+  filter(hscode %in% hscode_fish$hscode) %>%
+  # further filter by 3-digit and 4-digit HS codes for fishery products
+  filter(
+           substr(hscode,start = 1,stop=3) %in% c('301','302','303','304','305'
+           ,'306','307','308')
+           )
+         
+#hscode,start = 1,stop=4) %in% c('1604','1605') |
+```
+
+We do a frequency count by hscode to understand the volume for each hscode, the subset contains 30 hscodes pertaining to different types of seafood.
+
+```{r}
+freq_count_fish <- mc2_edges_fish %>%
+  group_by(hscode) %>%
+  summarise(count = n())
+```
+
+## Bundle info
+
+### **Catfish**
+
+```{r}
+
+catfish<- fromJSON("data/bundles/catfish.json")
+```
+
+Define nodes and edges
+
+```{r}
+
+catfish_nodes <- as_tibble(catfish$nodes) %>%
+  select(id, shpcountry, rcvcountry)
+
+catfish_edges <- as_tibble(catfish$links) %>%
+  select(source, target, arrivaldate, hscode, valueofgoods_omu) %>%
+  mutate(arrivaldate = as.Date(arrivaldate, format = "%Y-%m-%d"))
+```
+
+Check Summary
+
+```{r}
+summary(catfish_edges)
+```
+
+Freq_count by HS Code
+
+```{r}
+#|eeval: false
+freq_count_catfish <- catfish_edges %>%
+  group_by(hscode) %>%
+  summarise(count=n(),
+            total_value = sum(valueofgoods_omu)
+  ) %>%
+  arrange(desc(count))
+
+kable(freq_count_catfish) %>%
+  kable_styling(full_width = F)
+```
+
+Extract all edges with '30617'
+
+```{r}
+
+
+HS_code= 30617
+
+edges_selected <- catfish_edges %>%
+  filter(hscode == HS_code)
+
+id1 <- edges_selected %>%
+  select(source) %>%
+  rename(id = source)
+id2 <- edges_selected %>%
+  select(target) %>%
+  rename(id = target)
+nodes_extracted <- rbind(id1, id2) %>%
+  distinct()
+
+```
+
+Plot graph (for Highest HS Code)
+
+```{r}
+#| eval: false
+catfish_graph <- tbl_graph(nodes = nodes_extracted,
+                       edges = edges_selected,
+                       directed = TRUE)
+
+ggraph(catfish_graph,
+       layout = "fr") +
+  geom_edge_link(aes()) +
+  geom_node_point(aes()) +
+  theme_graph()
+```
+
+No filtering (for the entire catfish graph)
+
+```{r}
+#| eval: false
+catfish_graph <- tbl_graph(nodes = catfish_nodes,
+                       edges = catfish_edges,
+                       directed = TRUE)
+
+ggraph(catfish_graph,
+       layout = "fr") +
+  geom_edge_link(aes()) +
+  geom_node_point(aes()) +
+  theme_graph()
+```
+
+#### Full Graph of Bundle
+
+```{r}
+
+catfish_nodes_int <- catfish_nodes %>%
+  filter(id %in% c(catfish_edges$source,catfish_edges$target)) %>%
+  rename(label = id) %>%
+  mutate(id=row_number()) %>%
+  arrange(label)
+
+catfish_edges_int <- catfish_edges %>%
+  left_join(catfish_nodes_int, select(label,id),by = c("source" = "label")) %>%
+  rename(from = id) %>%
+  left_join(catfish_nodes_int, select(label,id), by = c("target" = "label")) %>%
+  rename(to = id) %>%
+  group_by(from, to) %>%
+    summarise(weight = n()) %>%
+  filter(from!=to) %>%
+  ungroup()
+
+
+
+# Create graph visualization using visNetwork
+visNetwork(catfish_nodes_int,catfish_edges_int) %>%
+  visIgraphLayout(layout = "layout_with_fr") %>%
+  visOptions(highlightNearest = TRUE,
+             nodesIdSelection = TRUE) %>%
+  visLegend() %>%
+  visLayout(randomSeed = 123)
+```
+
+#### Main subgraph of bundle
+
+```{r}
+set.seed(123)
+
+catfish_graph <- tbl_graph(nodes = catfish_nodes,
+                       edges = catfish_edges,
+                       directed = TRUE)
+
+# Convert tbl_graph to igraph object
+catfish_igraph <- as.igraph(catfish_graph)
+
+# Find the largest subgraph
+largest_subgraph <- subgraph(catfish_igraph, which(components(catfish_igraph)$membership == which.max(components(catfish_igraph)$csize)))
+
+# Convert largest subgraph to tbl_graph
+catfish_largest_subgraph <- as_tbl_graph(largest_subgraph)
+
+# Verify the largest subgraph
+catfish_largest_subgraph
+
+# Compose graph
+catfish_nodes_int <- catfish_largest_subgraph %>%
+  activate(nodes) %>%
+  filter(id %in% c(catfish_edges$source,catfish_edges$target)) %>%
+  rename(label = id) %>%
+  mutate(id=row_number()) %>%
+  arrange(label) %>%
+    as_tibble()
+
+catfish_edges_int <- catfish_largest_subgraph %>%
+  activate(edges) %>%
+  as_tibble() 
+
+
+
+# Create graph visualization using visNetwork
+visNetwork(catfish_nodes_int,catfish_edges_int) %>%
+  visIgraphLayout(layout = "layout_with_fr") %>%
+  visOptions(highlightNearest = TRUE,
+             nodesIdSelection = TRUE) %>%
+  visLegend() %>%
+  visLayout(randomSeed = 123)
+```
+
+Extract from edges dataset
+
+```{r}
+unique_src_target_pair = catfish_edges %>%
+  select(source,target) %>%
+  group_by(source, target) %>%
+  ungroup()
+
+
+original_edges <- mc2_edges_unique %>%
+  semi_join(unique_src_target_pair, by = c("source", "target")) %>%
+  filter(arrivaldate>='2034-02-03' & arrivaldate <= '2035-01-31' )
+
+id1 <- original_edges %>%
+  select(source) %>%
+  rename(id = source)
+id2 <- original_edges %>%
+  select(target) %>%
+  rename(id = target)
+nodes_extracted <- rbind(id1, id2) %>%
+  distinct()
+
+full_graph <- tbl_graph(nodes=nodes_extracted,
+                        edges = original_edges,
+                        directed = T)
+
+```
+
+```{r}
+### Don't run #####
+ggraph(full_graph,
+       layout = "fr") +
+  geom_edge_link(aes()) +
+  geom_node_point(aes()) +
+  theme_graph()
+```
+
+#### Graph from Main Dataset using the Catfish edge info
+
+```{r}
+catfish_nodes_int <- nodes_extracted  %>%
+  #filter(id %in% c(catfish_edges$source,catfish_edges$target)) %>%
+  rename(label = id) %>%
+  mutate(id=row_number()) %>%
+  arrange(label)
+
+catfish_edges_int <- original_edges %>%
+  left_join(catfish_nodes_int, select(label,id),by = c("source" = "label")) %>%
+  rename(from = id) %>%
+  left_join(catfish_nodes_int, select(label,id), by = c("target" = "label")) %>%
+  rename(to = id) %>%
+  group_by(from, to) %>%
+    summarise(weight = n()) %>%
+  filter(from!=to) %>%
+  ungroup()
+
+
+
+# Create graph visualization using visNetwork
+visNetwork(catfish_nodes_int,catfish_edges_int) %>%
+  visIgraphLayout(layout = "layout_with_fr") %>%
+  visOptions(highlightNearest = TRUE,
+             nodesIdSelection = TRUE) %>%
+  visLegend() %>%
+  visLayout(randomSeed = 123)
+```
+
+#### Largest subgraph From Main Dataset
+
+```{r}
+set.seed(123)
+catfish_graph <- tbl_graph(nodes = nodes_extracted,
+                       edges = original_edges,
+                       directed = TRUE)
+
+# Convert tbl_graph to igraph object
+catfish_igraph <- as.igraph(catfish_graph)
+
+# Find the largest subgraph
+largest_subgraph <- subgraph(catfish_igraph, which(components(catfish_igraph)$membership == which.max(components(catfish_igraph)$csize)))
+
+# Convert largest subgraph to tbl_graph
+catfish_largest_subgraph1 <- as_tbl_graph(largest_subgraph)
+
+# Verify the largest subgraph
+catfish_largest_subgraph1
+
+# Compose graph
+catfish_nodes_int1 <- catfish_largest_subgraph1 %>%
+  activate(nodes) %>%
+  filter(id %in% c(catfish_edges$source,catfish_edges$target)) %>%
+  rename(label = id) %>%
+  mutate(id=row_number()) %>%
+  arrange(label) %>%
+    as_tibble()
+
+catfish_edges_int1 <- catfish_largest_subgraph1 %>%
+  activate(edges) %>%
+  as_tibble() 
+
+
+
+# Create graph visualization using visNetwork
+visNetwork(catfish_nodes_int1,catfish_edges_int1) %>%
+  visIgraphLayout(layout = "layout_with_fr") %>%
+  visOptions(highlightNearest = TRUE,
+             nodesIdSelection = TRUE) %>%
+  visLegend() %>%
+  visLayout(randomSeed = 123)
+```
+
+### **chub_mackerel Bundle**
+
+```{r}
+catfish<- fromJSON("data/bundles/chub_mackerel.json")
+catfish_nodes <- as_tibble(catfish$nodes) %>%
+  select(id, shpcountry, rcvcountry)
+
+catfish_edges <- as_tibble(catfish$links) %>%
+  select(source, target, arrivaldate, hscode, valueofgoods_omu) %>%
+  mutate(arrivaldate = as.Date(arrivaldate, format = "%Y-%m-%d"))
+```
+
+```{r}
+summary(catfish_edges)
+```
+
+A, Plot from package
+
+#### Full plot (with all nodes)
+
+```{r}
+catfish_nodes_int <- catfish_nodes %>%
+  filter(id %in% c(catfish_edges$source,catfish_edges$target)) %>%
+  rename(label = id) %>%
+  mutate(id=row_number()) %>%
+  arrange(label)
+
+catfish_edges_int <- catfish_edges %>%
+  left_join(catfish_nodes_int, select(label,id),by = c("source" = "label")) %>%
+  rename(from = id) %>%
+  left_join(catfish_nodes_int, select(label,id), by = c("target" = "label")) %>%
+  rename(to = id) %>%
+  group_by(from, to) %>%
+    summarise(weight = n()) %>%
+  filter(from!=to) %>%
+  ungroup()
+
+
+
+# Create graph visualization using visNetwork
+visNetwork(catfish_nodes_int,catfish_edges_int) %>%
+  visIgraphLayout(layout = "layout_with_fr") %>%
+  visOptions(highlightNearest = TRUE,
+             nodesIdSelection = TRUE) %>%
+  visLegend() %>%
+  visLayout(randomSeed = 123)
+```
+
+#### Plot for main subgraph
+
+```{r}
+set.seed(123)
+
+catfish_graph <- tbl_graph(nodes = catfish_nodes,
+                       edges = catfish_edges,
+                       directed = TRUE)
+
+# Convert tbl_graph to igraph object
+catfish_igraph <- as.igraph(catfish_graph)
+
+# Find the largest subgraph
+largest_subgraph <- subgraph(catfish_igraph, which(components(catfish_igraph)$membership == which.max(components(catfish_igraph)$csize)))
+
+# Convert largest subgraph to tbl_graph
+catfish_largest_subgraph <- as_tbl_graph(largest_subgraph)
+
+# Verify the largest subgraph
+catfish_largest_subgraph
+
+# Compose graph
+catfish_nodes_int <- catfish_largest_subgraph %>%
+  activate(nodes) %>%
+  filter(id %in% c(catfish_edges$source,catfish_edges$target)) %>%
+  rename(label = id) %>%
+  mutate(id=row_number()) %>%
+  arrange(label) %>%
+    as_tibble()
+
+catfish_edges_int <- catfish_largest_subgraph %>%
+  activate(edges) %>%
+  as_tibble() 
+
+
+
+# Create graph visualization using visNetwork
+visNetwork(catfish_nodes_int,catfish_edges_int) %>%
+  visIgraphLayout(layout = "layout_with_fr") %>%
+  visOptions(highlightNearest = TRUE,
+             nodesIdSelection = TRUE) %>%
+  visLegend() %>%
+  visLayout(randomSeed = 123)
+```
+
+B. Extract info from the main graph
+
+```{r}
+unique_src_target_pair = catfish_edges %>%
+  select(source,target) %>%
+  group_by(source, target) %>%
+  ungroup()
+
+
+original_edges <- mc2_edges_unique %>%
+  semi_join(unique_src_target_pair, by = c("source", "target")) %>%
+  filter(arrivaldate>='2034-01-01' & arrivaldate <= '2035-01-31' )
+
+id1 <- original_edges %>%
+  select(source) %>%
+  rename(id = source)
+id2 <- original_edges %>%
+  select(target) %>%
+  rename(id = target)
+nodes_extracted <- rbind(id1, id2) %>%
+  distinct()
+
+full_graph <- tbl_graph(nodes=nodes_extracted,
+                        edges = original_edges,
+                        directed = T)
+
+```
+
+#### Full Plot from Main Dataset
+
+```{r}
+catfish_nodes_int <- nodes_extracted  %>%
+  #filter(id %in% c(catfish_edges$source,catfish_edges$target)) %>%
+  rename(label = id) %>%
+  mutate(id=row_number()) %>%
+  arrange(label)
+
+catfish_edges_int <- original_edges %>%
+  left_join(catfish_nodes_int, select(label,id),by = c("source" = "label")) %>%
+  rename(from = id) %>%
+  left_join(catfish_nodes_int, select(label,id), by = c("target" = "label")) %>%
+  rename(to = id) %>%
+  group_by(from, to) %>%
+    summarise(weight = n()) %>%
+  filter(from!=to) %>%
+  ungroup()
+
+
+
+# Create graph visualization using visNetwork
+visNetwork(catfish_nodes_int,catfish_edges_int) %>%
+  visIgraphLayout(layout = "layout_with_fr") %>%
+  visOptions(highlightNearest = TRUE,
+             nodesIdSelection = TRUE) %>%
+  visLegend() %>%
+  visLayout(randomSeed = 123)
+```
+
+#### Largest Subgraph from Main Dataset
+
+```{r}
+set.seed(123)
+catfish_graph <- tbl_graph(nodes = nodes_extracted,
+                       edges = original_edges,
+                       directed = TRUE)
+
+# Convert tbl_graph to igraph object
+catfish_igraph <- as.igraph(catfish_graph)
+
+# Find the largest subgraph
+largest_subgraph <- subgraph(catfish_igraph, which(components(catfish_igraph)$membership == which.max(components(catfish_igraph)$csize)))
+
+# Convert largest subgraph to tbl_graph
+catfish_largest_subgraph1 <- as_tbl_graph(largest_subgraph)
+
+# Verify the largest subgraph
+catfish_largest_subgraph1
+
+# Compose graph
+catfish_nodes_int1 <- catfish_largest_subgraph1 %>%
+  activate(nodes) %>%
+  filter(id %in% c(catfish_edges$source,catfish_edges$target)) %>%
+  rename(label = id) %>%
+  mutate(id=row_number()) %>%
+  arrange(label) %>%
+    as_tibble()
+
+catfish_edges_int1 <- catfish_largest_subgraph1 %>%
+  activate(edges) %>%
+  as_tibble() 
+
+
+
+# Create graph visualization using visNetwork
+visNetwork(catfish_nodes_int1,catfish_edges_int1) %>%
+  visIgraphLayout(layout = "layout_with_fr") %>%
+  visOptions(highlightNearest = TRUE,
+             nodesIdSelection = TRUE) %>%
+  visLegend() %>%
+  visLayout(randomSeed = 123)
+```
