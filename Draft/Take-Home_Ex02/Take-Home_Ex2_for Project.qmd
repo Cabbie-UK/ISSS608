@@ -17,7 +17,7 @@ format:
 
 (First Published: May 28, 2023)
 
-# 1.Overview  Fisheye Bundles 
+# 1.Overview Fisheye Bundles
 
 1.1 Setting the Scene
 
@@ -67,8 +67,6 @@ options(scipen = 999, digits = 15)
 
 2.2 Import the data
 
-The data is a directed knowledge graph provided is in json format containing 2 data-sets. Nodes and Edges attributes .
-
 We first import data as assign it to a variable *mc2*.
 
 ```{r}
@@ -84,14 +82,6 @@ mc2_nodes <- as_tibble(mc2$nodes) %>%
   select(id, shpcountry, rcvcountry)
 ```
 
-The nodes data frame contains the following attributes:
-
--   id \-- Name of the company that originated (or received) the shipment
-
--   shpcountry \-- Country the company most often associated with when shipping
-
--   rcvcountry \-- Country the company most often associated with when receiving
-
 Then we cxtract the edges info from *mc2* data frame
 
 ```{r}
@@ -100,20 +90,6 @@ Then we cxtract the edges info from *mc2* data frame
 mc2_edges <- as_tibble(mc2$links) %>%
   select(source, target, arrivaldate, hscode, valueofgoods_omu, volumeteu, weightkg,  valueofgoodsusd)
 ```
-
-The edges data frame contains the following attributes:
-
--   arrivaldate \-- Date the shipment arrived at port in YYYY-MM-DD format.
-
--   hscode \-- Harmonized System code for the shipment. Can be joined with the hscodes table to get additional details.
-
--   valueofgoods_omu \-- Customs-declared value of the total shipment, in Oceanus Monetary Units (OMU)
-
--   volumeteu \-- The volume of the shipment in 'Twenty-foot equivalent units', roughly how many 20-foot standard containers would be required. (Actual number of containers may have been different as there are 20ft and 40ft standard containers and tankers that do not use containers)
-
--   weightkg \-- The weight of the shipment in kilograms (if known)
-
-Since these working files are huge, we will store the mc2 nodes and edges data frames in *rds* format for ease of subsequent retrieval. This code need only be executed once. Thereafter we will reload the mc2_nodes and edges data frames again
 
 ```{r}
 # write_rds(mc2_nodes, "data/mc2_nodes.rds")
@@ -137,12 +113,6 @@ We get some summary statistics to understand the available data.
 summary(mc2_edges)
 ```
 
-The following are noted:
-
--   There are 7 years of transactions, ranging from 1-Jan-2028 to 30-Dec-2034
-
--   Valueofgood_omu, volumeteu and valueofgoodusd contain a lot of 'NA's. These attributes are not useful for our analysis.
-
 **Check for the presence of duplicate records**
 
 ```{r}
@@ -152,7 +122,7 @@ The following are noted:
 paste(sum(duplicated(mc2_edges)),"duplicate records.")
 ```
 
-We are unsure of the reasons behind the duplicate records and do not discount the possibility that they could be genuine. On balance, we find it unlikely that duplicate records exist for every day, with same weight and among the same pair of entities. Hence, we will use the `distinct()` function on the edge data to only retain only unique edge records for our analysis.
+we will use the `distinct()` function on the edge data to only retain only unique edge records for our analysis.
 
 ```{r}
 mc2_edges_unique <- mc2_edges %>%
@@ -240,7 +210,7 @@ summary(catfish_edges)
 Freq_count by HS Code
 
 ```{r}
-#|eeval: false
+
 freq_count_catfish <- catfish_edges %>%
   group_by(hscode) %>%
   summarise(count=n(),
@@ -248,7 +218,9 @@ freq_count_catfish <- catfish_edges %>%
   ) %>%
   arrange(desc(count))
 
-kable(freq_count_catfish) %>%
+n <- 10
+
+kable(head(freq_count_catfish,n=n)) %>%
   kable_styling(full_width = F)
 ```
 
@@ -335,6 +307,8 @@ visNetwork(catfish_nodes_int,catfish_edges_int) %>%
 ```
 
 #### Main subgraph of bundle
+
+(nodes -26,-24 and Albertine are the new ones)
 
 ```{r}
 set.seed(123)
@@ -506,6 +480,20 @@ catfish_edges <- as_tibble(catfish$links) %>%
 summary(catfish_edges)
 ```
 
+```{r}
+freq_count_catfish <- catfish_edges %>%
+  group_by(hscode) %>%
+  summarise(count=n(),
+            total_value = sum(valueofgoods_omu)
+  ) %>%
+  arrange(desc(count))
+
+n <- 10
+
+kable(head(freq_count_catfish,n=n)) %>%
+  kable_styling(full_width = F)
+```
+
 A, Plot from package
 
 #### Full plot (with all nodes)
@@ -538,7 +526,9 @@ visNetwork(catfish_nodes_int,catfish_edges_int) %>%
   visLayout(randomSeed = 123)
 ```
 
-#### Plot for main subgraph
+#### Plot for main subgraph 
+
+(node -41 is the new one)
 
 ```{r}
 set.seed(123)
