@@ -526,7 +526,7 @@ visNetwork(catfish_nodes_int,catfish_edges_int) %>%
   visLayout(randomSeed = 123)
 ```
 
-#### Plot for main subgraph 
+#### Plot for main subgraph
 
 (node -41 is the new one)
 
