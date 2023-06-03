@@ -1,0 +1,38 @@
+---
+title: "7b"
+subtitle: Hands-On Exercise for Week 6
+date: last-modified
+author: "KB"
+editor: visual
+execute:
+  freeze: auto 
+  warning: false
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    code-line-numbers: true
+    toc-depth: 4
+---
+
+(First Published: May 20, 2023)
+
+## 14.1 Learning Outcome
+
+We will learn how to create static and interactive Treemaps using various R packages.
+
+## 14.2 Getting Started
+
+### 14.2.1 Install and load the required R libraries
+
+Install and load the the required R packages. The name and function of the new package that will be used for this exercise is as follow
+
+-   **treemap** : provides the necessary functions, classes, and methods to generate treemaps
+
+```{r}
+pacman::p_load(treemap, treemapify, tidyverse) 
+```
+
+### 14.2.2 Import the data
+
+We import the data set for property sales in 2018 and assign it to *realis2018*.

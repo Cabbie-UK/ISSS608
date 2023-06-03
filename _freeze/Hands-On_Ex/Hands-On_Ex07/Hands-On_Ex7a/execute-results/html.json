@@ -1,0 +1,14 @@
+{
+  "hash": "ee3deb81794e159c9ba36cfd4316f0b3",
+  "result": {
+    "markdown": "---\ntitle: \"7b\"\nsubtitle: Hands-On Exercise for Week 6\ndate: last-modified\nauthor: \"KB\"\neditor: visual\nexecute:\n  freeze: auto \n  warning: false\nformat:\n  html:\n    code-fold: true\n    code-summary: \"Show the code\"\n    code-line-numbers: true\n    toc-depth: 4\n---\n\n\n(First Published: May 20, 2023)\n\n## 14.1 Learning Outcome\n\nWe will learn how to create static and interactive Treemaps using various R packages.\n\n## 14.2 Getting Started\n\n### 14.2.1 Install and load the required R libraries\n\nInstall and load the the required R packages. The name and function of the new package that will be used for this exercise is as follow\n\n-   **treemap** : provides the necessary functions, classes, and methods to generate treemaps\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(treemap, treemapify, tidyverse) \n```\n:::\n\n\n### 14.2.2 Import the data\n\nWe import the data set for property sales in 2018 and assign it to *realis2018*.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

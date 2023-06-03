@@ -1,0 +1,42 @@
+---
+title: "Time Plots"
+author: "KB"
+subtitle: In-Class Exercise for Week 7
+date: last-modified
+editor: visual
+execute:
+  freeze: auto 
+  warning: false
+---
+
+(First Published: Jun 03, 2023)
+
+Today, we covered a series of time/date related plots during lessons. Let's check out what we did!.
+
+**A) Line and Cyclical Pattern Plot**
+
+👇*Use the slider to select a year-range, and select a country to display the overall tourist arrivals for the period on this Tableau dashboard.*
+
+```{=html}
+<iframe width="1000"" height="700" src="https://public.tableau.com/shared/RX4HG9R4Y?:display_count=n&:origin=viz_share_link?:language=en-US&:display_count=n&:origin=viz_share_link?:showVizHome=no&:embed=true"></iframe>
+```
+**B) Slope Graph**
+
+This is essentially a variant of the line graph and was invented by Edward Tufte. Like the linegraph, it allows a change between points to be presented by a line. It shows 2 things:
+
+-   The data points are arranged in descending, allowing us to identify which country has the highest rice yield for the year
+
+-   The slope of the lines shows the rate the change during the period.
+
+👇*Use the year selector on the right to pick 2 years to see the graph in action*
+
+```{=html}
+<iframe width="1000"" height="700" src="https://public.tableau.com/views/Rice_16857726945410/SlopeGraph?:language=en-US&:display_count=n&:origin=viz_share_link?:language=en-US&:display_count=n&:origin=viz_share_link?:showVizHome=no&:embed=true"></iframe>
+```
+**C) Calender Heatmap**
+
+👇Hover over the calender tiles to view the count of intrusions logged for the day.
+
+```{=html}
+<iframe width="1000"" height="700" src="https://public.tableau.com/views/EventLog_16857725562760/CalendarHeatmap?:language=en-US&:display_count=n&:origin=viz_share_link?:language=en-US&:display_count=n&:origin=viz_share_link?:showVizHome=no&:embed=true"></iframe>
+```

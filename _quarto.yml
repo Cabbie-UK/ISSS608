@@ -71,6 +71,8 @@ website:
             href: Tableau/3_Animation_CrossFiltering.qmd
           - text: 'Plots for multi-variate analysis'
             href: Tableau/4_multivariate_plots.qmd
+          - text: 'Time Plots'
+            href: Tableau/5_time_plots.qmd
             
   page-navigation: true
   navbar:

@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="KB">
+<meta name="dcterms.date" content="2023-06-03">
 
-<title>KB’s Visual Analytics - Visual Analytics and Applications</title>
+<title>KB’s Visual Analytics - 7b</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,25 +22,88 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./In-Class_Ex/In-Class_Ex01/In-Class_Ex1.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -60,10 +125,10 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 
 <div id="quarto-search-results"></div>
@@ -71,7 +136,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">KB’s Visual Analytics</span>
     </a>
   </div>
@@ -84,59 +149,59 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercises" role="button" data-bs-toggle="dropdown" aria-expanded="false">Hands-on Exercises</a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercises">    
         <li>
-    <a class="dropdown-item" href="./Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.html">
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.html">
  <span class="dropdown-text">1 A Layered Grammar of Graphics - ggplot2 methods</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands-On_Ex/Hands-On_Ex02/Hands-on_Ex2.html">
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex02/Hands-on_Ex2.html">
  <span class="dropdown-text">2 Beyond ggplot2 Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3a.html">
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3a.html">
  <span class="dropdown-text">3 Programming Interactive Data Visualisations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3b.html">
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3b.html">
  <span class="dropdown-text">4 Programming Animated Data Visualisations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4a.html">
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4a.html">
  <span class="dropdown-text">5 Visual Statistical Analysis</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4b.html">
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4b.html">
  <span class="dropdown-text">6 Visualise Uncertainty</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4c.html">
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4c.html">
  <span class="dropdown-text">7 Funnel Plots for Fair Comparison</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5a.html">
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5a.html">
  <span class="dropdown-text">8 Visualise Distributions</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5b.html">
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5b.html">
  <span class="dropdown-text">9 Visualise Network Data</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6a.html">
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6a.html">
  <span class="dropdown-text">10 Ternary Plot to display composition of 3 variables</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6b.html">
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6b.html">
  <span class="dropdown-text">11 Visual Correlation Analysis of Numerical and Categorical Data</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6c.html">
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6c.html">
  <span class="dropdown-text">12 Heatmap to visualise Multivariate Data</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6d.html">
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6d.html">
  <span class="dropdown-text">13 Visual Multivariate Analysis with Parallel Coordinates Plot</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6e.html">
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6e.html">
  <span class="dropdown-text">14 Treemap Visualisation</span></a>
   </li>  
     </ul>
@@ -145,19 +210,19 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercises" role="button" data-bs-toggle="dropdown" aria-expanded="false">In-class Exercises</a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercises">    
         <li>
-    <a class="dropdown-item" href="./In-Class_Ex/In-Class_Ex01/In-Class_Ex1.html">
+    <a class="dropdown-item" href="../../In-Class_Ex/In-Class_Ex01/In-Class_Ex1.html">
  <span class="dropdown-text">1 A Light Makeover of ggplots</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./In-Class_Ex/In-Class_Ex03/In-Class_Ex3.html">
+    <a class="dropdown-item" href="../../In-Class_Ex/In-Class_Ex03/In-Class_Ex3.html">
  <span class="dropdown-text">2 Publishing a Quarto Document</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./In-Class_Ex/In-Class_Ex04/In-Class_Ex4.html">
+    <a class="dropdown-item" href="../../In-Class_Ex/In-Class_Ex04/In-Class_Ex4.html">
  <span class="dropdown-text">3 Quantile–quantile plots</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./In-Class_Ex/In-Class_Ex05/In-Class_Ex5.html">
+    <a class="dropdown-item" href="../../In-Class_Ex/In-Class_Ex05/In-Class_Ex5.html">
  <span class="dropdown-text">4 Working with json files for Network Analysis</span></a>
   </li>  
     </ul>
@@ -166,7 +231,7 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercises" role="button" data-bs-toggle="dropdown" aria-expanded="false">Take-home Exercises</a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercises">    
         <li>
-    <a class="dropdown-item" href="./Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.html">
+    <a class="dropdown-item" href="../../Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.html">
  <span class="dropdown-text">City of Engagement: Demographics and Financial Health of Residents</span></a>
   </li>  
     </ul>
@@ -183,7 +248,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Visual Analytics and Applications</h1>
+      <h1 class="quarto-secondary-nav-title">7b</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -195,8 +260,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-      <a href="./" class="sidebar-logo-link">
-      <img src="./dataviz.jpeg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <a href="../../" class="sidebar-logo-link">
+      <img src="../../dataviz.jpeg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -208,7 +273,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">Home</a>
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">Home</a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -221,22 +286,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./In-Class_Ex/In-Class_Ex01/In-Class_Ex1.html" class="sidebar-item-text sidebar-link">1 A Light Makeover of ggplots</a>
+  <a href="../../In-Class_Ex/In-Class_Ex01/In-Class_Ex1.html" class="sidebar-item-text sidebar-link">1 A Light Makeover of ggplots</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./In-Class_Ex/In-Class_Ex03/In-Class_Ex3.html" class="sidebar-item-text sidebar-link">2 Publishing a Quarto Document</a>
+  <a href="../../In-Class_Ex/In-Class_Ex03/In-Class_Ex3.html" class="sidebar-item-text sidebar-link">2 Publishing a Quarto Document</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./In-Class_Ex/In-Class_Ex04/In-Class_Ex4.html" class="sidebar-item-text sidebar-link">3 Quantile–quantile plots</a>
+  <a href="../../In-Class_Ex/In-Class_Ex04/In-Class_Ex4.html" class="sidebar-item-text sidebar-link">3 Quantile–quantile plots</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./In-Class_Ex/In-Class_Ex05/In-Class_Ex5.html" class="sidebar-item-text sidebar-link">4 Working with json files for Network Analysis</a>
+  <a href="../../In-Class_Ex/In-Class_Ex05/In-Class_Ex5.html" class="sidebar-item-text sidebar-link">4 Working with json files for Network Analysis</a>
   </div>
 </li>
       </ul>
@@ -251,7 +316,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.html" class="sidebar-item-text sidebar-link">City of Engagement: Demographics and Financial Health of its Residents</a>
+  <a href="../../Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.html" class="sidebar-item-text sidebar-link">City of Engagement: Demographics and Financial Health of its Residents</a>
   </div>
 </li>
       </ul>
@@ -266,72 +331,72 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.html" class="sidebar-item-text sidebar-link">1 A Layered Grammar of Graphics - ggplot2 methods</a>
+  <a href="../../Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.html" class="sidebar-item-text sidebar-link">1 A Layered Grammar of Graphics - ggplot2 methods</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hands-On_Ex/Hands-On_Ex02/Hands-on_Ex2.html" class="sidebar-item-text sidebar-link">2 Beyond ggplot2 Fundamentals</a>
+  <a href="../../Hands-On_Ex/Hands-On_Ex02/Hands-on_Ex2.html" class="sidebar-item-text sidebar-link">2 Beyond ggplot2 Fundamentals</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3a.html" class="sidebar-item-text sidebar-link">3 Programming Interactive Data Visualisations</a>
+  <a href="../../Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3a.html" class="sidebar-item-text sidebar-link">3 Programming Interactive Data Visualisations</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3b.html" class="sidebar-item-text sidebar-link">4 Programming Animated Data Visualisations</a>
+  <a href="../../Hands-On_Ex/Hands-On_Ex03/Hands-on_Ex3b.html" class="sidebar-item-text sidebar-link">4 Programming Animated Data Visualisations</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4a.html" class="sidebar-item-text sidebar-link">5 Visual Statistical Analysis</a>
+  <a href="../../Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4a.html" class="sidebar-item-text sidebar-link">5 Visual Statistical Analysis</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4b.html" class="sidebar-item-text sidebar-link">6 Visualise Uncertainty</a>
+  <a href="../../Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4b.html" class="sidebar-item-text sidebar-link">6 Visualise Uncertainty</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4c.html" class="sidebar-item-text sidebar-link">7 Funnel Plots for Fair Comparison</a>
+  <a href="../../Hands-On_Ex/Hands-On_Ex04/Hands-on_Ex4c.html" class="sidebar-item-text sidebar-link">7 Funnel Plots for Fair Comparison</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5a.html" class="sidebar-item-text sidebar-link">8 Visualise Distributions</a>
+  <a href="../../Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5a.html" class="sidebar-item-text sidebar-link">8 Visualise Distributions</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5b.html" class="sidebar-item-text sidebar-link">9 Visualise Network Data</a>
+  <a href="../../Hands-On_Ex/Hands-On_Ex05/Hands-on_Ex5b.html" class="sidebar-item-text sidebar-link">9 Visualise Network Data</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6a.html" class="sidebar-item-text sidebar-link">10 Ternary Plot to display composition of 3 variables</a>
+  <a href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6a.html" class="sidebar-item-text sidebar-link">10 Ternary Plot to display composition of 3 variables</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6b.html" class="sidebar-item-text sidebar-link">11 Visual Correlation Analysis of Numerical and Categorical Data</a>
+  <a href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6b.html" class="sidebar-item-text sidebar-link">11 Visual Correlation Analysis of Numerical and Categorical Data</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6c.html" class="sidebar-item-text sidebar-link">12 Heatmap to visualise Multivariate Data</a>
+  <a href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6c.html" class="sidebar-item-text sidebar-link">12 Heatmap to visualise Multivariate Data</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6d.html" class="sidebar-item-text sidebar-link">13 Visual Multivariate Analysis with Parallel Coordinates Plot</a>
+  <a href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6d.html" class="sidebar-item-text sidebar-link">13 Visual Multivariate Analysis with Parallel Coordinates Plot</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6e.html" class="sidebar-item-text sidebar-link">14 Treemap Visualisation</a>
+  <a href="../../Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6e.html" class="sidebar-item-text sidebar-link">14 Treemap Visualisation</a>
   </div>
 </li>
       </ul>
@@ -346,27 +411,27 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Tableau/1_Superstore.html" class="sidebar-item-text sidebar-link">Superstore Annual Sales and Profit</a>
+  <a href="../../Tableau/1_Superstore.html" class="sidebar-item-text sidebar-link">Superstore Annual Sales and Profit</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Tableau/2_Superstore_Story.html" class="sidebar-item-text sidebar-link">The Superstore Story</a>
+  <a href="../../Tableau/2_Superstore_Story.html" class="sidebar-item-text sidebar-link">The Superstore Story</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Tableau/3_Animation_CrossFiltering.html" class="sidebar-item-text sidebar-link">Animinated Bubbleplot and Cross-Filtering of Charts</a>
+  <a href="../../Tableau/3_Animation_CrossFiltering.html" class="sidebar-item-text sidebar-link">Animinated Bubbleplot and Cross-Filtering of Charts</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Tableau/4_multivariate_plots.html" class="sidebar-item-text sidebar-link">Plots for multi-variate analysis</a>
+  <a href="../../Tableau/4_multivariate_plots.html" class="sidebar-item-text sidebar-link">Plots for multi-variate analysis</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Tableau/5_time_plots.html" class="sidebar-item-text sidebar-link">Time Plots</a>
+  <a href="../../Tableau/5_time_plots.html" class="sidebar-item-text sidebar-link">Time Plots</a>
   </div>
 </li>
       </ul>
@@ -375,31 +440,81 @@ ul.task-list li input[type="checkbox"] {
     </div>
 </nav>
 <!-- margin-sidebar -->
-    
-<!-- main -->
-<div class="quarto-about-solana column-body">
-  <div class="about-entity">
-    <div class="entity-contents">
-      <header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title d-none d-lg-block">Visual Analytics and Applications</h1>
-</div>
-<div class="quarto-title-meta">
-  </div>
-</header> 
-      <div class="about-contents"><main class="content" id="quarto-document-content">
-<p>Hi all,</p>
-<p>I am a student taking a post-grad analytics programme. Welcome to my ISSS608 Visual Analytics and Applications site! 😊</p>
-<p>This site is a portfolio of my learning and accomplishments in the course. It showcases the exercises and projects I have completed and the skills I have acquired from the course.</p>
-
-
-</main></div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link active" data-scroll-target="#learning-outcome">14.1 Learning Outcome</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">14.2 Getting Started</a>
+  <ul>
+  <li><a href="#install-and-load-the-required-r-libraries" id="toc-install-and-load-the-required-r-libraries" class="nav-link" data-scroll-target="#install-and-load-the-required-r-libraries">14.2.1 Install and load the required R libraries</a></li>
+  <li><a href="#import-the-data" id="toc-import-the-data" class="nav-link" data-scroll-target="#import-the-data">14.2.2 Import the data</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
-    <img src="pexels.jpg" class="about-image
-  rounded " style="width: 15em;">
-  </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">7b</h1>
+<p class="subtitle lead">Hands-On Exercise for Week 6</p>
 </div>
- <!-- /main -->
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>KB </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 3, 2023</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>(First Published: May 20, 2023)</p>
+<section id="learning-outcome" class="level2">
+<h2 class="anchored" data-anchor-id="learning-outcome">14.1 Learning Outcome</h2>
+<p>We will learn how to create static and interactive Treemaps using various R packages.</p>
+</section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">14.2 Getting Started</h2>
+<section id="install-and-load-the-required-r-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="install-and-load-the-required-r-libraries">14.2.1 Install and load the required R libraries</h3>
+<p>Install and load the the required R packages. The name and function of the new package that will be used for this exercise is as follow</p>
+<ul>
+<li><strong>treemap</strong> : provides the necessary functions, classes, and methods to generate treemaps</li>
+</ul>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(treemap, treemapify, tidyverse) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="import-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="import-the-data">14.2.2 Import the data</h3>
+<p>We import the data set for property sales in 2018 and assign it to <em>realis2018</em>.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -420,6 +535,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const clipboard = new window.ClipboardJS('.code-copy-button', {
     target: function(trigger) {
       return trigger.previousElementSibling;
@@ -491,15 +613,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./In-Class_Ex/In-Class_Ex01/In-Class_Ex1.html" class="pagination-link">
-        <span class="nav-page-text">1 A Light Makeover of ggplots</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 
