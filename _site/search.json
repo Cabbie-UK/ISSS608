@@ -693,6 +693,48 @@
     "text": "15.5 Reference\n\n15.5.1 All about tmap package\n\ntmap: Thematic Maps in R\ntmap\ntmap: get started!\ntmap: changes in version 2.0\ntmap: creating thematic maps in a flexible way (useR!2015)\nExploring and presenting maps with tmap (useR!2017)\n\n\n\n15.5.2 Geospatial data wrangling\n\nsf: Simple Features for R\nSimple Features for R: StandardizedSupport for Spatial Vector Data\nReading, Writing and Converting Simple Features\n\n\n\n15.5.3 Data wrangling\n\ndplyr\nTidy data\ntidyr: Easily Tidy Data with ‘spread()’ and ‘gather()’ Functions\n\n\n\\(**That's\\) \\(all\\) \\(folks!**\\)"
   },
   {
+    "objectID": "Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8b.html",
+    "href": "Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8b.html",
+    "title": "16 Visualise Geospatial Point Data",
+    "section": "",
+    "text": "(First Published: Jun 10, 2023)"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8b.html#learning-outcome",
+    "href": "Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8b.html#learning-outcome",
+    "title": "16 Visualise Geospatial Point Data",
+    "section": "16.1 Learning Outcome",
+    "text": "16.1 Learning Outcome\nWe will learn how to create a proportional symbol map showing the number of wins by Singapore Pools’ outlets using an R package called tmap."
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8b.html#getting-started",
+    "href": "Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8b.html#getting-started",
+    "title": "16 Visualise Geospatial Point Data",
+    "section": "16.2 Getting Started",
+    "text": "16.2 Getting Started\n\n16.2.1 Install and load the required R libraries\nInstall and load the the required R packages.\n\n\nShow the code\npacman::p_load(sf, tmap, tidyverse)\n\n\n\n\n16.2.2 Import the data\nThe data set use for this hands-on exercise is called SGPools_svy21. The data is in csv file format.\nFigure below shows the first 15 records of SGPools_svy21.csv. It consists of seven columns. The XCOORD and YCOORD columns are the x-coordinates and y-coordinates of SingPools outlets and branches.\nWe wll use read_csv() function of readr package to import SGPools_svy21.csv into R as a tibble data frame called sgpools.\n\n\n\nShow the code\nsgpools <- read_csv(\"data/aspatial/SGPools_svy21.csv\", show_col_types = F)\n\n\nAfter importing the data file into R, it is important for us to examine if the data file has been imported correctly.\n\n\nShow the code\nlist(sgpools) \n\n\n[[1]]\n# A tibble: 306 × 7\n   NAME           ADDRESS POSTCODE XCOORD YCOORD `OUTLET TYPE` `Gp1Gp2 Winnings`\n   <chr>          <chr>      <dbl>  <dbl>  <dbl> <chr>                     <dbl>\n 1 Livewire (Mar… 2 Bayf…    18972 30842. 29599. Branch                        5\n 2 Livewire (Res… 26 Sen…    98138 26704. 26526. Branch                       11\n 3 SportsBuzz (K… Lotus …   738078 20118. 44888. Branch                        0\n 4 SportsBuzz (P… 1 Sele…   188306 29777. 31382. Branch                       44\n 5 Prime Serango… Blk 54…   552542 32239. 39519. Branch                        0\n 6 Singapore Poo… 1A Woo…   731001 21012. 46987. Branch                        3\n 7 Singapore Poo… Blk 64…   370064 33990. 34356. Branch                       17\n 8 Singapore Poo… Blk 88…   370088 33847. 33976. Branch                       16\n 9 Singapore Poo… Blk 30…   540308 33910. 41275. Branch                       21\n10 Singapore Poo… Blk 20…   560202 29246. 38943. Branch                       25\n# ℹ 296 more rows\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe sgpools data in tibble data frame and not the common R data frame.\n\n\n\n\n16.2.3 Create a sf data frame from an aspatial data frame\nWe convert sgpools data frame into a simple feature data frame by using st_as_sf() of sf packages.\n\n\nShow the code\nsgpools_sf <- st_as_sf(sgpools, \n                       coords = c(\"XCOORD\", \"YCOORD\"),\n                       crs= 3414)\n\n\n\n\n\n\n\n\nThings to learn from the codes\n\n\n\n\nThe coords argument requires us to provide the column name of the x-coordinates first then followed by the column name of the y-coordinates.\nThe crs argument required us to provide the coordinates system in epsg format. EPSG: 3414 is Singapore SVY21 Projected Coordinate System. We can search for other country’s epsg code by refering to epsg.io.\n\n\n\nNotice that a new column called geometry has been added into the sgpools_sf data frame.\n We can display the basic information of the newly created sgpools_sf.\n\n\nShow the code\nlist(sgpools_sf)\n\n\n[[1]]\nSimple feature collection with 306 features and 5 fields\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: 7844.194 ymin: 26525.7 xmax: 45176.57 ymax: 47987.13\nProjected CRS: SVY21 / Singapore TM\n# A tibble: 306 × 6\n   NAME                         ADDRESS POSTCODE `OUTLET TYPE` `Gp1Gp2 Winnings`\n * <chr>                        <chr>      <dbl> <chr>                     <dbl>\n 1 Livewire (Marina Bay Sands)  2 Bayf…    18972 Branch                        5\n 2 Livewire (Resorts World Sen… 26 Sen…    98138 Branch                       11\n 3 SportsBuzz (Kranji)          Lotus …   738078 Branch                        0\n 4 SportsBuzz (PoMo)            1 Sele…   188306 Branch                       44\n 5 Prime Serangoon North        Blk 54…   552542 Branch                        0\n 6 Singapore Pools Woodlands C… 1A Woo…   731001 Branch                        3\n 7 Singapore Pools 64 Circuit … Blk 64…   370064 Branch                       17\n 8 Singapore Pools 88 Circuit … Blk 88…   370088 Branch                       16\n 9 Singapore Pools Anchorvale … Blk 30…   540308 Branch                       21\n10 Singapore Pools Ang Mo Kio … Blk 20…   560202 Branch                       25\n# ℹ 296 more rows\n# ℹ 1 more variable: geometry <POINT [m]>\n\n\nThe output shows that sgppols_sf is in point feature class. It’s epsg ID is 3414. The bbox provides information of the extend of the geospatial data."
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8b.html#draw-proportional-symbol-map",
+    "href": "Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8b.html#draw-proportional-symbol-map",
+    "title": "16 Visualise Geospatial Point Data",
+    "section": "16.3 Draw Proportional Symbol Map",
+    "text": "16.3 Draw Proportional Symbol Map\nTo create an interactive proportional symbol map in R, the view mode of tmap will be used.\nThe code churn below will turn on the interactive mode of tmap.\n\n\nShow the code\ntmap_mode(\"view\")\n\n\n\n16.3.1 Plot an interactive point symbol map\nLet’s plot an interactive point symbol map.\n\n\nShow the code\ntm_shape(sgpools_sf)+\ntm_bubbles(col = \"red\",\n           size = 1,\n           border.col = \"black\",\n           border.lwd = 1)\n\n\n\n\n\n\n\n\n\n16.3.2 Let’s make the points proportional\nTo draw a proportional symbol map, we need to assign a numerical variable to the size visual attribute. The codes below show that the variable Gp1Gp2Winnings is assigned to size visual attribute.\n\n\nShow the code\ntm_shape(sgpools_sf)+\ntm_bubbles(col = \"red\",\n           size = \"Gp1Gp2 Winnings\",\n           border.col = \"black\",\n           border.lwd = 1)\n\n\n\n\n\n\n\n\n\n16.3.3 Let’s give the points a different colour\nThe proportional symbol map can be further improved by using the colour visual attribute. In the codes below, OUTLET TYPE variable is used as the colour attribute variable.\n\n\nShow the code\ntm_shape(sgpools_sf)+\ntm_bubbles(col = \"OUTLET TYPE\", \n          size = \"Gp1Gp2 Winnings\",\n          border.col = \"black\",\n          border.lwd = 1)"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8b.html#i-have-a-twin-brothers",
+    "href": "Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8b.html#i-have-a-twin-brothers",
+    "title": "16 Visualise Geospatial Point Data",
+    "section": "16.3.4 I have a twin brothers :)",
+    "text": "16.3.4 I have a twin brothers :)\nAn impressive and little-know feature of tmap’s view mode is that it also works with faceted plots. The argument sync in tm_facets() can be used in this case to produce multiple maps with synchronised zoom and pan settings.\n\n\nShow the code\ntm_shape(sgpools_sf) +\n  tm_bubbles(col = \"OUTLET TYPE\", \n          size = \"Gp1Gp2 Winnings\",\n          border.col = \"black\",\n          border.lwd = 1) +\n  tm_facets(by= \"OUTLET TYPE\",\n            nrow = 1,\n            sync = TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBefore we end the session, it is wiser to switch tmap’s Viewer back to plot mode by using the code chunk below.\n\n\nShow the code\ntmap_mode(\"plot\")"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8b.html#reference",
+    "href": "Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8b.html#reference",
+    "title": "16 Visualise Geospatial Point Data",
+    "section": "16.4 Reference",
+    "text": "16.4 Reference\n\n16.4.1 All about tmap package\n\ntmap: Thematic Maps in R\ntmap\ntmap: get started!\ntmap: changes in version 2.0\ntmap: creating thematic maps in a flexible way (useR!2015)\nExploring and presenting maps with tmap (useR!2017)\n\n\n\n16.4.2 Geospatial data wrangling\n\nsf: Simple Features for R\nSimple Features for R: StandardizedSupport for Spatial Vector Data\nReading, Writing and Converting Simple Features\n\n\n\n16.4.3 Data wrangling\n\ndplyr\nTidy data\ntidyr: Easily Tidy Data with ‘spread()’ and ‘gather()’ Functions\n\n\n\\(**That's\\) \\(all\\) \\(folks!**\\)"
+  },
+  {
     "objectID": "In-Class_Ex/In-Class_Ex01/In-Class_Ex1.html",
     "href": "In-Class_Ex/In-Class_Ex01/In-Class_Ex1.html",
     "title": "1 A Light Makeover of ggplots",
