@@ -70,6 +70,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6d.qmd
           - text: '14  Treemap Visualisation'
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6e.qmd
+          - text: '15 Choropleth Mapping'
+            href: Hands-On_Ex/Hands-On_Ex08/Hands-on_Ex8a.qmd
             
       - section: "Tableau"
         contents:
@@ -117,6 +119,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6d.qmd
           - text: '14  Treemap Visualisation'
             href: Hands-On_Ex/Hands-On_Ex06/Hands-on_Ex6e.qmd
+          - text: '15 Choropleth Mapping'
+            href: Hands-On_Ex/Hands-On_Ex08/Hands-on_Ex8a.qmd
             
       - text: In-class Exercises
         menu: 

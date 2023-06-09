@@ -1,0 +1,244 @@
+---
+title: "Take-Home Ex3"
+author: "Vast Challenge 2023: Mini-Challenge 3"
+editor: visual
+date: last-modified
+execute:
+  freeze: auto 
+  warning: false
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    code-line-numbers: true
+    toc-depth: 4
+---
+
+(First Published: Jun 18, 2023)
+
+Load Packages
+
+```{r}
+pacman::p_load(igraph, tidygraph, ggraph, ggforce, tidytext, visNetwork, tidyverse, jsonlite, plotly, patchwork, knitr, kableExtra, skimr, DT)
+
+# Set the default display settings for numeric values to see large numbers in full
+options(scipen = 999, digits = 15)
+```
+
+Import data
+
+```{r}
+#| eval: false
+mc3 <- fromJSON("data/mc3.json")
+```
+
+Extract the node data frame
+
+```{r}
+#| eval: false
+
+# Extract the nodes data
+
+# convert the fields to characters first to extract the information embedded as list
+mc3_nodes <- as_tibble(mc3$nodes) %>%
+  # mutate() and as.character() are used to convert the field data type from list to character
+  mutate(country = as.character(country),
+         id = as.character(id),
+         product_services = as.character(product_services),
+         revenue_omu = as.numeric(as.character(revenue_omu)),
+         type = as.character(type)) %>%
+  # Re-organise the columns
+  select(id,country,type,product_services,revenue_omu) %>%
+  # remove duplicate records
+  distinct() %>%
+  # omu is denominated in smaller currency units, so we will round all values to the nearest home unit
+  mutate(revenue_omu = round(revenue_omu,0)) 
+
+
+```
+
+Note: Have to be mindful of character((0)) and unknown. Recode to NAs before passing to text sensing or put as as part of the stop words during text sensing
+
+In terms of edges, we will have BO-Coy, CC-Coy, Coy-Coy but we would probably not see the BO-CO
+
+Extract Edges data frame
+
+```{r}
+#| eval: false
+
+# Extract the edge data
+mc3_edges <- as_tibble(mc3$links) %>%
+  # remove the duplicates
+  distinct() %>%
+  #mutate() and as.character() are used to convert the field data type from list to character
+  mutate(source = as.character(source),
+         target = as.character(target),
+         type = as.character(type)) %>%
+  group_by(source, target, type) %>%
+  summarise(weight = n()) %>%
+  # Included to ensure self-links are excluded, although there's none found
+  filter(source!=target) %>%
+  ungroup
+```
+
+::: callout-note
+## Observations
+
+-   Although included in the codes about, there is no duplicate records or self-links
+
+-   Grouping by source, target and type does not reduce the number of records, and the *weight* for all records show 1. This means the edge information contain the relationships between the entities involved and does not connote the volume of transactions between them
+:::
+
+We will store the *mc3* nodes and edges data frames in *rds* format for ease of subsequent retrieval. This "write" code need only be executed once. Thereafter we can reload the mc3_nodes and edges data frames for data wrangling.
+
+```{r}
+# write and load the mc3_nodes and edges dataframe. With this, we need not re-extract from the raw dataset subsequently
+
+#write_rds(mc3_nodes, "data/mc3_nodes.rds")
+mc3_nodes = read_rds("data/mc3_nodes.rds")
+
+#write_rds(mc3_edges, "data/mc3_edges.rds")
+mc3_edges <- read_rds("data/mc3_edges.rds")
+```
+
+**Initial Data Exploration**
+
+1.  Explore the edge data frame
+
+We first inspect the data frame using `skim()`
+
+```{r}
+skim(mc3_edges)
+```
+
+::: callout-note
+## Observations
+
+-   There is no field with missing value
+
+-   There are 2 unique relationship types: Entity - Beneficial Owner (BO), Entity - Company Contact (CC)
+
+-   The total number of entities under *source* and *target* columns is 34,121. This forms the upper bound of entities/nodes we should have in the analysis.
+:::
+
+2.  Get count of records by type
+
+```{r}
+mc3_edges %>% 
+  group_by(type) %>%
+  summarise(count = n()) %>%
+  ggplot(aes(x = type, y = count)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = count), vjust = -0.5) +
+  theme_minimal() +
+  labs(x = "Edge Type", y = "No. of\nTransactions",
+       title = 'Count of Reationships by Type') +
+  theme(axis.title.y = element_text(angle = 0, vjust = 0.5, hjust = 1))
+
+
+```
+
+3.  Quick visualisation of the network
+
+```{r}
+# Prepare the nodes information using the source and target information in the edge data frame
+id1 <- mc3_edges %>%
+  select(source) %>%
+  rename(id = source)
+id2 <- mc3_edges %>%
+  select(target) %>%
+  rename(id = target)
+mc3_nodes_fr_edges <- rbind(id1, id2) %>%
+  distinct() 
+```
+
+!! I didn't do the left_join to mc3_nodes as shown in prof's steps as this resulted in more records, which kind of defeat the purpose of doing distinct() above !!
+
+```{r}
+
+# compute the centrality measures for nodes
+mc3_graph <- tbl_graph(nodes = mc3_nodes_fr_edges,
+                       edges = mc3_edges,
+                       directed = FALSE) %>%
+  mutate(betweenness_centrality = centrality_betweenness(),
+         closeness_centrality = centrality_closeness())
+
+# set random seed for consistency
+set.seed(123)
+
+# plot the graph
+mc3_graph %>%
+  filter(betweenness_centrality >= 100000) %>%
+ggraph(layout = "fr") +
+  geom_edge_link(aes(alpha=0.5)) +
+  geom_node_point(aes(
+    linewidth = betweenness_centrality,
+    alpha = 0.5)) +
+  scale_size_continuous(range=c(0.01,0.5))+
+  theme_graph() +
+  labs(title = "Initial Network Plot based on Edge Data")+
+  theme(legend.position = "none")
+```
+
+2.  Explore the nodes dataframe
+
+We will first do a left join with the entities featured in the edge data frame mc3_nodes1 to remove all irrelevant nodes record
+
+```{r}
+mc3_nodes_matched <- mc3_nodes %>%
+  left_join(mc3_nodes_fr_edges,
+            unmatched = "drop")
+```
+
+::: callout-note
+## Observations
+
+-   No node record was dropped
+
+-   The edge data frame contains more entities than those provided in the nodes data frame
+:::
+
+```{r}
+skim(mc3_nodes)
+```
+
+Check the frequency count of various product types
+
+```{r}
+# Get the freq count of records by product_services column 
+freq_count_pdt_svcs <- mc3_nodes %>% 
+  group_by(product_services) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count))
+
+datatable(freq_count_pdt_svcs, class = "compact", options = list(pageLength = 5), 
+              caption = "Table 1: Frequency Count of product_services Column",
+              rownames = FALSE)
+```
+
+We noticed that there was a large number of the records with "character(0)" type for product_services. We re-coded this as Unknown.
+
+```{r}
+mc3_nodes <- mc3_nodes %>%
+  mutate(product_services = replace(product_services, product_services == "character(0)", "Unknown"))
+```
+
+Visualise frequency of node types
+
+```{r}
+mc3_nodes %>% 
+  group_by(type) %>%
+  summarise(count = n()) %>%
+  ggplot(aes(x = type, y = count)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = count), vjust = -0.5) +
+  theme_minimal() +
+  labs(x = "Node Type", y = "No. of\nTransactions",
+       title = 'Count of Nodes by Type') +
+  theme(axis.title.y = element_text(angle = 0, vjust = 0.5, hjust = 1))
+```
+
+```{r}
+
+
+```
