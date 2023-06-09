@@ -74,6 +74,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex08/Hands-on_Ex8a.qmd
           - text: '16  Visualise Geospatial Point Data'
             href: Hands-On_Ex/Hands-On_Ex08/Hands-on_Ex8b.qmd
+          - text: '17  Analytical Mapping on Choropleth'
+            href: Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8c.qmd
             
       - section: "Tableau"
         contents:
@@ -125,6 +127,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex08/Hands-on_Ex8a.qmd
           - text: '16  Visualise Geospatial Point Data'
             href: Hands-On_Ex/Hands-On_Ex08/Hands-on_Ex8b.qmd
+          - text: '17  Analytical Mapping on Choropleth'
+            href: Hands-On_Ex/Hands-On_Ex08/Hands-on_Ex8c.qmd
             
       - text: In-class Exercises
         menu: 
