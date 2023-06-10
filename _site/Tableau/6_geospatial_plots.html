@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="KB">
+<meta name="dcterms.date" content="2023-06-10">
 
-<title>KB’s Visual Analytics - The Superstore Story</title>
+<title>KB’s Visual Analytics - Visualise Geographic Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +32,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../Tableau/1_Superstore.html" rel="prev">
+<link href="../Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.html" rel="next">
+<link href="../Tableau/5_time_plots.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -216,7 +219,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">The Superstore Story</h1>
+      <h1 class="quarto-secondary-nav-title">Visualise Geographic Data</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -246,12 +249,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">In-class Exercises</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">In-class Exercises</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../In-Class_Ex/In-Class_Ex01/In-Class_Ex1.html" class="sidebar-item-text sidebar-link">1 A Light Makeover of ggplots</a>
@@ -289,7 +292,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Tableau/6_geospatial_plots.html" class="sidebar-item-text sidebar-link">8 Visualise Geographic Data</a>
+  <a href="../Tableau/6_geospatial_plots.html" class="sidebar-item-text sidebar-link active">8 Visualise Geographic Data</a>
   </div>
 </li>
       </ul>
@@ -411,12 +414,12 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Tableau</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Tableau</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Tableau/1_Superstore.html" class="sidebar-item-text sidebar-link">Superstore Annual Sales and Profit</a>
@@ -424,7 +427,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Tableau/2_Superstore_Story.html" class="sidebar-item-text sidebar-link active">The Superstore Story</a>
+  <a href="../Tableau/2_Superstore_Story.html" class="sidebar-item-text sidebar-link">The Superstore Story</a>
   </div>
 </li>
       </ul>
@@ -441,24 +444,53 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">The Superstore Story</h1>
+<h1 class="title d-none d-lg-block">Visualise Geographic Data</h1>
+<p class="subtitle lead">In-Class Exercise for Week 8</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>KB </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 10, 2023</p>
+    </div>
+  </div>
     
   </div>
   
 
 </header>
 
-<p>Published: 23-Apr-23</p>
-<p>I created this storyboard after going through the online tutorial on <a href="https://help.tableau.com/current/guides/get-started-tutorial/en-us/get-started-tutorial-home.htm">Tableau’s website</a>👻. It’s refreshing to learn some of the capabilities of the visualisation tool and the workflow of creating a data story</p>
+<p>(First Published: Jun 10, 2023)</p>
+<p>Today, we covered a few types of maps during using 4 different data sets. Enjoy the visuals!</p>
+<p><strong>A) Proportional Symbol Map for the TOTO wins at Singapore Pools Branches and Outlets</strong></p>
+<p>This map was developed using aspatial data set with WGS84 projected coordinates</p>
+<p>👇<em>Check out the popular branch/outlet in Yishun!</em> 🙃</p>
 
-<iframe width="1100" "="" height="700" src="https://public.tableau.com/shared/MH2NMZ79M?:display_count=n&amp;:origin=viz_share_link?:showVizHome=no&amp;:embed=true"></iframe>
+<iframe width="1000" "="" height="700" src="https://public.tableau.com/views/SingaporePoolsBranchesandOutlets/ProportionalSymbolMap?:language=en-US&amp;publish=yes&amp;:display_count=n&amp;:origin=viz_share_link?:language=en-US&amp;:display_count=n&amp;:origin=viz_share_link?:showVizHome=no&amp;:embed=true"></iframe>
+<p><strong>B) Map of Elderly Care Centres in Singapore</strong></p>
+<p>This map was developed using spatial data with a Geometry info</p>
+
+<iframe width="1000" "="" height="700" src="https://public.tableau.com/views/EldercareFacilitiesinSingapore/Sheet1?:language=en-US&amp;publish=yes&amp;:display_count=n&amp;:origin=viz_share_link?:language=en-US&amp;:display_count=n&amp;:origin=viz_share_link?:showVizHome=no&amp;:embed=true"></iframe>
+<p><strong>C) Dashboard for Real Estate Transactions in 2019</strong></p>
+<p>Information is broken by project name and planning area.</p>
+<p>👇<em>Choose which property type to review using the radio buttons on the filtering pane</em></p>
+
+<iframe width="1000" "="" height="700" src="https://public.tableau.com/shared/WF3D4QM5C?:display_count=n&amp;:origin=viz_share_link?:language=en-US&amp;:display_count=n&amp;:origin=viz_share_link?:showVizHome=no&amp;:embed=true"></iframe>
+<p><strong>D) Choropleth Map for Singapore Population 2022</strong></p>
+<p>We have to use URA’s Master Plan File 2019 to plot the choropleth map nicely</p>
+
+<iframe width="1000" "="" height="700" src="https://public.tableau.com/views/PopulationDensityinYear2022/Dashboard1?:language=en-US&amp;publish=yes&amp;:display_count=n&amp;:origin=viz_share_link?:language=en-US&amp;:display_count=n&amp;:origin=viz_share_link?:showVizHome=no&amp;:embed=true"></iframe>
 
 
 
@@ -564,11 +596,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../Tableau/1_Superstore.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Superstore Annual Sales and Profit</span>
+      <a href="../Tableau/5_time_plots.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">7 Time Plots</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.html" class="pagination-link">
+        <span class="nav-page-text">1.City of Engagement: Demographics and Financial Health of its Residents</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

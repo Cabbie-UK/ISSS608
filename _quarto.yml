@@ -30,6 +30,8 @@ website:
             href: Tableau/4_multivariate_plots.qmd
           - text: '7 Time Plots'
             href: Tableau/5_time_plots.qmd
+          - text: '8 Visualise Geographic Data'
+            href: Tableau/6_geospatial_plots.qmd
             
 
       - section: "Take-home Exercises"
@@ -83,12 +85,7 @@ website:
             href: Tableau/1_Superstore.qmd
           - text: 'The Superstore Story'
             href: Tableau/2_Superstore_Story.qmd
-          - text: 'Animinated Bubbleplot and Cross-Filtering of Charts'
-            href: Tableau/3_Animation_CrossFiltering.qmd
-          - text: 'Plots for multi-variate analysis'
-            href: Tableau/4_multivariate_plots.qmd
-          - text: 'Time Plots'
-            href: Tableau/5_time_plots.qmd
+
             
   page-navigation: true
   navbar:
@@ -146,6 +143,8 @@ website:
             href: Tableau/4_multivariate_plots.qmd
           - text: '7 Time Plots'
             href: Tableau/5_time_plots.qmd
+          - text: '8 Visualise Geographic Data'
+            href: Tableau/6_geospatial_plots.qmd
             
       - text: Take-home Exercises
         menu:

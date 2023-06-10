@@ -118,5 +118,11 @@
   },
   "Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8c.qmd": {
     "Hands-On_Ex8c.html": "820317d2"
+  },
+  "Hands-On_Ex/Hands-On_Ex08/data/geospatial/MPSZ-2019.qmd": {
+    "MPSZ-2019.html": "03ceba77"
+  },
+  "Tableau/6_geospatial_plots.qmd": {
+    "6_geospatial_plots.html": "bb6f3553"
   }
 }

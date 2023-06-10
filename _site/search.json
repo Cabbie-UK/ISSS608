@@ -903,6 +903,13 @@
     "text": "Today, we covered a series of time/date related plots during lessons. Let’s check out what we did!.\nA) Line and Cyclical Pattern Plot\n👇Use the slider to select a year-range, and select a country to display the overall tourist arrivals for the period on this Tableau dashboard.\n\n\nB) Slope Graph\nThis is essentially a variant of the line graph and was invented by Edward Tufte. Like the linegraph, it allows a change between points to be presented by a line. It shows 2 things:\n\nThe data points are arranged in descending, allowing us to identify which country has the highest rice yield for the year\nThe slope of the lines shows the rate the change during the period.\n\n👇Use the year selector on the right to pick 2 years to see the graph in action\n\n\nC) Calender Heatmap\n👇Hover over the calender tiles to view the count of intrusions logged for the day."
   },
   {
+    "objectID": "Tableau/6_geospatial_plots.html",
+    "href": "Tableau/6_geospatial_plots.html",
+    "title": "Visualise Geographic Data",
+    "section": "",
+    "text": "Today, we covered a few types of maps during using 4 different data sets. Enjoy the visuals!\nA) Proportional Symbol Map for the TOTO wins at Singapore Pools Branches and Outlets\nThis map was developed using aspatial data set with WGS84 projected coordinates\n👇Check out the popular branch/outlet in Yishun! 🙃\n\n\nB) Map of Elderly Care Centres in Singapore\nThis map was developed using spatial data with a Geometry info\n\n\nC) Dashboard for Real Estate Transactions in 2019\nInformation is broken by project name and planning area.\n👇Choose which property type to review using the radio buttons on the filtering pane\n\n\nD) Choropleth Map for Singapore Population 2022\nWe have to use URA’s Master Plan File 2019 to plot the choropleth map nicely"
+  },
+  {
     "objectID": "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.html",
     "href": "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.html",
     "title": "The City of Engagement: Undestanding the Demographics and Financial Characteristics of its Residents",

@@ -1,0 +1,47 @@
+---
+title: "Visualise Geographic Data"
+author: "KB"
+subtitle: In-Class Exercise for Week 8
+date: last-modified
+editor: visual
+execute:
+  freeze: auto 
+  warning: false
+---
+
+(First Published: Jun 10, 2023)
+
+Today, we covered a few types of maps during using 4 different data sets. Enjoy the visuals!
+
+**A) Proportional Symbol Map for the TOTO wins at Singapore Pools Branches and Outlets**
+
+This map was developed using aspatial data set with WGS84 projected coordinates
+
+👇*Check out the popular branch/outlet in Yishun!* 🙃
+
+```{=html}
+<iframe width="1000"" height="700" src="https://public.tableau.com/views/SingaporePoolsBranchesandOutlets/ProportionalSymbolMap?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link?:language=en-US&:display_count=n&:origin=viz_share_link?:showVizHome=no&:embed=true"></iframe>
+```
+**B) Map of Elderly Care Centres in Singapore**
+
+This map was developed using spatial data with a Geometry info
+
+```{=html}
+<iframe width="1000"" height="700" src="https://public.tableau.com/views/EldercareFacilitiesinSingapore/Sheet1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link?:language=en-US&:display_count=n&:origin=viz_share_link?:showVizHome=no&:embed=true"></iframe>
+```
+**C) Dashboard for Real Estate Transactions in 2019**
+
+Information is broken by project name and planning area.
+
+👇*Choose which property type to review using the radio buttons on the filtering pane*
+
+```{=html}
+<iframe width="1000"" height="700" src="https://public.tableau.com/shared/WF3D4QM5C?:display_count=n&:origin=viz_share_link?:language=en-US&:display_count=n&:origin=viz_share_link?:showVizHome=no&:embed=true"></iframe>
+```
+**D) Choropleth Map for Singapore Population 2022**
+
+We have to use URA's Master Plan File 2019 to plot the choropleth map nicely
+
+```{=html}
+<iframe width="1000"" height="700" src="https://public.tableau.com/views/PopulationDensityinYear2022/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link?:language=en-US&:display_count=n&:origin=viz_share_link?:showVizHome=no&:embed=true"></iframe>
+```
