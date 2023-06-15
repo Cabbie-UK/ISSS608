@@ -78,6 +78,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex08/Hands-on_Ex8b.qmd
           - text: '17  Analytical Mapping on Choropleth'
             href: Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8c.qmd
+          - text: '18  Information Dashboard Design'
+            href: Hands-On_Ex/Hands-On_Ex09/Hands-On_Ex9.qmd
             
       - section: "Tableau"
         contents:
@@ -126,6 +128,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex08/Hands-on_Ex8b.qmd
           - text: '17  Analytical Mapping on Choropleth'
             href: Hands-On_Ex/Hands-On_Ex08/Hands-on_Ex8c.qmd
+          - text: '18  Information Dashboard Design'
+            href: Hands-On_Ex/Hands-On_Ex09/Hands-On_Ex9.qmd
             
       - text: In-class Exercises
         menu: 
