@@ -119,6 +119,7 @@ Before we can perform the geo-relational join, one extra step is required to con
 
 ```{r}
 popdata2020 <- popdata2020 %>%
+  # convert the PA and SZ columns to uppercase
   mutate_at(.vars = vars(PA, SZ), 
           .funs = funs(toupper)) %>%
   filter(`ECONOMY ACTIVE` > 0)
@@ -134,7 +135,7 @@ mpsz_pop2020 <- left_join(mpsz, popdata2020,
 ::: callout-tip
 ## Things to learn from the codes
 
-`left_join()` of **dplyr** package is used with `mpsz` simple feature data frame as the left data table is to ensure that the output will be a simple features data frame.
+`left_join()` of **dplyr** package is used with `mpsz` simple feature data frame as the left data table is to ensure that the output will be a simple features data frame and the resulting table contains the geometry information inherited from *mpsz*.
 :::
 
 We save a copy of the *mpsz_pop2020* data frame before we start with the plots.
@@ -401,16 +402,19 @@ tm_shape(mpsz_pop2020)+
   tm_fill("DEPENDENCY", 
           style = "quantile", 
           palette = "Blues",
-          title = "No. of Persons") +
+          title = "Dependency Ratio") +
   tm_layout(main.title = "Distribution of Dependency Ratio \nby Planning Subzone",
             main.title.position = "center",
             main.title.size = 1.2,
             legend.height = 0.45, 
             legend.width = 0.35,
             frame = TRUE) +
+  # for the borders of the polygon, with alpha = 0.5
+  # there are arguments for colours, line width etc
   tm_borders(alpha = 0.5) +
   tm_compass(type="8star", size = 2) +
   tm_scale_bar(width = 0.15) +
+  # control the features of the grid line
   tm_grid(lwd = 0.1, alpha = 0.2) +
   tm_credits("Source: Planning Sub-zone boundary from Urban Redevelopment Authorithy (URA)\n and Population data from Department of Statistics DOS", 
              position = c("left", "bottom"))
@@ -468,8 +472,11 @@ tm_shape(mpsz_pop2020) +
           style = "quantile",
           palette = "Blues",
           thres.poly = 0) + 
-  tm_facets(by="REGION_N", 
-            free.coords=TRUE, 
+  tm_facets(by="REGION_N",
+            # THe allow each facet square to be scaled its frame
+            # Setting it to FALSE will retain the original size as based on the SG map
+            free.coords=TRUE,
+            # Not to include neighbouring region
             drop.shapes=TRUE) +
   tm_layout(legend.show = FALSE,
             title.position = c("center", "center"), 
@@ -497,7 +504,7 @@ tmap_arrange(youngmap, agedmap, asp=1, ncol=2)
 
 ### **15.4.7 Map Spatial Object Meeting a Selection Criterion**
 
-Instead of creating small multiple choropleth map, we can also use selection funtion to map spatial objects meeting the selection criterion.
+Instead of creating small multiple choropleth map, we can also use selection function to map spatial objects meeting the selection criterion.
 
 ```{r}
 tm_shape(mpsz_pop2020[mpsz_pop2020$REGION_N=="CENTRAL REGION", ])+

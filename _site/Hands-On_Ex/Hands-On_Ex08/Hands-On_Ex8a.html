@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="KB">
-<meta name="dcterms.date" content="2023-06-10">
+<meta name="dcterms.date" content="2023-06-17">
 
 <title>KB’s Visual Analytics - 15 Choropleth Mapping</title>
 <style>
@@ -273,6 +273,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="dropdown-item" href="../../Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex2.html">
  <span class="dropdown-text">2.FishEye Knowldge Graph: Temporal Patterns of individual entities and between entities</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-Home_Ex/Take-Home_Ex03/Take-Home_Ex3.html">
+ <span class="dropdown-text">3.Countering illegal fishing: Identify anomalies in the business groups</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -381,6 +385,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex2.html" class="sidebar-item-text sidebar-link">2.FishEye Knowldge Graph: Temporal Patterns of individual entities and between entities</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Take-Home_Ex/Take-Home_Ex03/Take-Home_Ex3.html" class="sidebar-item-text sidebar-link">3.Countering illegal fishing: Identify anomalies in the business groups</a>
   </div>
 </li>
       </ul>
@@ -589,7 +598,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 10, 2023</p>
+      <p class="date">June 17, 2023</p>
     </div>
   </div>
     
@@ -763,9 +772,10 @@ First 10 features:
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>popdata2020 <span class="ot">&lt;-</span> popdata2020 <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">mutate_at</span>(<span class="at">.vars =</span> <span class="fu">vars</span>(PA, SZ), </span>
-<span id="cb8-3"><a href="#cb8-3"></a>          <span class="at">.funs =</span> <span class="fu">funs</span>(toupper)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">ECONOMY ACTIVE</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="co"># convert the PA and SZ columns to uppercase</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">mutate_at</span>(<span class="at">.vars =</span> <span class="fu">vars</span>(PA, SZ), </span>
+<span id="cb8-4"><a href="#cb8-4"></a>          <span class="at">.funs =</span> <span class="fu">funs</span>(toupper)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">ECONOMY ACTIVE</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Next, <code>left_join()</code> of <strong>dplyr</strong> is used to join the geographical data and attribute table using planning subzone name e.g.&nbsp;<em>SUBZONE_N</em> and <em>SZ</em> as the common identifier.</p>
@@ -786,7 +796,7 @@ Things to learn from the codes
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><code>left_join()</code> of <strong>dplyr</strong> package is used with <code>mpsz</code> simple feature data frame as the left data table is to ensure that the output will be a simple features data frame.</p>
+<p><code>left_join()</code> of <strong>dplyr</strong> package is used with <code>mpsz</code> simple feature data frame as the left data table is to ensure that the output will be a simple features data frame and the resulting table contains the geometry information inherited from <em>mpsz</em>.</p>
 </div>
 </div>
 <p>We save a copy of the <em>mpsz_pop2020</em> data frame before we start with the plots.</p>
@@ -1129,19 +1139,22 @@ Feel free to Explore!
 <span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">tm_fill</span>(<span class="st">"DEPENDENCY"</span>, </span>
 <span id="cb26-3"><a href="#cb26-3"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>, </span>
 <span id="cb26-4"><a href="#cb26-4"></a>          <span class="at">palette =</span> <span class="st">"Blues"</span>,</span>
-<span id="cb26-5"><a href="#cb26-5"></a>          <span class="at">title =</span> <span class="st">"No. of Persons"</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>          <span class="at">title =</span> <span class="st">"Dependency Ratio"</span>) <span class="sc">+</span></span>
 <span id="cb26-6"><a href="#cb26-6"></a>  <span class="fu">tm_layout</span>(<span class="at">main.title =</span> <span class="st">"Distribution of Dependency Ratio </span><span class="sc">\n</span><span class="st">by Planning Subzone"</span>,</span>
 <span id="cb26-7"><a href="#cb26-7"></a>            <span class="at">main.title.position =</span> <span class="st">"center"</span>,</span>
 <span id="cb26-8"><a href="#cb26-8"></a>            <span class="at">main.title.size =</span> <span class="fl">1.2</span>,</span>
 <span id="cb26-9"><a href="#cb26-9"></a>            <span class="at">legend.height =</span> <span class="fl">0.45</span>, </span>
 <span id="cb26-10"><a href="#cb26-10"></a>            <span class="at">legend.width =</span> <span class="fl">0.35</span>,</span>
 <span id="cb26-11"><a href="#cb26-11"></a>            <span class="at">frame =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb26-12"><a href="#cb26-12"></a>  <span class="fu">tm_borders</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb26-13"><a href="#cb26-13"></a>  <span class="fu">tm_compass</span>(<span class="at">type=</span><span class="st">"8star"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb26-14"><a href="#cb26-14"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">width =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
-<span id="cb26-15"><a href="#cb26-15"></a>  <span class="fu">tm_grid</span>(<span class="at">lwd =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb26-16"><a href="#cb26-16"></a>  <span class="fu">tm_credits</span>(<span class="st">"Source: Planning Sub-zone boundary from Urban Redevelopment Authorithy (URA)</span><span class="sc">\n</span><span class="st"> and Population data from Department of Statistics DOS"</span>, </span>
-<span id="cb26-17"><a href="#cb26-17"></a>             <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"bottom"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-12"><a href="#cb26-12"></a>  <span class="co"># for the borders of the polygon, with alpha = 0.5</span></span>
+<span id="cb26-13"><a href="#cb26-13"></a>  <span class="co"># there are arguments for colours, line width etc</span></span>
+<span id="cb26-14"><a href="#cb26-14"></a>  <span class="fu">tm_borders</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb26-15"><a href="#cb26-15"></a>  <span class="fu">tm_compass</span>(<span class="at">type=</span><span class="st">"8star"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb26-16"><a href="#cb26-16"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">width =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
+<span id="cb26-17"><a href="#cb26-17"></a>  <span class="co"># control the features of the grid line</span></span>
+<span id="cb26-18"><a href="#cb26-18"></a>  <span class="fu">tm_grid</span>(<span class="at">lwd =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb26-19"><a href="#cb26-19"></a>  <span class="fu">tm_credits</span>(<span class="st">"Source: Planning Sub-zone boundary from Urban Redevelopment Authorithy (URA)</span><span class="sc">\n</span><span class="st"> and Population data from Department of Statistics DOS"</span>, </span>
+<span id="cb26-20"><a href="#cb26-20"></a>             <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"bottom"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="Hands-On_Ex8a_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
@@ -1209,13 +1222,16 @@ Feel free to Explore!
 <span id="cb30-3"><a href="#cb30-3"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
 <span id="cb30-4"><a href="#cb30-4"></a>          <span class="at">palette =</span> <span class="st">"Blues"</span>,</span>
 <span id="cb30-5"><a href="#cb30-5"></a>          <span class="at">thres.poly =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
-<span id="cb30-6"><a href="#cb30-6"></a>  <span class="fu">tm_facets</span>(<span class="at">by=</span><span class="st">"REGION_N"</span>, </span>
-<span id="cb30-7"><a href="#cb30-7"></a>            <span class="at">free.coords=</span><span class="cn">TRUE</span>, </span>
-<span id="cb30-8"><a href="#cb30-8"></a>            <span class="at">drop.shapes=</span><span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb30-9"><a href="#cb30-9"></a>  <span class="fu">tm_layout</span>(<span class="at">legend.show =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb30-10"><a href="#cb30-10"></a>            <span class="at">title.position =</span> <span class="fu">c</span>(<span class="st">"center"</span>, <span class="st">"center"</span>), </span>
-<span id="cb30-11"><a href="#cb30-11"></a>            <span class="at">title.size =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
-<span id="cb30-12"><a href="#cb30-12"></a>  <span class="fu">tm_borders</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-6"><a href="#cb30-6"></a>  <span class="fu">tm_facets</span>(<span class="at">by=</span><span class="st">"REGION_N"</span>,</span>
+<span id="cb30-7"><a href="#cb30-7"></a>            <span class="co"># THe allow each facet square to be scaled its frame</span></span>
+<span id="cb30-8"><a href="#cb30-8"></a>            <span class="co"># Setting it to FALSE will retain the original size as based on the SG map</span></span>
+<span id="cb30-9"><a href="#cb30-9"></a>            <span class="at">free.coords=</span><span class="cn">TRUE</span>,</span>
+<span id="cb30-10"><a href="#cb30-10"></a>            <span class="co"># Not to include neighbouring region</span></span>
+<span id="cb30-11"><a href="#cb30-11"></a>            <span class="at">drop.shapes=</span><span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb30-12"><a href="#cb30-12"></a>  <span class="fu">tm_layout</span>(<span class="at">legend.show =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb30-13"><a href="#cb30-13"></a>            <span class="at">title.position =</span> <span class="fu">c</span>(<span class="st">"center"</span>, <span class="st">"center"</span>), </span>
+<span id="cb30-14"><a href="#cb30-14"></a>            <span class="at">title.size =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb30-15"><a href="#cb30-15"></a>  <span class="fu">tm_borders</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="Hands-On_Ex8a_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
@@ -1248,7 +1264,7 @@ Feel free to Explore!
 </section>
 <section id="map-spatial-object-meeting-a-selection-criterion" class="level3">
 <h3 class="anchored" data-anchor-id="map-spatial-object-meeting-a-selection-criterion"><strong>15.4.7 Map Spatial Object Meeting a Selection Criterion</strong></h3>
-<p>Instead of creating small multiple choropleth map, we can also use selection funtion to map spatial objects meeting the selection criterion.</p>
+<p>Instead of creating small multiple choropleth map, we can also use selection function to map spatial objects meeting the selection criterion.</p>
 <div class="cell">
 <details>
 <summary>Show the code</summary>

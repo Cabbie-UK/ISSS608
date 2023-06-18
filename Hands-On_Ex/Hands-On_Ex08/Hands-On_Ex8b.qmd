@@ -64,6 +64,7 @@ We convert *sgpools* data frame into a simple feature data frame by using `st_as
 ```{r}
 sgpools_sf <- st_as_sf(sgpools, 
                        coords = c("XCOORD", "YCOORD"),
+                       #crs stands for coordinate reference system
                        crs= 3414)
 ```
 
@@ -143,6 +144,7 @@ tm_shape(sgpools_sf) +
           border.lwd = 1) +
   tm_facets(by= "OUTLET TYPE",
             nrow = 1,
+            # this line set both maps to be in sync
             sync = TRUE)
 ```
 

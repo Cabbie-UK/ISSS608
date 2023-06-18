@@ -40,6 +40,8 @@ website:
             href: Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.qmd
           - text: '2.FishEye Knowldge Graph: Temporal Patterns of individual entities and between entities'
             href: Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex2.qmd
+          - text: '3.Countering illegal fishing: Identify anomalies in the business groups'
+            href: Take-Home_Ex/Take-Home_Ex03/Take-Home_Ex3.qmd
                   
 
       - section: "Hands-on Exercises"
@@ -156,6 +158,9 @@ website:
             href: Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.qmd
           - text: '2.FishEye Knowldge Graph: Temporal Patterns of individual entities and between entities'
             href: Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex2.qmd
+          - text: '3.Countering illegal fishing: Identify anomalies in the business groups'
+            href: Take-Home_Ex/Take-Home_Ex03/Take-Home_Ex3.qmd
+          
             
     right:
       - text: KB's GeoSpatial Analytics
