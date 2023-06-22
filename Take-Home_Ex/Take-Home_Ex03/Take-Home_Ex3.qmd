@@ -957,7 +957,7 @@ Cogno had 58 BOs, way beyond what a typical company had. One reasonable explanat
 Similarly, we started our review with the network diagram of Subgraph Group 210.
 
 ```{r}
-result <- createNE_by_Group(129)
+result <- createNE_by_Group(210)
 createGraph(result$relevant_nodes,result$relevant_edges, result$title)
 ```
 
