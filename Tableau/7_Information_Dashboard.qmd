@@ -1,0 +1,18 @@
+---
+title: "Information Dashboard"
+author: "KB"
+subtitle: In-Class Exercise for Week 10
+date: last-modified
+editor: visual
+execute:
+  freeze: auto 
+  warning: false
+---
+
+(First Published: Jun 24, 2023)
+
+Today is the final lesson of our Visual Analytics And Applications Course😕. We covered the 2 plots that are commonly used in Information Dashboards. One is a **Bullet Chart** created by Stephen Few and the one is **Sparkline** introduced by Edward Tufte.
+
+```{=html}
+<iframe width="1000"" height="700" src="https://public.tableau.com/views/InformationDashboardForCoffeeChain/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link?:language=en-US&:display_count=n&:origin=viz_share_link?:showVizHome=no&:embed=true"></iframe>
+```

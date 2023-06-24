@@ -326,7 +326,9 @@ sales_data = sales_data %>%
 # generate the "everything into one" table
 sales_data %>%
   gt() %>%
-  gt_plt_sparkline('Monthly Sales') %>%
+  gt_plt_sparkline('Monthly Sales',
+                   # the following argument ensures that each sparkline graph has its own y-axis
+                   same_limit = FALSE) %>%
   gt_plt_bullet(column = Actual, 
                 target = Target, 
                 width = 40,

@@ -4,7 +4,7 @@ author: "Vast Challenge 2023: Mini-Challenge 3"
 editor: visual
 date: last-modified
 execute:
-  freeze: auto 
+  freeze: true 
   warning: false
 format:
   html:
@@ -1178,3 +1178,14 @@ The exercise has been especially challenging, requiring a variety of data proces
 -   Text Mining for Social and Behavioral Research Using R, Zhiyong Zhang, [Text Mining for Social and Behavioral Research Using R (psychstat.org)](https://books.psychstat.org/textmining/mining-gender-information.html)
 
 -   Options for visNetwork, an R package for interactive network visualisation, [Options (datastorm-open.github.io)](https://datastorm-open.github.io/visNetwork/options.html)
+
+```{r}
+all_nodes <- mc3_nodes_cleaned3 %>%
+  mutate(type2 = ifelse(is.na(category), type, ifelse(category == 'seafood' & type == 'Company', 'Seafood Company', type))) %>%
+  mutate(type3 = ifelse(type2=='Company','Other Company',type2)) %>%
+  select(-type2) %>%
+  rename(type2=type3)
+
+write_csv(all_nodes,'C:\\Users\\kkb74\\downloads\\all_nodes.csv')
+
+```

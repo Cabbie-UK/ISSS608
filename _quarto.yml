@@ -32,6 +32,8 @@ website:
             href: Tableau/5_time_plots.qmd
           - text: '8 Visualise Geographic Data'
             href: Tableau/6_geospatial_plots.qmd
+          - text: '9 Information Dashboard'
+            href: Tableau/7_Information_Dashboard.qmd
             
 
       - section: "Take-home Exercises"
@@ -151,6 +153,8 @@ website:
             href: Tableau/5_time_plots.qmd
           - text: '8 Visualise Geographic Data'
             href: Tableau/6_geospatial_plots.qmd
+          - text: '9 Information Dashboard'
+            href: Tableau/7_Information_Dashboard.qmd
             
       - text: Take-home Exercises
         menu:
