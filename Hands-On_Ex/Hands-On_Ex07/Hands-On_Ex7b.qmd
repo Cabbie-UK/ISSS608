@@ -1,0 +1,104 @@
+---
+title: "20 Time on the Horizon: ggHoriPlot methods"
+subtitle: Hands-On Exercise for Week 7
+date: last-modified
+author: "KB"
+editor: visual
+execute:
+  freeze: auto 
+  warning: false
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    code-line-numbers: true
+    toc-depth: 4
+---
+
+(First Published: Jul 5, 2023)
+
+## 20.1 Learning Outcome
+
+We will learn how to create a Horizon Graph.
+
+A horizon graph is an analytical graphical method specially designed for visualising large numbers of time-series. It aims to overcome the issue of visualising highly overlapping time-series as shown in the figure below.
+
+![](images/paste-4FFFA726.png)
+
+A horizon graph essentially an area chart that has been split into slices and the slices then layered on top of one another with the areas representing the highest (absolute) values on top. Each slice has a greater intensity of colour based on the absolute value it represents.
+
+![](images/paste-83E8DE34.png)
+
+::: callout-tip
+## Tip
+
+Before getting started, do visit [Getting Started](https://rivasiker.github.io/ggHoriPlot/articles/ggHoriPlot.html) to learn more about the functions of ggHoriPlot package. Next, read [`geom_horizon()`](https://rivasiker.github.io/ggHoriPlot/reference/geom_horizon.html) to learn more about the usage of its arguments.
+:::
+
+## 20.2 Getting Started
+
+### 20.2.1 Install and load the required R libraries
+
+Install and load the the required R packages. The name and function of the new package that will be used for this exercise is as follow:
+
+-   **ggHoriPlot** : allows building horizon plots in ggplot2
+
+```{r}
+pacman::p_load(ggHoriPlot, ggthemes, tidyverse)
+```
+
+### 20.2.2 Import the Data
+
+The [Average Retail Prices Of Selected Consumer Items](https://tablebuilder.singstat.gov.sg/table/TS/M212891) data will be used.
+
+```{r}
+averp <- read_csv("data/AVERP.csv", show_col_types = F) %>%
+  mutate(`Date` = dmy(`Date`))
+```
+
+::: callout-note
+## Things to note:
+
+By default, read_csv will import data in Date field as Character data type. [`dmy()`](https://lubridate.tidyverse.org/reference/ymd.html) of [**lubridate**](https://lubridate.tidyverse.org/) package, which is a part of **tidyverse**, to parse the Date field into the Date data type in R.
+:::
+
+### 20.2.3 Plotting the Horizon Graph
+
+The codes below are used to plot the horizon graph.
+
+```{r}
+#| fig-height: 10
+#| fig-width: 8
+
+averp %>% 
+  filter(Date >= "2018-01-01") %>%
+  ggplot() +
+  geom_horizon(aes(x = Date, y=Values), 
+               origin = "midpoint", 
+               horizonscale = 6)+
+  facet_grid(`Consumer Items`~.) +
+    theme_few() +
+  scale_fill_hcl(palette = 'RdBu') +
+  theme(panel.spacing.y=unit(0, "lines"), strip.text.y = element_text(
+    size = 5, angle = 0, hjust = 0),
+    legend.position = 'none',
+    axis.text.y = element_blank(),
+    axis.text.x = element_text(size=7),
+    axis.title.y = element_blank(),
+    axis.title.x = element_blank(),
+    axis.ticks.y = element_blank(),
+    panel.border = element_blank()
+    ) +
+    scale_x_date(expand=c(0,0), date_breaks = "3 month", date_labels = "%b%y") +
+  ggtitle('Average Retail Prices of Selected Consumer Items (Jan 2018 to Dec 2022)')
+```
+
+::: callout-tip
+## Tip
+
+The red portion of the plot indicates a decline in value while the blue portion denotes an increase in value. The intensity of the red and blue tone signifies the magnitude of decline or increase.
+:::
+
+::: {style="text-align: center"}
+$**That's$ $all$ $folks!**$
+:::

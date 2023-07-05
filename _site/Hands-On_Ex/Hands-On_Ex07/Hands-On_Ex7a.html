@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="KB">
-<meta name="dcterms.date" content="2023-06-03">
+<meta name="dcterms.date" content="2023-07-05">
 
-<title>KB’s Visual Analytics - 7b</title>
+<title>KB’s Visual Analytics - 19 Visualise And Analyse Time-Oriented Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -95,6 +95,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../Hands-On_Ex/Hands-On_Ex07/Hands-On_Ex7b.html" rel="next">
+<link href="../../Hands-On_Ex/Hands-On_Ex09/Hands-On_Ex9.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -124,6 +126,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -220,6 +223,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex09/Hands-On_Ex9.html">
  <span class="dropdown-text">18 Information Dashboard Design</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex07/Hands-On_Ex7a.html">
+ <span class="dropdown-text">19 Visualise And Analyse Time-Oriented Data</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex07/Hands-On_Ex7b.html">
+ <span class="dropdown-text">20 Time on the Horizon: ggHoriPlot methods</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -292,7 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">7b</h1>
+      <h1 class="quarto-secondary-nav-title">19 Visualise And Analyse Time-Oriented Data</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -402,12 +413,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Hands-on Exercises</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Hands-on Exercises</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Hands-On_Ex/Hands-On_Ex01/Hands-on_Ex1.html" class="sidebar-item-text sidebar-link">1 A Layered Grammar of Graphics - ggplot2 methods</a>
@@ -498,6 +509,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="../../Hands-On_Ex/Hands-On_Ex09/Hands-On_Ex9.html" class="sidebar-item-text sidebar-link">18 Information Dashboard Design</a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-On_Ex/Hands-On_Ex07/Hands-On_Ex7a.html" class="sidebar-item-text sidebar-link active">19 Visualise And Analyse Time-Oriented Data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-On_Ex/Hands-On_Ex07/Hands-On_Ex7b.html" class="sidebar-item-text sidebar-link">20 Time on the Horizon: ggHoriPlot methods</a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -529,11 +550,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link active" data-scroll-target="#learning-outcome">14.1 Learning Outcome</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">14.2 Getting Started</a>
+  <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link active" data-scroll-target="#learning-outcome">19.1 Learning Outcome</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">19.2 Getting Started</a>
   <ul>
-  <li><a href="#install-and-load-the-required-r-libraries" id="toc-install-and-load-the-required-r-libraries" class="nav-link" data-scroll-target="#install-and-load-the-required-r-libraries">14.2.1 Install and load the required R libraries</a></li>
-  <li><a href="#import-the-data" id="toc-import-the-data" class="nav-link" data-scroll-target="#import-the-data">14.2.2 Import the data</a></li>
+  <li><a href="#install-and-load-the-required-r-libraries" id="toc-install-and-load-the-required-r-libraries" class="nav-link" data-scroll-target="#install-and-load-the-required-r-libraries">19.2.1 Install and load the required R libraries</a></li>
+  </ul></li>
+  <li><a href="#plotting-calendar-heatmap" id="toc-plotting-calendar-heatmap" class="nav-link" data-scroll-target="#plotting-calendar-heatmap">19.3 Plotting Calendar Heatmap</a>
+  <ul>
+  <li><a href="#import-the-data" id="toc-import-the-data" class="nav-link" data-scroll-target="#import-the-data">19.3.1 Import the data</a></li>
+  <li><a href="#examine-the-data-structure" id="toc-examine-the-data-structure" class="nav-link" data-scroll-target="#examine-the-data-structure">19.3.2 Examine the data structure</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">19.3.3 Data Preparation</a></li>
+  <li><a href="#building-a-calendar-heatmap" id="toc-building-a-calendar-heatmap" class="nav-link" data-scroll-target="#building-a-calendar-heatmap">19.3.4 Building a Calendar Heatmap</a></li>
+  <li><a href="#building-multiple-calendar-heatmaps" id="toc-building-multiple-calendar-heatmaps" class="nav-link" data-scroll-target="#building-multiple-calendar-heatmaps">19.3.5 Building Multiple Calendar Heatmaps</a></li>
+  </ul></li>
+  <li><a href="#plotting-cycle-plot" id="toc-plotting-cycle-plot" class="nav-link" data-scroll-target="#plotting-cycle-plot">19.4 Plotting Cycle Plot</a>
+  <ul>
+  <li><a href="#import-the-data-1" id="toc-import-the-data-1" class="nav-link" data-scroll-target="#import-the-data-1">19.4.1 Import the data</a></li>
+  <li><a href="#data-preparation-1" id="toc-data-preparation-1" class="nav-link" data-scroll-target="#data-preparation-1">19.4.2 Data Preparation</a></li>
+  <li><a href="#generating-the-cycle-plot" id="toc-generating-the-cycle-plot" class="nav-link" data-scroll-target="#generating-the-cycle-plot">19.4.3 Generating the Cycle Plot</a></li>
+  <li><a href="#plotting-a-slopegraph" id="toc-plotting-a-slopegraph" class="nav-link" data-scroll-target="#plotting-a-slopegraph">19.5 Plotting a Slopegraph</a></li>
+  <li><a href="#import-the-data-2" id="toc-import-the-data-2" class="nav-link" data-scroll-target="#import-the-data-2">19.5.1 Import the data</a></li>
+  <li><a href="#generate-the-slopegraph" id="toc-generate-the-slopegraph" class="nav-link" data-scroll-target="#generate-the-slopegraph">19.5.2 Generate the Slopegraph</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -543,8 +580,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">7b</h1>
-<p class="subtitle lead">Hands-On Exercise for Week 6</p>
+<h1 class="title d-none d-lg-block">19 Visualise And Analyse Time-Oriented Data</h1>
+<p class="subtitle lead">Hands-On Exercise for Week 7</p>
 </div>
 
 
@@ -561,7 +598,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 3, 2023</p>
+      <p class="date">July 5, 2023</p>
     </div>
   </div>
     
@@ -570,29 +607,491 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>(First Published: May 20, 2023)</p>
+<p>(First Published: Jul 5, 2023)</p>
 <section id="learning-outcome" class="level2">
-<h2 class="anchored" data-anchor-id="learning-outcome">14.1 Learning Outcome</h2>
-<p>We will learn how to create static and interactive Treemaps using various R packages.</p>
+<h2 class="anchored" data-anchor-id="learning-outcome">19.1 Learning Outcome</h2>
+<p>We will learn how to create the following visualisations:</p>
+<ul>
+<li><p>plotting a calender heatmap,</p></li>
+<li><p>plotting a cycle plot,</p></li>
+<li><p>plotting a slopegraph, and</p></li>
+<li><p>plotting a horizon chart</p></li>
+</ul>
 </section>
 <section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">14.2 Getting Started</h2>
+<h2 class="anchored" data-anchor-id="getting-started">19.2 Getting Started</h2>
 <section id="install-and-load-the-required-r-libraries" class="level3">
-<h3 class="anchored" data-anchor-id="install-and-load-the-required-r-libraries">14.2.1 Install and load the required R libraries</h3>
-<p>Install and load the the required R packages. The name and function of the new package that will be used for this exercise is as follow</p>
+<h3 class="anchored" data-anchor-id="install-and-load-the-required-r-libraries">19.2.1 Install and load the required R libraries</h3>
+<p>Install and load the the required R packages. The name and function of the new packages that will be used for this exercise are as follow</p>
 <ul>
-<li><strong>treemap</strong> : provides the necessary functions, classes, and methods to generate treemaps</li>
+<li><strong>scales</strong> : provides various functions for scaling and formatting data</li>
+<li><strong>viridis</strong> : provides color palettes that are perceptually uniform and work well for representing data in visualisations</li>
+<li><strong>gridExtra</strong> : provides functions for arranging multiple plots on a page or within a plot</li>
+<li><strong>readxl</strong> :enables reading data from Microsoft Excel files (.xls and .xlsx) into R</li>
+<li><strong>knitr</strong> :used for dynamic report generation in R</li>
+<li><strong>data.table</strong> :offers fast data manipulation and aggregation operations, making it useful for working with large datasets</li>
+<li><strong>CGPfuntions</strong> : contains a function that is designed to automate the process of producing a <a href="https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk">Tufte style slopegraph</a> using <code>ggplot2</code>.</li>
 </ul>
 <div class="cell">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(treemap, treemapify, tidyverse) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(scales, viridis, lubridate, ggthemes, gridExtra, readxl, knitr, data.table, CGPfunctions, ggHoriPlot, tidyverse, CGPfunctions) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
+</section>
+<section id="plotting-calendar-heatmap" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-calendar-heatmap">19.3 Plotting Calendar Heatmap</h2>
+<p>In this section, we will learn how to plot a calender heatmap programmetically by using <strong>ggplot2</strong> package.</p>
 <section id="import-the-data" class="level3">
-<h3 class="anchored" data-anchor-id="import-the-data">14.2.2 Import the data</h3>
-<p>We import the data set for property sales in 2018 and assign it to <em>realis2018</em>.</p>
+<h3 class="anchored" data-anchor-id="import-the-data">19.3.1 Import the data</h3>
+<p><em>eventlog.csv</em> file consists of 199,999 rows of time-series cyber attack records by a country. It is imported in R and assigned to the <em>attacks</em> data frame.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>attacks <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/eventlog.csv"</span>, <span class="at">show_col_types =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="examine-the-data-structure" class="level3">
+<h3 class="anchored" data-anchor-id="examine-the-data-structure">19.3.2 Examine the data structure</h3>
+<p><code>kable()</code> can be used to review the structure of the imported data frame.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(attacks))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">timestamp</th>
+<th style="text-align: left;">source_country</th>
+<th style="text-align: left;">tz</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2015-03-12 15:59:16</td>
+<td style="text-align: left;">CN</td>
+<td style="text-align: left;">Asia/Shanghai</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2015-03-12 16:00:48</td>
+<td style="text-align: left;">FR</td>
+<td style="text-align: left;">Europe/Paris</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2015-03-12 16:02:26</td>
+<td style="text-align: left;">CN</td>
+<td style="text-align: left;">Asia/Shanghai</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2015-03-12 16:02:38</td>
+<td style="text-align: left;">US</td>
+<td style="text-align: left;">America/Chicago</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2015-03-12 16:03:22</td>
+<td style="text-align: left;">CN</td>
+<td style="text-align: left;">Asia/Shanghai</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2015-03-12 16:03:45</td>
+<td style="text-align: left;">CN</td>
+<td style="text-align: left;">Asia/Shanghai</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>There are three columns, namely <em>timestamp</em>, <em>source_country</em> and <em>tz</em>.</p>
+<ul>
+<li><p><em>timestamp</em> field stores date-time values in POSIXct format.</p></li>
+<li><p><em>source_country</em> field stores the source of the attack. It is in <em>ISO 3166-1 alpha-2</em> country code.</p></li>
+<li><p><em>tz</em> field stores time zone of the source IP address.</p></li>
+</ul>
+</section>
+<section id="data-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="data-preparation">19.3.3 Data Preparation</h3>
+<p>Step 1: Deriving <em>weekday</em> and <em>hour of day</em> fields</p>
+<p>Before we can plot the calender heatmap, two new fields namely <em>wkday</em> and <em>hour</em> need to be derived. In this step, we will write a function to perform the task.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>make_hr_wkday <span class="ot">&lt;-</span> <span class="cf">function</span>(ts, sc, tz) {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  real_times <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(ts, </span>
+<span id="cb4-3"><a href="#cb4-3"></a>                        <span class="at">tz =</span> tz[<span class="dv">1</span>], </span>
+<span id="cb4-4"><a href="#cb4-4"></a>                        <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">source_country =</span> sc,</span>
+<span id="cb4-6"><a href="#cb4-6"></a>                   <span class="at">wkday =</span> <span class="fu">weekdays</span>(real_times),</span>
+<span id="cb4-7"><a href="#cb4-7"></a>                   <span class="at">hour =</span> <span class="fu">hour</span>(real_times))</span>
+<span id="cb4-8"><a href="#cb4-8"></a>  <span class="fu">return</span>(dt)</span>
+<span id="cb4-9"><a href="#cb4-9"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Things to note:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html"><code>ymd_hms()</code></a> and <a href="https://lubridate.tidyverse.org/reference/hour.html"><code>hour()</code></a> are from <a href="https://lubridate.tidyverse.org/"><strong>lubridate</strong></a> package, and</p></li>
+<li><p><a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/weekdays"><code>weekdays()</code></a> is a <strong>base</strong> R function.</p></li>
+</ul>
+</div>
+</div>
+<p>Step 2: Deriving the attacks tibble data frame</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>wkday_levels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Saturday'</span>, <span class="st">'Friday'</span>, </span>
+<span id="cb5-2"><a href="#cb5-2"></a>                  <span class="st">'Thursday'</span>, <span class="st">'Wednesday'</span>, </span>
+<span id="cb5-3"><a href="#cb5-3"></a>                  <span class="st">'Tuesday'</span>, <span class="st">'Monday'</span>, </span>
+<span id="cb5-4"><a href="#cb5-4"></a>                  <span class="st">'Sunday'</span>)</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a>attacks <span class="ot">&lt;-</span> attacks <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">group_by</span>(tz) <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">do</span>(<span class="fu">make_hr_wkday</span>(.<span class="sc">$</span>timestamp, </span>
+<span id="cb5-9"><a href="#cb5-9"></a>                   .<span class="sc">$</span>source_country, </span>
+<span id="cb5-10"><a href="#cb5-10"></a>                   .<span class="sc">$</span>tz)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-11"><a href="#cb5-11"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-12"><a href="#cb5-12"></a>  <span class="fu">mutate</span>(<span class="at">wkday =</span> <span class="fu">factor</span>(</span>
+<span id="cb5-13"><a href="#cb5-13"></a>    wkday, <span class="at">levels =</span> wkday_levels),</span>
+<span id="cb5-14"><a href="#cb5-14"></a>    <span class="at">hour  =</span> <span class="fu">factor</span>(</span>
+<span id="cb5-15"><a href="#cb5-15"></a>      hour, <span class="at">levels =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">23</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Things to note:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Beside extracting the necessary data into <em>attacks</em> data frame, <code>mutate()</code> of <strong>dplyr</strong> package is used to convert <em>wkday</em> and <em>hour</em> fields into <strong>factor</strong> so they’ll be ordered when plotting.</p>
+</div>
+</div>
+<p>The table below shows the tidy tibble table after processing.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(attacks))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">tz</th>
+<th style="text-align: left;">source_country</th>
+<th style="text-align: left;">wkday</th>
+<th style="text-align: left;">hour</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Africa/Cairo</td>
+<td style="text-align: left;">BG</td>
+<td style="text-align: left;">Saturday</td>
+<td style="text-align: left;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Africa/Cairo</td>
+<td style="text-align: left;">TW</td>
+<td style="text-align: left;">Sunday</td>
+<td style="text-align: left;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Africa/Cairo</td>
+<td style="text-align: left;">TW</td>
+<td style="text-align: left;">Sunday</td>
+<td style="text-align: left;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Africa/Cairo</td>
+<td style="text-align: left;">CN</td>
+<td style="text-align: left;">Sunday</td>
+<td style="text-align: left;">11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Africa/Cairo</td>
+<td style="text-align: left;">US</td>
+<td style="text-align: left;">Sunday</td>
+<td style="text-align: left;">15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Africa/Cairo</td>
+<td style="text-align: left;">CA</td>
+<td style="text-align: left;">Monday</td>
+<td style="text-align: left;">11</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="building-a-calendar-heatmap" class="level3">
+<h3 class="anchored" data-anchor-id="building-a-calendar-heatmap">19.3.4 Building a Calendar Heatmap</h3>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>grouped <span class="ot">&lt;-</span> attacks <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">count</span>(wkday, hour) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="fu">ggplot</span>(grouped, </span>
+<span id="cb7-7"><a href="#cb7-7"></a>       <span class="fu">aes</span>(hour, </span>
+<span id="cb7-8"><a href="#cb7-8"></a>           wkday, </span>
+<span id="cb7-9"><a href="#cb7-9"></a>           <span class="at">fill =</span> n)) <span class="sc">+</span> </span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>, </span>
+<span id="cb7-11"><a href="#cb7-11"></a>          <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span> </span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="fu">theme_tufte</span>(<span class="at">base_family =</span> <span class="st">"Helvetica"</span>) <span class="sc">+</span> </span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="fu">scale_fill_gradient</span>(<span class="at">name =</span> <span class="st">"# of attacks"</span>,</span>
+<span id="cb7-15"><a href="#cb7-15"></a>                    <span class="at">low =</span> <span class="st">"sky blue"</span>, </span>
+<span id="cb7-16"><a href="#cb7-16"></a>                    <span class="at">high =</span> <span class="st">"dark blue"</span>) <span class="sc">+</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, </span>
+<span id="cb7-18"><a href="#cb7-18"></a>     <span class="at">y =</span> <span class="cn">NULL</span>, </span>
+<span id="cb7-19"><a href="#cb7-19"></a>     <span class="at">title =</span> <span class="st">"Attacks by weekday and time of day"</span>) <span class="sc">+</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="fu">theme</span>(<span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-21"><a href="#cb7-21"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb7-22"><a href="#cb7-22"></a>      <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb7-23"><a href="#cb7-23"></a>      <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">6</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Hands-On_Ex7a_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Things to note:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>a tibble data table called <em>grouped</em> is derived by aggregating the attack by <em>wkday</em> and <em>hour</em> fields.</p></li>
+<li><p>a new field called <em>n</em> is derived by using <code>group_by()</code> and <code>count()</code> functions.</p></li>
+<li><p><code>na.omit()</code> is used to exclude missing value.</p></li>
+<li><p><code>geom_tile()</code> is used to plot tiles (grids) at each x and y position. <code>color</code> and <code>size</code> arguments are used to specify the border color and line size of the tiles.</p></li>
+<li><p><a href="https://jrnold.github.io/ggthemes/reference/theme_tufte.html"><code>theme_tufte()</code></a> of <a href="https://jrnold.github.io/ggthemes/reference/"><strong>ggthemes</strong></a> package is used to remove unnecessary chart junk. To learn which visual components of default ggplot2 have been excluded, you are encouraged to comment out this line to examine the default plot.</p></li>
+<li><p><code>coord_equal()</code> is used to ensure the plot will have an aspect ratio of 1:1.</p></li>
+<li><p><code>scale_fill_gradient()</code> function is used to creates a two colour gradient (low-high).</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="building-multiple-calendar-heatmaps" class="level3">
+<h3 class="anchored" data-anchor-id="building-multiple-calendar-heatmaps">19.3.5 Building Multiple Calendar Heatmaps</h3>
+<p>Step 1: Deriving attack by country object</p>
+<p>In order to identify the top 4 countries with the highest number of attacks, we can do the followings:</p>
+<ul>
+<li><p>count the number of attacks by country,</p></li>
+<li><p>calculate the percent of attackes by country, and</p></li>
+<li><p>save the results in a tibble data frame.</p></li>
+</ul>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>attacks_by_country <span class="ot">&lt;-</span> <span class="fu">count</span>(</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  attacks, source_country) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> <span class="fu">percent</span>(n<span class="sc">/</span><span class="fu">sum</span>(n))) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Step 2: Preparing the tidy data frame</p>
+<p>In this step, we extract the attack records of the top 4 countries from <em>attacks</em> data frame and save the data in a new tibble data frame (i.e.&nbsp;<em>top4_attacks</em>).</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>top4 <span class="ot">&lt;-</span> attacks_by_country<span class="sc">$</span>source_country[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb9-2"><a href="#cb9-2"></a>top4_attacks <span class="ot">&lt;-</span> attacks <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">filter</span>(source_country <span class="sc">%in%</span> top4) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">count</span>(source_country, wkday, hour) <span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">mutate</span>(<span class="at">source_country =</span> <span class="fu">factor</span>(</span>
+<span id="cb9-7"><a href="#cb9-7"></a>    source_country, <span class="at">levels =</span> top4)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="fu">na.omit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Step 3: Plotting the Multiple Calender Heatmap by using ggplot2 package.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(top4_attacks, </span>
+<span id="cb10-2"><a href="#cb10-2"></a>       <span class="fu">aes</span>(hour, </span>
+<span id="cb10-3"><a href="#cb10-3"></a>           wkday, </span>
+<span id="cb10-4"><a href="#cb10-4"></a>           <span class="at">fill =</span> n)) <span class="sc">+</span> </span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>, </span>
+<span id="cb10-6"><a href="#cb10-6"></a>          <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span> </span>
+<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">theme_tufte</span>(<span class="at">base_family =</span> <span class="st">"Helvetica"</span>) <span class="sc">+</span> </span>
+<span id="cb10-8"><a href="#cb10-8"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">name =</span> <span class="st">"# of attacks"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10"></a>                    <span class="at">low =</span> <span class="st">"sky blue"</span>, </span>
+<span id="cb10-11"><a href="#cb10-11"></a>                    <span class="at">high =</span> <span class="st">"dark blue"</span>) <span class="sc">+</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>source_country, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, </span>
+<span id="cb10-14"><a href="#cb10-14"></a>     <span class="at">title =</span> <span class="st">"Attacks on top 4 countries by weekday and time of day"</span>) <span class="sc">+</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb10-16"><a href="#cb10-16"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
+<span id="cb10-17"><a href="#cb10-17"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb10-18"><a href="#cb10-18"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb10-19"><a href="#cb10-19"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">6</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Hands-On_Ex7a_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="plotting-cycle-plot" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-cycle-plot">19.4 Plotting Cycle Plot</h2>
+<section id="import-the-data-1" class="level3">
+<h3 class="anchored" data-anchor-id="import-the-data-1">19.4.1 Import the data</h3>
+<p>The codes below import <em>arrivals_by_air.xlsx</em> by using <code>read_excel()</code> of readxl package and save it as a tibble data frame called <em>air.</em></p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>air <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/arrivals_by_air.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="data-preparation-1" class="level3">
+<h3 class="anchored" data-anchor-id="data-preparation-1">19.4.2 Data Preparation</h3>
+<p>Next, two new fields called <em>month</em> and <em>year</em> are derived from <em>Month-Year</em> field.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>air<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">month</span>(air<span class="sc">$</span><span class="st">`</span><span class="at">Month-Year</span><span class="st">`</span>), </span>
+<span id="cb12-2"><a href="#cb12-2"></a>                    <span class="at">levels=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, </span>
+<span id="cb12-3"><a href="#cb12-3"></a>                    <span class="at">labels=</span>month.abb, </span>
+<span id="cb12-4"><a href="#cb12-4"></a>                    <span class="at">ordered=</span><span class="cn">TRUE</span>) </span>
+<span id="cb12-5"><a href="#cb12-5"></a>air<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">year</span>(<span class="fu">ymd</span>(air<span class="sc">$</span><span class="st">`</span><span class="at">Month-Year</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Then, we extract the data for the target country (i.e.&nbsp;Vietnam)</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>Vietnam <span class="ot">&lt;-</span> air <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Vietnam</span><span class="st">`</span>, </span>
+<span id="cb13-3"><a href="#cb13-3"></a>         month, </span>
+<span id="cb13-4"><a href="#cb13-4"></a>         year) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">2010</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Thereafter, we compute year average arrivals by month.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>hline.data <span class="ot">&lt;-</span> Vietnam <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">summarise</span>(<span class="at">avg_value =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">Vietnam</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="generating-the-cycle-plot" class="level3">
+<h3 class="anchored" data-anchor-id="generating-the-cycle-plot">19.4.3 Generating the Cycle Plot</h3>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Plot the graph</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>Vietnam,</span>
+<span id="cb15-4"><a href="#cb15-4"></a>            <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(year), <span class="co"># Set year to factor to ensure that x-axis label is formatted as 4-digit year</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>                <span class="at">y=</span><span class="st">`</span><span class="at">Vietnam</span><span class="st">`</span>, </span>
+<span id="cb15-6"><a href="#cb15-6"></a>                <span class="at">group=</span>month), </span>
+<span id="cb15-7"><a href="#cb15-7"></a>            <span class="at">colour=</span><span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept=</span>avg_value), </span>
+<span id="cb15-9"><a href="#cb15-9"></a>             <span class="at">data=</span>hline.data, </span>
+<span id="cb15-10"><a href="#cb15-10"></a>             <span class="at">linetype=</span><span class="dv">6</span>, </span>
+<span id="cb15-11"><a href="#cb15-11"></a>             <span class="at">colour=</span><span class="st">"red"</span>, </span>
+<span id="cb15-12"><a href="#cb15-12"></a>             <span class="at">size=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb15-13"><a href="#cb15-13"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>month) <span class="sc">+</span></span>
+<span id="cb15-14"><a href="#cb15-14"></a>  <span class="fu">labs</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb15-15"><a href="#cb15-15"></a>       <span class="at">title =</span> <span class="st">"Visitor arrivals from Vietnam by air, Jan 2010-Dec 2019"</span>) <span class="sc">+</span></span>
+<span id="cb15-16"><a href="#cb15-16"></a>  <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span></span>
+<span id="cb15-17"><a href="#cb15-17"></a>  <span class="fu">ylab</span>(<span class="st">"No. of Visitors"</span>)<span class="sc">+</span></span>
+<span id="cb15-18"><a href="#cb15-18"></a>  <span class="co"># Added to rotate the x-axis labels 90 degrees clockwise so that they don't overlap</span></span>
+<span id="cb15-19"><a href="#cb15-19"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb15-20"><a href="#cb15-20"></a>  <span class="co"># Added this line to display year label every 3 years on the x-axis to reduce clutter and overlapping of the year</span></span>
+<span id="cb15-21"><a href="#cb15-21"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">breaks =</span> <span class="cf">function</span>(x) x[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">length</span>(x), <span class="dv">3</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Hands-On_Ex7a_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="plotting-a-slopegraph" class="level3">
+<h3 class="anchored" data-anchor-id="plotting-a-slopegraph">19.5 Plotting a Slopegraph</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before getting start, make sure that <strong>CGPfunctions</strong> has been installed and loaded onto R environment. Then, refer to <a href="https://cran.r-project.org/web/packages/CGPfunctions/vignettes/Using-newggslopegraph.html">Using newggslopegraph</a> to learn more about the function. Lastly, read more about <code>newggslopegraph()</code> and its arguments by referring to this <a href="https://www.rdocumentation.org/packages/CGPfunctions/versions/0.6.3/topics/newggslopegraph">link</a>.</p>
+</div>
+</div>
+</section>
+<section id="import-the-data-2" class="level3">
+<h3 class="anchored" data-anchor-id="import-the-data-2">19.5.1 Import the data</h3>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>rice <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/rice.csv"</span>, <span class="at">show_col_types =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="generate-the-slopegraph" class="level3">
+<h3 class="anchored" data-anchor-id="generate-the-slopegraph">19.5.2 Generate the Slopegraph</h3>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>rice <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">mutate</span>(<span class="at">Year =</span> <span class="fu">factor</span>(Year)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">filter</span>(Year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1961</span>, <span class="dv">1980</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">newggslopegraph</span>(Year, Yield, Country,</span>
+<span id="cb17-5"><a href="#cb17-5"></a>                <span class="at">Title =</span> <span class="st">"Rice Yield of Top 11 Asian Counties"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6"></a>                <span class="at">SubTitle =</span> <span class="st">"1961-1980"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7"></a>                <span class="at">Caption =</span> <span class="st">"Prepared by: Dr. Kam Tin Seong"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Hands-On_Ex7a_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Things to note:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For effective data visualisation design, <code>factor()</code> is used convert the value type of <em>Year</em> field from numeric to factor.</p>
+</div>
+</div>
+<div style="text-align: center">
+<p><span class="math inline">\(**That's\)</span> <span class="math inline">\(all\)</span> <span class="math inline">\(folks!**\)</span></p>
+</div>
 
 
 </section>
@@ -697,6 +1196,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../Hands-On_Ex/Hands-On_Ex09/Hands-On_Ex9.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">18 Information Dashboard Design</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../Hands-On_Ex/Hands-On_Ex07/Hands-On_Ex7b.html" class="pagination-link">
+        <span class="nav-page-text">20 Time on the Horizon: ggHoriPlot methods</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

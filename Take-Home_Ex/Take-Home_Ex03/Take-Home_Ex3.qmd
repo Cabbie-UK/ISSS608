@@ -4,7 +4,7 @@ author: "Vast Challenge 2023: Mini-Challenge 3"
 editor: visual
 date: last-modified
 execute:
-  freeze: true 
+  freeze: auto 
   warning: false
 format:
   html:
@@ -972,7 +972,7 @@ In the image on the right below, we saw that The Salted Pearl - Oyj Marine Conse
 A more typical arrangement for 2 associated companies would be that they may share some common owners or contact persons, but not exactly the same set of individuals, similar to the setup for 2 seafood companies on the left image below.
 
 | Common: 2 companies may share some common owners or contact persons, but not exactly the same set of individuals | Uncommon: **Multiple and [Same]{.underline} Set of Individuals for 2 companies** |
-|-----------------------------------|------------------------------------|
+|------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
 | ![](images/paste-526E0E2D.png){width="285"}                                                                      | ![](images/paste-DFE5EE76.png){width="326"}                                      |
 
 ## 3.2 Companies with "extraordinary" revenue
@@ -1050,7 +1050,7 @@ createGraph(result$relevant_nodes,result$relevant_edges,result$title)
 Other than owning another company (Faroe Islands Ltd Express) associated with seafood, we noticed one BO of Baker and Sons, Michael Johnson, owned a number of other companies that were unrelated to the seafood businesses. This structure was in contrast with the other 2 high revenue per BO entities, Barron LLC and Caracola del Mar NV Family as shown below, where the BOs only had 1 company to manage.
 
 | Barron LLC                                  | Caracola del Mar NV Family     |
-|--------------------------------------|----------------------------------|
+|---------------------------------------------|--------------------------------|
 | ![](images/paste-8DBB4D18.png){width="331"} | ![](images/paste-2FBA3B5A.png) |
 
 While having a BO with numerous businesses unrelated to fishing does not directly imply involvement in illegal fishing, there's a possibility that such unrelated business could be a front to launder illicit gains from IUU or act as a false front for other illegal activities 🚩. Fisheye could consider analysing the entity's financial transactions, including sources of funding, payment flows,to look for any suspicious patterns, such as large amounts of cash transactions or frequent transfers to offshore jurisdictions known for illegal fishing activities.
@@ -1178,14 +1178,3 @@ The exercise has been especially challenging, requiring a variety of data proces
 -   Text Mining for Social and Behavioral Research Using R, Zhiyong Zhang, [Text Mining for Social and Behavioral Research Using R (psychstat.org)](https://books.psychstat.org/textmining/mining-gender-information.html)
 
 -   Options for visNetwork, an R package for interactive network visualisation, [Options (datastorm-open.github.io)](https://datastorm-open.github.io/visNetwork/options.html)
-
-```{r}
-all_nodes <- mc3_nodes_cleaned3 %>%
-  mutate(type2 = ifelse(is.na(category), type, ifelse(category == 'seafood' & type == 'Company', 'Seafood Company', type))) %>%
-  mutate(type3 = ifelse(type2=='Company','Other Company',type2)) %>%
-  select(-type2) %>%
-  rename(type2=type3)
-
-write_csv(all_nodes,'C:\\Users\\kkb74\\downloads\\all_nodes.csv')
-
-```

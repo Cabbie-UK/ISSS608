@@ -84,6 +84,11 @@ website:
             href: Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex8c.qmd
           - text: '18  Information Dashboard Design'
             href: Hands-On_Ex/Hands-On_Ex09/Hands-On_Ex9.qmd
+          - text: '19 Visualise And Analyse Time-Oriented Data'
+            href: Hands-On_Ex/Hands-On_Ex07/Hands-On_Ex7a.qmd
+          - text: '20  Time on the Horizon: ggHoriPlot methods'
+            href: Hands-On_Ex/Hands-On_Ex07/Hands-On_Ex7b.qmd
+            
             
       - section: "Tableau"
         contents:
@@ -134,6 +139,10 @@ website:
             href: Hands-On_Ex/Hands-On_Ex08/Hands-on_Ex8c.qmd
           - text: '18  Information Dashboard Design'
             href: Hands-On_Ex/Hands-On_Ex09/Hands-On_Ex9.qmd
+          - text: '19 Visualise And Analyse Time-Oriented Data'
+            href: Hands-On_Ex/Hands-On_Ex07/Hands-On_Ex7a.qmd
+          - text: '20  Time on the Horizon: ggHoriPlot methods'
+            href: Hands-On_Ex/Hands-On_Ex07/Hands-On_Ex7b.qmd
             
       - text: In-class Exercises
         menu: 
