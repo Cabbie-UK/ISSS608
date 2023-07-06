@@ -173,6 +173,9 @@ website:
             href: Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex2.qmd
           - text: '3.Countering illegal fishing: Identify anomalies in the business groups'
             href: Take-Home_Ex/Take-Home_Ex03/Take-Home_Ex3.qmd
+            
+      - text: Project Hooked
+        href: https://vaa-groupfour.netlify.app/
           
             
     right:
