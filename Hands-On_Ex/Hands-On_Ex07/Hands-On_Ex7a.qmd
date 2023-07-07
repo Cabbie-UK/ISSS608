@@ -172,8 +172,6 @@ theme(axis.ticks = element_blank(),
 
 -   `geom_tile()` is used to plot tiles (grids) at each x and y position. `color` and `size` arguments are used to specify the border color and line size of the tiles.
 
--   [`theme_tufte()`](https://jrnold.github.io/ggthemes/reference/theme_tufte.html) of [**ggthemes**](https://jrnold.github.io/ggthemes/reference/) package is used to remove unnecessary chart junk. To learn which visual components of default ggplot2 have been excluded, you are encouraged to comment out this line to examine the default plot.
-
 -   `coord_equal()` is used to ensure the plot will have an aspect ratio of 1:1.
 
 -   `scale_fill_gradient()` function is used to creates a two colour gradient (low-high).
@@ -194,6 +192,7 @@ In order to identify the top 4 countries with the highest number of attacks, we 
 ```{r}
 attacks_by_country <- count(
   attacks, source_country) %>%
+  # percent() is a function from scales packege
   mutate(percent = percent(n/sum(n))) %>%
   arrange(desc(n))
 ```
