@@ -88,6 +88,9 @@ website:
             href: Hands-On_Ex/Hands-On_Ex07/Hands-On_Ex7a.qmd
           - text: '20  Time on the Horizon: ggHoriPlot methods'
             href: Hands-On_Ex/Hands-On_Ex07/Hands-On_Ex7b.qmd
+          - text: '21 Extract and Visualise Financial Data Information'
+            href: Hands-On_Ex/Hands-On_Ex10/Hands-On_Ex10.qmd
+            
             
             
       - section: "Tableau"
@@ -143,6 +146,8 @@ website:
             href: Hands-On_Ex/Hands-On_Ex07/Hands-On_Ex7a.qmd
           - text: '20  Time on the Horizon: ggHoriPlot methods'
             href: Hands-On_Ex/Hands-On_Ex07/Hands-On_Ex7b.qmd
+          - text: '21 Extract and Visualise Financial Data Information'
+            href: Hands-On_Ex/Hands-On_Ex10/Hands-On_Ex10.qmd
             
       - text: In-class Exercises
         menu: 
