@@ -194,7 +194,7 @@ format:
 
 # Add the following for the body tag
 include-after-body:
-  - partials/google-analytics.html # Path to your partial. Create folder if needed.
+  - partials/_analytics.html # Path to your partial. Create folder if needed.
 
 editor: visual
 
