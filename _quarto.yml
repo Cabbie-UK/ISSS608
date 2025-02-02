@@ -193,7 +193,7 @@ format:
     toc: true
 
 # Add the following for the body tag
-html-before-body:
+include-after-body:
   - partials/google-analytics.html # Path to your partial. Create folder if needed.
 
 editor: visual
