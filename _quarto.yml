@@ -188,11 +188,13 @@ website:
         href: https://kaleidoscopic-bunny-isss624.netlify.app/
 format:
   html:
-    include-in-header: _analytics.html
     theme: flatly
     css: styles.css
     toc: true
 
+# Add the following for the body tag
+html-before-body:
+  - partials/google-analytics.html # Path to your partial. Create folder if needed.
 
 editor: visual
 
