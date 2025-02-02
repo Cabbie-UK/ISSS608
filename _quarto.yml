@@ -170,7 +170,7 @@ website:
           - text: '9 Information Dashboard'
             href: Tableau/7_Information_Dashboard.qmd
             
-      - text: Take-home Exercisese
+      - text: Take-home Exercises
         menu:
           - text: '1.City of Engagement: Demographics and Financial Health of its Residents'
             href: Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex1.qmd
