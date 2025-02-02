@@ -192,9 +192,5 @@ format:
     css: styles.css
     toc: true
 
-# Add the following for the body tag
-include-after-body:
-  - partials/_analytics.html
-
 editor: visual
 
