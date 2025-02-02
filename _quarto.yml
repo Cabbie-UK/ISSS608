@@ -188,8 +188,7 @@ website:
         href: https://kaleidoscopic-bunny-isss624.netlify.app/
 format:
   html:
-    include-in-header:
-      - file: _analytics.html
+    include-in-header: _analytics.html
     theme: flatly
     css: styles.css
     toc: true
