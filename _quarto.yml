@@ -194,7 +194,7 @@ format:
 
 # Add the following for the body tag
 include-after-body:
-  - partials/_analytics.html
+  - partials/_analytics.html #
 
 editor: visual
 
